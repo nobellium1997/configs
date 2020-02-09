@@ -1,0 +1,45 @@
+function ld {
+	lsd --color --group-dirs first $@ 
+	echo
+}
+
+alias ls=ld
+
+function cs {
+	cd $@ && ls 
+}
+
+function wopen { 
+	if [ "$2" = "l" ]; then 
+		brave-browser "https://localhost:5001/rest/$1/v1" 2>/dev/null &
+	else
+		brave-browser "https://$2energydataservices.ihsenergy.com/rest/$1/v1" 2>/dev/null &
+	fi
+}
+
+alias r=ranger
+alias :q=exit
+export EDITOR=nvim
+alias ride=rider.sh
+alias cd=cs
+alias update="sudo apt update && sudo apt upgrade -y"
+alias grep="grep --color"
+alias c="clear"
+alias tks="tmux kill-server"
+# alias vim=nvim
+alias open=xdg-open
+alias python=python3
+alias pip=pip3
+alias aws=aws2
+alias three=~/.screenlayout/threescreen.sh
+alias one=~/.screenlayout/singlescreen.sh
+alias ta="tmux attach"
+alias cdw="cd ~/Work"
+alias t=tig
+alias ts="tig status"
+alias tref="tig refs"
+alias dp="dotnet publish -c Release"
+alias dt="dotnet test --filter"
+alias ns="notify-send"
+alias b="cd .."
+alias config='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
