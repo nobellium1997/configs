@@ -43,3 +43,4 @@ alias dt="dotnet test --filter"
 alias ns="notify-send"
 alias b="cd .."
 alias config='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
+alias dbg="fd -e sln -x code {//}"
