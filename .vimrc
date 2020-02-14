@@ -22,9 +22,10 @@ nnoremap K <C-y>
 
 noremap y "+y
 noremap p "+p
+noremap P "+P
 vnoremap d "_d
 nnoremap d "_d
-vnoremap c "_c 
+" vnoremap c "_c 
 nnoremap c "_c
 
 nmap $ g_
