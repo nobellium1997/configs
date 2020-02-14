@@ -84,6 +84,10 @@ Plug 'https://github.com/pseewald/vim-anyfold.git'
 
 Plug 'christoomey/vim-tmux-runner'
 
+Plug 'https://github.com/SirVer/ultisnips.git'
+
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 call plug#end()
 
 set laststatus=2
@@ -121,6 +125,11 @@ let test#csharp#runner = 'dotnettest'
 let test#strategy = 'vtr'
 
 let g:VtrPercentage = 35
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-g>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 if (empty($TMUX))
   if (has("nvim"))
@@ -199,7 +208,11 @@ noremap <Leader>an :ALENext<CR>
 
 noremap <Leader>rd :call Code()<CR>
 
+noremap <Leader>db :!fd -e sln -x code {//}<CR>
+
 noremap <Leader>ed :call EmptyDiff("
+
+noremap : q:i
 
 function Code()
 	let lineNumber = line(".") 

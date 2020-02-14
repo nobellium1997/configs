@@ -97,6 +97,8 @@ export FZF_DEFAULT_COMMAND='fd --type f -E "*bin*" -E "*obj*" -E "*dll*"'
 
 export FZF_ALT_C_COMMAND='fd --type d -E "*obj*" -E "*bin*"'
 
+export FZF_CTRL_T_COMMAND='fd --type f -E "*bin*" -E "*obj*" -E "*dll*"'
+
 # if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "&TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
 # 	exec tmux
 # fi
