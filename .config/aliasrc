@@ -1,13 +1,13 @@
-function ld {
-	lsd --color --group-dirs first $@ 
-	echo
-}
+# function ld {
+# 	lsd --color --group-dirs first $@
+# 	echo
+# }
 
-alias ls=ld
+# alias ls=ld
 
-function cs {
-	cd $@ && ls 
-}
+# function cs {
+# 	cd $@ && ls
+# }
 
 function wopen { 
 	if [ "$2" = "l" ]; then 
@@ -17,11 +17,11 @@ function wopen {
 	fi
 }
 
+alias ls="ls --color"
 alias r=ranger
 alias :q=exit
 export EDITOR=nvim
 alias ride=rider.sh
-alias cd=cs
 alias update="sudo apt update && sudo apt upgrade -y"
 alias grep="grep --color"
 alias c="clear"

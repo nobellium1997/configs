@@ -50,7 +50,7 @@ source ~/.zsh/zsh-git-prompt/zshrc.sh
 # Set prompt 
 # PS1='%B %m %~%b $(git_super_status) %# '
 # PS1=' %{$fg[light yellow]%}%~%b $(git_super_status) %# '
-PS1=' %1d $(git_super_status) %# '
+PS1=' %2d $(git_super_status) %# '
 
 # Source bin for binaries
 export PATH=~/.local/bin:$PATH
@@ -87,7 +87,7 @@ setopt share_history
 # setopt AUTO_PUSHD
 
 # Set default editor to vanilla vim
-export EDITOR='program'
+# export EDITOR='program'
 
 export TERM=xterm-256color
 
