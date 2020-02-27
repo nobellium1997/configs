@@ -57,4 +57,4 @@
 
 (defun open-term ()
   (interactive)
-  (shell-command (format "tmux new-window -c %s" default-directory)))
+  (call-process "tmux" nil 0 nil "new-window" "-c" default-directory))
