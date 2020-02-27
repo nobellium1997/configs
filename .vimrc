@@ -213,8 +213,6 @@ noremap <Leader>db :!fd -e sln -x code {//}<CR>
 
 noremap <Leader>ed :call EmptyDiff("
 
-noremap : q:i
-
 function Code()
 	let lineNumber = line(".") 
 	execute '!code -g %:'.lineNumber
