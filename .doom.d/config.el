@@ -58,3 +58,6 @@
 (defun open-term ()
   (interactive)
   (call-process "tmux" nil 0 nil "new-window" "-c" default-directory))
+
+(setq neo-window-fixed-size nil)
+(setq neo-window-width 45)

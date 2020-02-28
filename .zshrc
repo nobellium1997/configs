@@ -95,7 +95,7 @@ export TF_DIFF_COMMAND='kdiff3 %1 %2'
 
 export FZF_DEFAULT_COMMAND='fd --type f -E "*bin*" -E "*obj*" -E "*dll*"'
 
-export FZF_ALT_C_COMMAND='fd --type d -E "*obj*" -E "*bin*"'
+export FZF_ALT_C_COMMAND='fd --type d -d 1 -E "*obj*" -E "*bin*"'
 
 export FZF_CTRL_T_COMMAND='fd --type f -E "*bin*" -E "*obj*" -E "*dll*"'
 
