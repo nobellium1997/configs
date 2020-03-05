@@ -2,7 +2,7 @@
 
 # Enable colors and change prompt:
 autoload -U colors && colors
-# PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%c%{$fg[red]%}]%{$reset_color%}$%b "
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%c%{$fg[red]%}]%{$reset_color%}$%b "
 
 # History in cache directory:
 HISTSIZE=10000
@@ -44,14 +44,6 @@ bindkey '^e' edit-command-line
 source /home/nobel/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Git Prompt
-source ~/.zsh/zsh-git-prompt/zshrc.sh
-
-# Set prompt 
-# PS1='%B %m %~%b $(git_super_status) %# '
-# PS1=' %{$fg[light yellow]%}%~%b $(git_super_status) %# '
-PS1=' %2d $(git_super_status) %# '
-
 # Source bin for binaries
 export PATH=~/.local/bin:$PATH
 
@@ -79,6 +71,12 @@ export PATH=~/Datagrip/DataGrip-2019.3.2/bin:$PATH
 # Source netcoredbg
 export PATH=~/NetCoreDbg/netcoredbg/bin:$PATH
 
+# Source sonarqube
+export PATH=~/Downloads/temp/sonarqube-8.2.0.32929/bin/linux-x86-64/:$PATH
+
+# Source dotnet tools
+export PATH=~/.dotnet/tools:$PATH
+
 # Save history accross sessions
 setopt inc_append_history
 setopt share_history
@@ -93,6 +91,7 @@ export TERM=xterm-256color
 
 export TF_DIFF_COMMAND='kdiff3 %1 %2'
 
+# FZF commands
 export FZF_DEFAULT_COMMAND='fd --type f -E "*bin*" -E "*obj*" -E "*dll*"'
 
 export FZF_ALT_C_COMMAND='fd --type d -d 1 -E "*obj*" -E "*bin*"'
