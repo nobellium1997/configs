@@ -28,7 +28,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Microsoft Teams - Preview",  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Microsoft Teams - Preview",  NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Code",     NULL,       NULL,       1 << 2,       0,           -1 }
 };
 
@@ -58,6 +58,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *roficmd[] = { "rofi", "-modi", "drun", "-show", "drun", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *mutemic[] = { "/home/nobel/dotfiles/scripts/MuteMic.sh", NULL};
 static const char *singlescreen[] = { "/home/nobel/.screenlayout/singlescreen.sh", NULL};
@@ -68,7 +69,7 @@ static const char *workurls[] = { "/home/nobel/Documents/workurls.sh", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,						XK_w, 	   spawn, 		   {.v = workurls } },
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = roficmd } },
 	{ MODKEY, 						XK_b,	   spawn, 		   {.v = mutemic } },
 	{ MODKEY, 						XK_v,	   spawn, 		   {.v = clipmenu } },
 	{ MODKEY|ShiftMask, 			XK_x,	   spawn, 		   {.v = puttosleep } },

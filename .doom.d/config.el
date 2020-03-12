@@ -57,7 +57,11 @@
 
 (defun open-term ()
   (interactive)
-  (call-process "tmux" nil 0 nil "new-window" "-c" default-directory))
+  (call-process "tmux" nil 0 nil "new-window" "-c" projectile-project-root))
 
 (setq neo-window-fixed-size nil)
 (setq neo-window-width 45)
+
+(defun jpk/eshell-mode-hook ()
+  (company-mode -1))
+(add-hook 'eshell-mode-hook 'jpk/eshell-mode-hook)
