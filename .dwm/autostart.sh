@@ -23,5 +23,5 @@ wmname LG3D
 # Set status bar to display time and battery 
 while true; do
 	xsetroot -name " $(amixer -c 1 sget Mic | tail -1) | $(acpi | rg "Battery 0") | $(date +'%D %H:%M') "
-	sleep 2
+	sleep 1
 done &
