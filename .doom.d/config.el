@@ -57,10 +57,14 @@
 
 (defun open-term ()
   (interactive)
-  (call-process "tmux" nil 0 nil "new-window" "-c" projectile-project-root))
+  (call-process "tmux" nil 0 nil "new-window" "-c" (projectile-project-root) "-n" (projectile-project-name)))
+
+(map! :leader "o e" 'open-term)
 
 (setq neo-window-fixed-size nil)
 (setq neo-window-width 45)
+
+;; (setq company-idle-delay 999999)
 
 (defun jpk/eshell-mode-hook ()
   (company-mode -1))
