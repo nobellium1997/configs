@@ -68,4 +68,9 @@
 
 (defun jpk/eshell-mode-hook ()
   (company-mode -1))
+
 (add-hook 'eshell-mode-hook 'jpk/eshell-mode-hook)
+
+(add-hook 'sh-mode-hook 'jpk/eshell-mode-hook)
+
+(add-hook 'org-mode-hook 'jpk/eshell-mode-hook)
