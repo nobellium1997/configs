@@ -1,23 +1,22 @@
-# function ld {
-# 	lsd --color --group-dirs first $@
-# 	echo
-# }
-
-# alias ls=ld
-
-# function cs {
-# 	cd $@ && ls
-# }
-
-function wopen { 
-	if [ "$2" = "l" ]; then 
-		brave-browser "https://localhost:5001/rest/$1/v1" 2>/dev/null &
-	else
-		brave-browser "https://$2energydataservices.ihsenergy.com/rest/$1/v1" 2>/dev/null &
-	fi
+function ld {
+	lsd --color --group-dirs first $@
+	echo
 }
 
-alias ls="ls --color"
+function s3download {
+    aws s3 cp s3://eds-upstream-intelligence-$1/$2 ~/Work/Misc/S3Downloads/$3
+}
+
+function s3upload {
+    aws s3 cp $2 s3://eds-upstream-intelligence-$1/$3
+}
+
+function s3ls {
+    aws s3 ls --recursive s3://eds-upstream-intelligence-$@
+}
+
+# alias ls="ls --color --group-directories-first"
+alias ls=ld
 alias r=ranger
 alias :q=exit
 export EDITOR=nvim
@@ -30,7 +29,6 @@ alias tks="tmux kill-server"
 alias open=xdg-open
 alias python=python3
 alias pip=pip3
-alias aws=aws2
 alias three=~/.screenlayout/threescreen.sh
 alias one=~/.screenlayout/singlescreen.sh
 alias ta="tmux attach"
@@ -44,3 +42,4 @@ alias ns="notify-send"
 alias b="cd .."
 alias config='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
 alias dbg="fd -e sln -x code {//}"
+alias s3d='cd ~/Work/Misc/S3Downloads'

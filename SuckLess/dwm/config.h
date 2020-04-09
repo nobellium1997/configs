@@ -6,17 +6,18 @@ static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "monospace:size=16" };
+static const char dmenufont[]       = "monospace:size=16";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#838383";
+static const char col_yellow[]      = "#ffff00";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_yellow  },
 };
 
 /* tagging */
@@ -29,7 +30,9 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Microsoft Teams - Preview",     NULL,       NULL,       1 << 1,            0,           1 },
+	{ "discord",     NULL,       NULL,       1 << 2,            0,           1 },
+	/* { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 }, */
 };
 
 /* layout(s) */
@@ -62,7 +65,7 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *mutemic[] = { "/home/nobel/dotfiles/scripts/MuteMic.sh", NULL};
 static const char *singlescreen[] = { "/home/nobel/.screenlayout/singlescreen.sh", NULL};
 static const char *widescreen[] = { "/home/nobel/.screenlayout/widescreen.sh", NULL};
-static const char *puttosleep[] = { "systemctl", "suspend", NULL };
+static const char *puttosleep[] = { "/home/nobel/dotfiles/scripts/WakeInMorning.sh", NULL };
 static const char *clipmenu[] = { "/home/nobel/SuckLess/clipmenu/clipmenu", NULL};
 static const char *workurls[] = { "/home/nobel/Documents/workurls.sh", NULL };
 
@@ -92,8 +95,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_j,      focusmon,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_k,      focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },

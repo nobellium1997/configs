@@ -98,9 +98,9 @@ export FZF_ALT_C_COMMAND='fd --type d -d 1 -E "*obj*" -E "*bin*"'
 
 export FZF_CTRL_T_COMMAND='fd --type f -E "*bin*" -E "*obj*" -E "*dll*"'
 
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "&TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-	exec tmux
-fi
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "&TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+# 	exec tmux
+# fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/nobel/.sdkman"

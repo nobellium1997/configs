@@ -10,7 +10,7 @@ parcellite &
 ~/initscript.sh &
 
 # Set background
-feh --bg-fill ~/dotfiles/wallpapers/newwall.png &
+feh --bg-fill ~/dotfiles/wallpapers/PixelCity.png &
 
 # Run clipboard manager daemon 
 /home/nobel/SuckLess/clipmenu/clipmenud &
@@ -21,10 +21,10 @@ export AWT_TOOLKIT=MToolkit &
 wmname LG3D &
 
 # Start Compton for compositing effects
-# compton &
+compton &
 
 # Start bwall
-bwall -pixel_city &
+# bwall -pixel_city &
 
 # Set status bar to display time and battery
 while true; do

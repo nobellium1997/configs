@@ -2,7 +2,7 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-
+(package-initialize)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -52,25 +52,47 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Make company faster
 (setq company-dabbrev-downcase 0)
 (setq company-idle-delay 0)
 
+;; Set org-agenda-files
+(setq org-agenda-files '("/home/nobel/Notes/WorkNotes"))
+
+;; Function for opening tmux in the current directory/project
 (defun open-term ()
   (interactive)
-  (call-process "tmux" nil 0 nil "new-window" "-c" (projectile-project-root) "-n" (projectile-project-name)))
+  (if (not (string= (projectile-project-name) "-"))
+      (call-process "tmux" nil 0 nil "new-window" "-c" (projectile-project-root) "-n" (projectile-project-name))
+      (call-process "tmux" nil 0 nil "new-window" "-c" default-directory "-n" "Emacs"))
+  (call-process "tmux" nil 0 nil "kill-window" "-a"))
 
 (map! :leader "o e" 'open-term)
+(map! :leader "s p" 'deadgrep)
+(map! :leader "t z" 'centered-window-mode)
 
+;; Set neo-window to be bigger
 (setq neo-window-fixed-size nil)
 (setq neo-window-width 45)
 
-;; (setq company-idle-delay 999999)
+;; Custom file open locations
+(defun goto-notes ()
+  (interactive)
+  (counsel-find-file "~/Notes"))
+(map! :leader "f n" 'goto-notes)
 
+(defun goto-home ()
+  (interactive)
+  (counsel-find-file "~"))
+(map! :leader "f h" 'goto-home)
+
+;; Don't show hidden files in dired
+(setq counsel-dired-listing-switches "-l")
+
+;; Disable company mode in the following modes
 (defun jpk/eshell-mode-hook ()
   (company-mode -1))
-
 (add-hook 'eshell-mode-hook 'jpk/eshell-mode-hook)
-
-(add-hook 'sh-mode-hook 'jpk/eshell-mode-hook)
-
 (add-hook 'org-mode-hook 'jpk/eshell-mode-hook)
+
+(setq cwm-centered-window-width 150)
