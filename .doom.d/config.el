@@ -86,8 +86,10 @@
   (counsel-find-file "~"))
 (map! :leader "f h" 'goto-home)
 
-;; Don't show hidden files in dired
-(setq counsel-dired-listing-switches "-l")
+(defun goto-rest ()
+  (interactive)
+  (counsel-find-file "~/Rest"))
+(map! :leader "f m" 'goto-rest)
 
 ;; Disable company mode in the following modes
 (defun jpk/eshell-mode-hook ()
@@ -96,3 +98,9 @@
 (add-hook 'org-mode-hook 'jpk/eshell-mode-hook)
 
 (setq cwm-centered-window-width 150)
+
+;; Don't show hidden files in dired
+(setq dired-actual-switches "-l --group-directories-first")
+
+;; Set vterm default shell
+(setq vterm-shell "/usr/bin/fish")
