@@ -91,6 +91,11 @@
   (counsel-find-file "~/Rest"))
 (map! :leader "f m" 'goto-rest)
 
+(defun goto-work ()
+  (interactive)
+  (counsel-find-file "~/Work"))
+(map! :leader "f w" 'goto-work)
+
 ;; Disable company mode in the following modes
 (defun jpk/eshell-mode-hook ()
   (company-mode -1))
