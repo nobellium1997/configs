@@ -109,3 +109,11 @@
 
 ;; Set vterm default shell
 (setq vterm-shell "/usr/bin/fish")
+
+;; Dired mappings
+(map! :leader "f d" 'find-name-dired)
+
+;; Magit blame style
+(setq magit-blame-echo-style 'margin)
+
+(map! :m "C-o" 'pop-tag-mark)

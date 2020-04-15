@@ -10,7 +10,7 @@ parcellite &
 ~/initscript.sh &
 
 # Set background
-feh --bg-fill ~/dotfiles/wallpapers/PixelCity.png &
+feh --bg-fill ~/dotfiles/wallpapers/bashWall.png &
 
 # Run clipboard manager daemon 
 /home/nobel/SuckLess/clipmenu/clipmenud &
