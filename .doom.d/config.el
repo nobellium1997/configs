@@ -106,8 +106,8 @@
 (setq vterm-shell "/usr/bin/fish")
 
 ;; Force so-long mode for certain file types
-(add-hook 'html-mode 'so-long)
-(add-hook 'json-mode 'so-long)
+(add-to-list 'auto-mode-alist (cons (rx ".html" eos) 'so-long-mode))
+(add-to-list 'auto-mode-alist (cons (rx ".json" eos) 'so-long-mode))
 
 ;; Dired mappings
 (map! :leader "f d" 'find-name-dired)
