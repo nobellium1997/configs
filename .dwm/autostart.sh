@@ -10,7 +10,7 @@ parcellite &
 ~/initscript.sh &
 
 # Set background
-feh --bg-fill ~/dotfiles/wallpapers/bashWall.png &
+feh --bg-fill ~/dotfiles/wallpapers/mechwall.png &
 
 # Run clipboard manager daemon 
 /home/nobel/SuckLess/clipmenu/clipmenud &
@@ -28,7 +28,8 @@ compton &
 
 # Set status bar to display time and battery
 while true; do
-	amixer -c 1 sget Mic | rg "\[on\]"
+	# amixer -c 1 sget Mic | rg "\[on\]"
+	amixer get Capture | rg "\[on\]"
 	MIC_IS_ON=$(echo $?)
 
 	MIC_MESSAGE="Mic is OFF"
@@ -36,6 +37,8 @@ while true; do
 		MIC_MESSAGE="Mic is LIVE"
 	fi
 
-	xsetroot -name " $MIC_MESSAGE | $(acpi | rg "Battery 0") | $(date +'%D %H:%M') "
+	LOAD_AVG=$(cat /proc/loadavg | awk -F ' ' '{print $1}')
+
+	xsetroot -name " Load Avg: $LOAD_AVG | $MIC_MESSAGE | $(acpi | rg "Battery 0" | sed "s/Battery 0: //g") | $(date +'%D %H:%M') "
 	sleep 1
 done &

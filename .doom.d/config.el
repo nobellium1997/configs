@@ -102,13 +102,12 @@
 (add-hook 'eshell-mode-hook 'jpk/eshell-mode-hook)
 (add-hook 'org-mode-hook 'jpk/eshell-mode-hook)
 
-(setq cwm-centered-window-width 150)
-
-;; Don't show hidden files in dired
-(setq dired-actual-switches "-l --group-directories-first")
-
 ;; Set vterm default shell
 (setq vterm-shell "/usr/bin/fish")
+
+;; Force so-long mode for certain file types
+(add-hook 'html-mode 'so-long)
+(add-hook 'json-mode 'so-long)
 
 ;; Dired mappings
 (map! :leader "f d" 'find-name-dired)
