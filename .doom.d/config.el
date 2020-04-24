@@ -103,7 +103,7 @@
 (add-hook 'org-mode-hook 'jpk/eshell-mode-hook)
 
 ;; Set vterm default shell
-(setq vterm-shell "/usr/bin/fish")
+;(setq vterm-shell "/usr/bin/fish")
 
 ;; Force so-long mode for certain file types
 (add-to-list 'auto-mode-alist (cons (rx ".html" eos) 'so-long-mode))
@@ -115,4 +115,4 @@
 ;; Magit blame style
 (setq magit-blame-echo-style 'margin)
 
-(map! :m "C-o" 'pop-tag-mark)
+; (map! :m "C-o" 'pop-tag-mark)

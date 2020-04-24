@@ -1,1 +1,1 @@
-/home/nobel/.local/share/omf/themes/lambda/fish_prompt.fish
+/home/nobel/.local/share/omf/themes/default/fish_prompt.fish
