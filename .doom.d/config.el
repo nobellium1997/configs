@@ -88,7 +88,7 @@
 
 (defun goto-rest ()
   (interactive)
-  (counsel-find-file "~/Rest"))
+  (counsel-find-file "~/Work/EDS.TestingScripts"))
 (map! :leader "f m" 'goto-rest)
 
 (defun goto-work ()
