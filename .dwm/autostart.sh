@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Set the screen layout
+~/.screenlayout/twoscreen.sh &
+
 # Custom arrow keys
 autokey &
 

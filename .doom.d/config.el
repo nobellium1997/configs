@@ -19,12 +19,17 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 14))
+(setq doom-font (font-spec :family "monospace" :size 16))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'adwaita)
+(setq evil-normal-state-cursor '(box "black")
+      evil-insert-state-cursor '(bar "black")
+      evil-visual-state-cursor '(hollow "black"))
+(set-face-foreground 'highlight nil)
+(set-face-background 'hl-line "#d3d3d3")
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -64,8 +69,8 @@
   (interactive)
   (if (not (string= (projectile-project-name) "-"))
       (call-process "tmux" nil 0 nil "new-window" "-c" (projectile-project-root) "-n" (projectile-project-name))
-      (call-process "tmux" nil 0 nil "new-window" "-c" default-directory "-n" "Emacs"))
-  (call-process "tmux" nil 0 nil "kill-window" "-a"))
+      (call-process "tmux" nil 0 nil "new-window" "-c" default-directory "-n" "Emacs")))
+  ;(call-process "tmux" nil 0 nil "kill-window" "-a"))
 
 (map! :leader "o e" 'open-term)
 (map! :leader "s p" 'deadgrep)
