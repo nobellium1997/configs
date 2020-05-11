@@ -13,7 +13,7 @@ parcellite &
 ~/initscript.sh &
 
 # Set background
-feh --bg-fill ~/dotfiles/wallpapers/mechwall.png &
+feh --bg-fill ~/Downloads/macoselcap.jpg &
 
 # Run clipboard manager daemon 
 /home/nobel/SuckLess/clipmenu/clipmenud &
