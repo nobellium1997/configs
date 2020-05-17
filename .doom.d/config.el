@@ -24,7 +24,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-vibrant)
+(setq doom-theme 'doom-acario-dark)
 ;; (setq evil-normal-state-cursor '(box "black")
 ;;       evil-insert-state-cursor '(bar "black")
 ;;       evil-visual-state-cursor '(hollow "black"))
@@ -113,7 +113,7 @@
 (add-to-list 'auto-mode-alist (cons (rx ".json" eos) 'so-long-mode))
 
 ;; Dired mappings
-(map! :leader "f d" 'find-name-dired)
+(map! :leader "f d" 'fd-dired)
 
 ;; Magit blame style
 (setq magit-blame-echo-style 'margin)

@@ -30,6 +30,8 @@ SET fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 SET fish_color_status:red
 SET fish_color_user:brgreen
 SET fish_color_valid_path:\x2d\x2dunderline
+SET fish_cursor_insert:line
+SET fish_cursor_replace_one:underscore
 SET fish_greeting:Welcome\x20to\x20fish\x2c\x20the\x20friendly\x20interactive\x20shell
 SET fish_key_bindings:fish_vi_key_bindings
 SET fish_pager_color_completion:normal

@@ -31,7 +31,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Microsoft Teams - Preview",     NULL,       NULL,       1 << 1,            0,           1 },
+	{ "Microsoft Teams - Preview",     NULL,       NULL,       1 << 8,            0,           1 },
 	{ "discord",     NULL,       NULL,       1 << 3,            0,           1 },
 };
 
@@ -63,9 +63,9 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-i", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 /* static const char *dmenucmd[] = { "rofi", "-modi", "drun", "-show", "drun",  NULL }; */
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "gnome-terminal", NULL };
 static const char *mutemic[] = { "/home/nobel/dotfiles/scripts/MuteMic.sh", NULL};
 static const char *singlescreen[] = { "/home/nobel/.screenlayout/singlescreen.sh", NULL};
 static const char *widescreen[] = { "/home/nobel/.screenlayout/widescreen.sh", NULL};
