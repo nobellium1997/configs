@@ -1,7 +1,7 @@
-# function ld {
-# 	lsd --color --group-dirs first $@
-# 	echo
-# }
+function ld
+    lsd --color --group-dirs first $argv
+    echo
+end
 
 function s3dl
     aws s3 cp s3://eds-upstream-intelligence-$argv[1]/$argv[2] $argv[3]
@@ -23,7 +23,7 @@ function dwt
     dotnet watch test -v m --filter FullyQualifiedName~$argv
 end
 
-alias ls="ls --color --group-directories-first"
+alias ls=ld
 alias r=ranger
 alias :q=exit
 alias ride=rider.sh
