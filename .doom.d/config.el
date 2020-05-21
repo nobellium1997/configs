@@ -118,4 +118,8 @@
 ;; Magit blame style
 (setq magit-blame-echo-style 'margin)
 
-; (map! :m "C-o" 'pop-tag-mark)
+;; Map scrolling to easier to reach keys
+(map! :nv "J" 'evil-scroll-line-down)
+(map! :nv "K" 'evil-scroll-line-up)
+(map! "C-h" '+workspace/switch-left)
+(map! "C-l" '+workspace/switch-right)
