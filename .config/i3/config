@@ -30,7 +30,7 @@ font pango:San Francisco Font Display 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec st
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -39,13 +39,13 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+# bindsym $mod+h focus left
+bindsym $mod+j focus left
+bindsym $mod+k focus right
+# bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+h move left
@@ -144,7 +144,7 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
-client.focused          $#a9a9a9           $#a9a9a9          $text-color          #a9a9a9
+client.focused          #cccc00           #cccc00          $text-color          #cccc00
 client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $inactive-bg-colorhl
@@ -176,7 +176,7 @@ bar {
 
 # Assign workspaces to certain monitors
 workspace 2 output DP1
-workspace 3 output HDMI1
+workspace 3 output DP1
 workspace 4 output DP1
 workspace 1 output HDMI1
 workspace 5 output DP1
@@ -185,7 +185,7 @@ workspace 7 output HDMI1
 workspace 10 output DP1
 
 # sleep, lock and shutdown
-bindsym $mod+x exec ~/i3lock-fancy-multimonitor/lock -p -n
+# bindsym $mod+x exec ~/i3lock-fancy-multimonitor/lock -p -n
 bindsym $mod+shift+x exec systemctl suspend
 bindsym $mod+ctrl+shift+x exec systemctl poweroff
 
@@ -204,10 +204,10 @@ bindsym $mod+t exec ~/.screenlayout/twoscreen.sh
 bindsym $mod+o exec ~/.screenlayout/singlescreen.sh
 
 # Hotkey to open browser
-bindsym $mod+b exec brave-browser
+bindsym $mod+b exec ~/Scripts/ClipboardManager.sh
 
 # Set wallpaper
-exec_always feh --bg-fill ~/dotfiles/wallpapers/newwall.png
+exec_always feh --bg-fill ~/Downloads/macoselcap.jpg
 
 # Run wifi applet
 exec_always nm-applet
@@ -218,12 +218,6 @@ exec compton
 # Set keyboard repeat rate.
 exec xset r rate 279 40
 
-# Run AutoKey for much better arrow keys
-exec autokey
-
-# Run copyq for clipboard manager
-exec copyq
-
 # Set numlock to on
 exec numlockx on
 
@@ -231,6 +225,6 @@ exec numlockx on
 for_window [class="Microsoft Teams - Preview"] floating enable
 
 # i3-gaps settings
-for_window [class="^.*"] border pixel 3
-gaps inner 1
-gaps outer 1
+for_window [class="^.*"] border pixel 4
+gaps inner 5
+gaps outer 5
