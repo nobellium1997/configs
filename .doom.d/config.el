@@ -24,7 +24,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-acario-dark)
+;; (setq doom-theme 'doom-acario-dark)
 ;; (setq evil-normal-state-cursor '(box "black")
 ;;       evil-insert-state-cursor '(bar "black")
 ;;       evil-visual-state-cursor '(hollow "black"))
@@ -110,7 +110,7 @@
 
 ;; Force so-long mode for certain file types
 (add-to-list 'auto-mode-alist (cons (rx ".html" eos) 'so-long-mode))
-(add-to-list 'auto-mode-alist (cons (rx ".json" eos) 'so-long-mode))
+;; (add-to-list 'auto-mode-alist (cons (rx ".json" eos) 'so-long-mode))
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
@@ -123,3 +123,12 @@
 (map! :nv "K" 'evil-scroll-line-up)
 (map! "C-h" '+workspace/switch-left)
 (map! "C-l" '+workspace/switch-right)
+(map! :nv "U" 'undo-tree-redo)
+
+;; Make pop up buffers persist
+(setq persp-autokill-buffer-on-remove nil)
+
+;; Add xml-mode to csproj files
+(add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
+
+;; (disable-theme)

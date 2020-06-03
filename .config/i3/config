@@ -43,8 +43,8 @@ bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 # bindsym $mod+h focus left
-bindsym $mod+j focus left
-bindsym $mod+k focus right
+bindsym $mod+h focus left
+bindsym $mod+l focus right
 # bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
@@ -64,7 +64,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -200,14 +200,17 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Change screen resolution on the fly
-bindsym $mod+t exec ~/.screenlayout/twoscreen.sh
-bindsym $mod+o exec ~/.screenlayout/singlescreen.sh
+# bindsym $mod+t exec ~/.screenlayout/twoscreen.sh
+# bindsym $mod+o exec ~/.screenlayout/singlescreen.sh
 
-# Hotkey to open browser
-bindsym $mod+b exec ~/Scripts/ClipboardManager.sh
+# Work url hotkeys
+bindsym $mod+w exec ~/Documents/workurls.sh
+
+# Hotkey to clipboard manager
+bindsym $mod+b exec /home/nobel/SuckLess/clipmenu/clipmenu
 
 # Set wallpaper
-exec_always feh --bg-fill ~/Downloads/macoselcap.jpg
+exec_always feh --bg-fill ~/Downloads/kitanaZeroWall.png
 
 # Run wifi applet
 exec_always nm-applet
@@ -221,8 +224,11 @@ exec xset r rate 279 40
 # Set numlock to on
 exec numlockx on
 
+# Run clipmenu dameon
+exec /home/nobel/SuckLess/clipmenu/clipmenud
+
 # Make teams notification banners float 
-for_window [class="Microsoft Teams - Preview"] floating enable
+# for_window [class="Microsoft Teams - Preview"] floating enable
 
 # i3-gaps settings
 for_window [class="^.*"] border pixel 4

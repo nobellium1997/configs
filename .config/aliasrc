@@ -50,3 +50,4 @@ alias dbg="fd -e sln -x code {//}"
 alias s3d='cd ~/Work/Misc/S3Downloads'
 alias proxy="export http_proxy=127.0.0.1:44700; export https_proxy=127.0.0.1:44700"
 alias unproxy="set -e http_proxy; set -e https_proxy"
+alias emacs='env TERM=xterm-256color emacs -nw'
