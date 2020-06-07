@@ -152,14 +152,8 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 hide_edge_borders both
 
 # Assign programs to workspaces
-assign [class="jetbrains-rider"] "3"
-assign [class="Code"] "3"
-assign [class="Postman"] "5"
 assign [class="xTIMEcomposer"] "2"
-assign [class="Remmina"] "7"
-assign [class="Microsoft Teams - Preview"] "4"
-assign [class="Progress Telerik Fiddler"] "6"
-# assign [class="Brave-browser"] "2"
+assign [class="Microsoft Teams - Preview"] "3"
 
 # Start i3bar to display a workspace bar 
 bar {

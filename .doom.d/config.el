@@ -125,10 +125,18 @@
 (map! "C-l" '+workspace/switch-right)
 (map! :nv "U" 'undo-tree-redo)
 
+;; Map jump to <C-i>
+(map! :nv "C-i" 'evil-jump-forward)
+(map! :nv "C-o" 'evil-jump-backward)
+
 ;; Make pop up buffers persist
 (setq persp-autokill-buffer-on-remove nil)
 
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
 
-;; (disable-theme)
+;; Set modeline color
+(set-face-background 'mode-line "#332E42")
+
+;; Set realtive line numbers
+(setq display-line-numbers-type 'relative)

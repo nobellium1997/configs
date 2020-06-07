@@ -1,5 +1,5 @@
 set number
-" set relativenumber
+set relativenumber
 set ignorecase
 set incsearch
 set backspace=2
@@ -89,6 +89,8 @@ Plug 'https://github.com/SirVer/ultisnips.git'
 
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+Plug 'https://github.com/easymotion/vim-easymotion.git'
+
 call plug#end()
 
 set laststatus=2
@@ -146,6 +148,7 @@ if (empty($TMUX))
 endif
 
 colorscheme onedark
+hi Normal guibg=NONE ctermbg=NONE
 
 " Omnisharp configs
 
@@ -207,9 +210,7 @@ noremap <Leader>fb :Buffers<CR>
 
 noremap <Leader>an :ALENext<CR>
 
-noremap <Leader>rd :call Code()<CR>
-
-noremap <Leader>db :!fd -e sln -x code {//}<CR>
+noremap <Leader>rg :Rg<CR>
 
 noremap <Leader>ed :call EmptyDiff("
 
@@ -233,3 +234,7 @@ au BufRead,BufNewFile *.cshtml set filetype=html
 
 " Fzf configs
 imap <c-x><c-x> <plug>(fzf-complete-path)
+
+" Easy motion settings
+let g:EasyMotion_smartcase = 1
+nmap s <Plug>(easymotion-overwin-f2)
