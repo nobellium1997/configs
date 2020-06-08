@@ -92,8 +92,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 
 Plug 'https://github.com/easymotion/vim-easymotion.git'
 
-Plug 'iberianpig/tig-explorer.vim'
-
 call plug#end()
 
 set laststatus=2
@@ -210,8 +208,11 @@ noremap <Leader>fb :Buffers<CR>
 noremap <Leader>an :ALENext<CR>
 noremap <Leader>rg :Rg<CR>
 noremap <Leader>ed :call EmptyDiff("
-noremap <Leader>ts :TigStatus<CR>
-noremap <Leader>tm :Tig<CR>
+
+" Git mappings 
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gl :Glog<CR>
+nmap <Leader>gd :Gvdiffsplit<CR>
 
 function EmptyDiff(fileType)
 	execute 'tabe difftwo.' . a:fileType

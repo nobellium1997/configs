@@ -25,3 +25,5 @@ search_inc eds
 search_inc testing
 shell xdg-open EDS.TestingScripts
 shell xdg-open ChangeRequests.py
+search_inc config
+search_inc data
