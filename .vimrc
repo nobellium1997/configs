@@ -5,6 +5,7 @@ set incsearch
 set backspace=2
 set nohlsearch
 set nowrap
+set wildmode=longest,list,full
 syntax on
 
 filetype plugin indent on
@@ -91,13 +92,15 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 
 Plug 'https://github.com/easymotion/vim-easymotion.git'
 
+Plug 'iberianpig/tig-explorer.vim'
+
 call plug#end()
 
 set laststatus=2
 
 set foldlevel=99 " Open all folds
 
-let g:auto_save = 1
+let g:auto_save = 0
 
 let g:auto_save_no_updatetime = 1
 
@@ -134,21 +137,21 @@ let g:UltiSnipsExpandTrigger="<c-g>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
+"if (empty($TMUX))
+"  if (has("nvim"))
+"    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+"    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"  endif
+"  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+"  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+"  if (has("termguicolors"))
+"    set termguicolors
+"  endif
+"endif
 
 colorscheme onedark
-hi Normal guibg=NONE ctermbg=NONE
+hi! Normal guibg=NONE ctermbg=NONE
 
 " Omnisharp configs
 
@@ -197,27 +200,18 @@ nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
 " Start the omnisharp server for the current solution
 nnoremap <Leader>ss :OmniSharpStartServer<CR>
 nnoremap <Leader>sp :OmniSharpStopServer<CR>
-
+nnoremap <Leader>sr :OmniSharpRestartServer<CR>
 nnoremap <Leader>ad :ALEDetail<CR>
-
-nnoremap <Leader>fd :Files<CR>
-
+nnoremap <Leader><Leader>fd :Files!<CR>
+nnoremap <Leader>fd :GFiles!<CR>
 noremap <Leader>uh :GitGutterUndoHunk<CR>
-
 noremap <Leader>nt :NERDTreeFind<CR>
-
 noremap <Leader>fb :Buffers<CR>
-
 noremap <Leader>an :ALENext<CR>
-
 noremap <Leader>rg :Rg<CR>
-
 noremap <Leader>ed :call EmptyDiff("
-
-function Code()
-	let lineNumber = line(".") 
-	execute '!code -g %:'.lineNumber
-endfunction
+noremap <Leader>ts :TigStatus<CR>
+noremap <Leader>tm :Tig<CR>
 
 function EmptyDiff(fileType)
 	execute 'tabe difftwo.' . a:fileType
@@ -238,3 +232,4 @@ imap <c-x><c-x> <plug>(fzf-complete-path)
 " Easy motion settings
 let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-overwin-f2)
+

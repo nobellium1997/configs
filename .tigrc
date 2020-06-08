@@ -1,5 +1,4 @@
 bind status U @git add -A
 bind generic y !@sh -c "git rev-parse --short %(commit) | xclip -sel clip"
-bind generic D !git difftool -y %(commit)
-bind status D !git difftool %(commit) %(file)
+bind status D !rm %(file)
 source ~/vim.tigrc
