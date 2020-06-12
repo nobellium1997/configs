@@ -206,7 +206,7 @@ noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
 noremap <Leader>fb :Buffers<CR>
 noremap <Leader>an :ALENext<CR>
-noremap <Leader>rg :Rg<CR>
+noremap <Leader>rg :Rg!<CR>
 noremap <Leader>ed :call EmptyDiff("
 
 " Git mappings 
