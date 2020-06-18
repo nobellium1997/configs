@@ -12,6 +12,8 @@ filetype plugin indent on
 
 autocmd Filetype * AnyFoldActivate
 
+autocmd BufRead,BufNewFile *.fish set filetype=sh
+
 set wildignore+=**/bin/**,**/obj/**,**/*.dll
 
 let mapleader = "\<Space>"
@@ -206,7 +208,7 @@ noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
 noremap <Leader>fb :Buffers<CR>
 noremap <Leader>an :ALENext<CR>
-noremap <Leader>rg :Rg!<CR>
+noremap <Leader>rg :Rg! 
 noremap <Leader>ed :call EmptyDiff("
 
 " Git mappings 

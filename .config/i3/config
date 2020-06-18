@@ -57,7 +57,7 @@ bindsym $mod+Shift+l move right
 bindsym $mod+q split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+# bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -157,7 +157,7 @@ assign [class="Microsoft Teams - Preview"] "3"
 
 # Start i3bar to display a workspace bar 
 bar {
-        status_command i3status -c ~/.config/i3/i3status.conf
+	status_command /home/nobel/custom_i3_status.sh
 	position top
 	colors {
 		background $bg-color
@@ -187,7 +187,7 @@ bindsym $mod+ctrl+shift+x exec systemctl poweroff
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym $mod+m exec ~/dotfiles/scripts/MuteMic.sh
+# bindsym $mod+m exec ~/dotfiles/scripts/MuteMic.sh
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -201,7 +201,10 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 bindsym $mod+w exec ~/Documents/workurls.sh
 
 # Hotkey to clipboard manager
-bindsym $mod+b exec /home/nobel/SuckLess/clipmenu/clipmenu
+bindsym $mod+v exec /home/nobel/SuckLess/clipmenu/clipmenu
+
+# Hotkey for muting mic
+bindsym $mod+b exec ~/dotfiles/scripts/MuteMic.sh
 
 # Set wallpaper
 exec_always feh --bg-fill ~/Downloads/kitanaZeroWall.png
@@ -220,6 +223,9 @@ exec numlockx on
 
 # Run clipmenu dameon
 exec /home/nobel/SuckLess/clipmenu/clipmenud
+
+# default to dual monitors
+exec ~/.screenlayout/twoscreen.sh
 
 # Make teams notification banners float 
 # for_window [class="Microsoft Teams - Preview"] floating enable
