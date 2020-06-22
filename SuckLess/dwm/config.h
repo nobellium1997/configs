@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int gappx     = 0;
+static const unsigned int gappx     = 10;
 static const unsigned int borderpx  = 5;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -31,8 +31,6 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Microsoft Teams - Preview",     NULL,       NULL,       1 << 8,            0,           1 },
-	{ "discord",     NULL,       NULL,       1 << 3,            0,           1 },
 };
 
 /* layout(s) */
@@ -44,8 +42,8 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[M]",      monocle },
 	{ "[]=",      tile },    /* first entry is default */
+	{ "[M]",      monocle },
 	{ "TTT",      bstack },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
@@ -94,7 +92,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	/* { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} }, */
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

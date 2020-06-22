@@ -13,7 +13,7 @@ parcellite &
 ~/initscript.sh &
 
 # Set background
-feh --bg-fill ~/Downloads/macoselcap.jpg &
+feh --bg-fill ~/Downloads/kitanaZeroWall.png &
 
 # Run clipboard manager daemon 
 /home/nobel/SuckLess/clipmenu/clipmenud &
@@ -31,8 +31,8 @@ compton &
 
 # Set status bar to display time and battery
 while true; do
-	# amixer -c 1 sget Mic | rg "\[on\]"
-	amixer get Capture | rg "\[on\]"
+	amixer -c 1 sget Mic | rg "\[on\]"
+	# amixer get Capture | rg "\[on\]"
 	MIC_IS_ON=$(echo $?)
 
 	MIC_MESSAGE="Mic is OFF"
