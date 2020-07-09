@@ -31,6 +31,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "Shutter",     NULL,       NULL,       1 << 2,            0,           1 },
+	{ "Microsoft Teams - Preview",     NULL,       NULL,       1,            0,           1 },
 };
 
 /* layout(s) */

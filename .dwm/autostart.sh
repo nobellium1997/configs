@@ -3,9 +3,6 @@
 # Set the screen layout
 ~/.screenlayout/twoscreen.sh &
 
-# Custom arrow keys
-autokey &
-
 # Clipboard persistence
 parcellite &
 

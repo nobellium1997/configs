@@ -6,7 +6,15 @@ set backspace=2
 set nohlsearch
 set nowrap
 set wildmode=longest,list,full
+
 syntax on
+
+set expandtab
+set smarttab
+set textwidth=120
+set ts=4 sw=4
+set autoindent
+set smartindent
 
 filetype plugin indent on
 
@@ -17,8 +25,6 @@ autocmd BufRead,BufNewFile *.fish set filetype=sh
 set wildignore+=**/bin/**,**/obj/**,**/*.dll
 
 let mapleader = "\<Space>"
-
-set ts=4 sw=4
 
 nnoremap J <C-e>
 nnoremap K <C-y>
@@ -37,75 +43,67 @@ vmap $ g_
 call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/vim-scripts/vim-auto-save.git'
-
 Plug 'https://github.com/xolox/vim-easytags.git'
-
 Plug 'https://github.com/xolox/vim-misc.git'
-
 Plug 'https://github.com/tpope/vim-fugitive.git'
-
 Plug 'https://github.com/dense-analysis/ale.git'
-
 Plug 'https://github.com/tpope/vim-surround.git'
-
 Plug 'https://github.com/KangOl/vim-pudb.git'
-
 Plug 'https://github.com/OmniSharp/omnisharp-vim.git'
-
 Plug 'prabirshrestha/asyncomplete.vim'
-
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
 Plug 'junegunn/fzf.vim'
-
 Plug 'https://github.com/vim-nerdtree/nerdtree.git'
-
 Plug 'https://github.com/ycm-core/YouCompleteMe.git'
-
 Plug 'https://github.com/itchyny/lightline.vim.git'
-
 Plug 'https://github.com/airblade/vim-gitgutter.git'
-
 Plug 'https://github.com/vim-scripts/json-formatter.vim.git'
-
 Plug 'https://github.com/janko/vim-test.git'
-
 Plug 'https://github.com/joshdick/onedark.vim.git'
-
 Plug 'https://github.com/Chiel92/vim-autoformat.git'
-
 " F# plugins 
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-
 Plug 'ionide/Ionide-vim', {
       \ 'do':  'make fsautocomplete',
       \}
-
 Plug 'https://github.com/pseewald/vim-anyfold.git'
-
 Plug 'christoomey/vim-tmux-runner'
-
 Plug 'https://github.com/SirVer/ultisnips.git'
-
 Plug 'dracula/vim', { 'as': 'dracula' }
-
 Plug 'https://github.com/easymotion/vim-easymotion.git'
+Plug 'https://github.com/vim-scripts/taglist.vim.git'
+Plug 'lervag/vimtex'
 
 call plug#end()
 
 set laststatus=2
 
+" Latex configurations
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+  endif
+  au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 set foldlevel=99 " Open all folds
 
-let g:auto_save = 0
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+" set conceallevel=1
+let g:tex_conceal='abdmg'
 
+" Tlist configs
+let Tlist_Use_Horiz_Window = 1  
+let Tlist_WinHeight = 15
+
+" Autosave configs 
+let g:auto_save = 1
 let g:auto_save_no_updatetime = 1
-
 let g:auto_save_in_insert_mode = 0
 
+" No ycm for cs files 
 let g:ycm_filetype_blacklist = {'cs': 1}
 
 set updatetime=200
@@ -118,18 +116,16 @@ let g:ale_linters = {
 \ 'cs': ['OmniSharp']
 \}
 
+" More omnisharp stuff
 let g:ale_echo_cursor = 0
-
 let g:OmniSharp_highlight_types = 2
-
 let g:OmniSharp_selector_ui = 'fzf'
 
 let g:NERDTreeWinSize=60
 
+" Testing in vim tmux 
 let test#csharp#runner = 'dotnettest'
-
 let test#strategy = 'vtr'
-
 let g:VtrPercentage = 35
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -137,24 +133,10 @@ let g:UltiSnipsExpandTrigger="<c-g>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-"if (empty($TMUX))
-"  if (has("nvim"))
-"    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-"    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"  endif
-"  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-"  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-"  if (has("termguicolors"))
-"    set termguicolors
-"  endif
-"endif
-
 colorscheme onedark
 hi! Normal guibg=NONE ctermbg=NONE
 
 " Omnisharp configs
-
 augroup omnisharp_commands
     autocmd!
 
@@ -198,6 +180,7 @@ command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
 nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
 
 " Start the omnisharp server for the current solution
+" General Hotkeys
 nnoremap <Leader>ss :OmniSharpStartServer<CR>
 nnoremap <Leader>sp :OmniSharpStopServer<CR>
 nnoremap <Leader>sr :OmniSharpRestartServer<CR>
@@ -206,16 +189,18 @@ nnoremap <Leader><Leader>fd :Files!<CR>
 nnoremap <Leader>fd :GFiles!<CR>
 noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
-noremap <Leader>fb :Buffers<CR>
+noremap <Leader>fb :Buffers!<CR>
 noremap <Leader>an :ALENext<CR>
 noremap <Leader>rg :Rg! 
 noremap <Leader>ed :call EmptyDiff("
+noremap <Leader>tl :TlistOpen<CR>
 
 " Git mappings 
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gl :Glog<CR>
 nmap <Leader>gd :Gvdiffsplit<CR>
 
+" Command for exectuing diffs
 function EmptyDiff(fileType)
 	execute 'tabe difftwo.' . a:fileType
 	execute 'vs diffone.' . a:fileType
