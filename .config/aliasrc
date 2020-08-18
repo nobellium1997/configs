@@ -27,3 +27,4 @@ alias emacs='env TERM=xterm-256color emacs -nw'
 alias ca-cert='export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
 alias no-cert="set -e REQUESTS_CA_BUNDLE"
 alias cac="cd application_csharp"
+alias fd=fdfind

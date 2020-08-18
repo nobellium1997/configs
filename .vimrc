@@ -29,6 +29,7 @@ let mapleader = "\<Space>"
 nnoremap J <C-e>
 nnoremap K <C-y>
 
+noremap <C-q> :Commands<CR>
 noremap y "+y
 noremap p "+p
 noremap P "+P
@@ -42,40 +43,24 @@ vmap $ g_
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/vim-scripts/vim-auto-save.git'
-Plug 'https://github.com/xolox/vim-easytags.git'
-Plug 'https://github.com/xolox/vim-misc.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'https://github.com/KangOl/vim-pudb.git'
 Plug 'https://github.com/OmniSharp/omnisharp-vim.git'
-Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/vim-nerdtree/nerdtree.git'
-Plug 'https://github.com/ycm-core/YouCompleteMe.git'
 Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/vim-scripts/json-formatter.vim.git'
-Plug 'https://github.com/janko/vim-test.git'
 Plug 'https://github.com/joshdick/onedark.vim.git'
 Plug 'https://github.com/Chiel92/vim-autoformat.git'
-" F# plugins 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'ionide/Ionide-vim', {
-      \ 'do':  'make fsautocomplete',
-      \}
 Plug 'https://github.com/pseewald/vim-anyfold.git'
-Plug 'christoomey/vim-tmux-runner'
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'https://github.com/easymotion/vim-easymotion.git'
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'lervag/vimtex'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -122,11 +107,6 @@ let g:OmniSharp_highlight_types = 2
 let g:OmniSharp_selector_ui = 'fzf'
 
 let g:NERDTreeWinSize=60
-
-" Testing in vim tmux 
-let test#csharp#runner = 'dotnettest'
-let test#strategy = 'vtr'
-let g:VtrPercentage = 35
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-g>"
@@ -216,8 +196,3 @@ au BufRead,BufNewFile *.cshtml set filetype=html
 
 " Fzf configs
 imap <c-x><c-x> <plug>(fzf-complete-path)
-
-" Easy motion settings
-let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-overwin-f2)
-
