@@ -46,7 +46,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'https://github.com/OmniSharp/omnisharp-vim.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/vim-nerdtree/nerdtree.git'
