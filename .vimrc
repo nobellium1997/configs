@@ -29,7 +29,7 @@ let mapleader = "\<Space>"
 nnoremap J <C-e>
 nnoremap K <C-y>
 
-noremap <C-q> :Commands<CR>
+noremap <leader>cm :Commands<CR>
 noremap y "+y
 noremap p "+p
 noremap P "+P
@@ -44,7 +44,6 @@ vmap $ g_
 call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/dense-analysis/ale.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'

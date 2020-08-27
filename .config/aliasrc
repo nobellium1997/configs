@@ -1,5 +1,5 @@
 alias r=ranger
-alias :q=exit
+alias q=exit
 alias ride=rider.sh
 alias update="sudo apt update; and sudo apt upgrade -y"
 alias grep="grep --color"
