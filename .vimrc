@@ -59,6 +59,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'lervag/vimtex'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'christoomey/vim-conflicted'
 
 call plug#end()
 
@@ -117,10 +118,6 @@ hi! Normal guibg=NONE ctermbg=NONE
 " Omnisharp configs
 augroup omnisharp_commands
     autocmd!
-
-    " Show type information automatically when the cursor stops moving
-    "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
     " The following commands are contextual, based on the cursor position.
     autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
     autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>

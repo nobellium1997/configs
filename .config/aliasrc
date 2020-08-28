@@ -1,30 +1,18 @@
 alias r=ranger
 alias q=exit
-alias ride=rider.sh
-alias update="sudo apt update; and sudo apt upgrade -y"
-alias grep="grep --color"
-alias c="clear"
 alias tks="tmux kill-server"
 alias open=xdg-open
-#alias python=python3
-#alias pip=pip3
-alias three=~/.screenlayout/threescreen.sh
-alias one=~/.screenlayout/singlescreen.sh
 alias ta="tmux attach"
+alias tinit="tmux attach || tmux"
 alias cdw="cd ~/Work"
 alias cdn="cd ~/Notes"
 alias t=tig
 alias ts="tig status"
-alias tref="tig refs"
+alias tr="tig refs"
 alias ns="notify-send"
-alias b="cd .."
 alias config='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
-alias dbg="fd -e sln -x code {//}"
-alias s3d='cd ~/Work/Misc/S3Downloads'
 alias proxy="export http_proxy=127.0.0.1:44700; export https_proxy=127.0.0.1:44700"
 alias unproxy="set -e http_proxy; set -e https_proxy"
-alias emacs='env TERM=xterm-256color emacs -nw'
 alias ca-cert='export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
 alias no-cert="set -e REQUESTS_CA_BUNDLE"
-alias cac="cd application_csharp"
 alias fd=fdfind
