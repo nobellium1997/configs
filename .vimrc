@@ -22,18 +22,12 @@ autocmd Filetype * AnyFoldActivate
 
 autocmd BufRead,BufNewFile *.fish set filetype=sh
 
-set wildignore+=**/bin/**,**/obj/**,**/*.dll
-
 let mapleader = "\<Space>"
 
 nnoremap J <C-e>
 nnoremap K <C-y>
 
 noremap <leader>cm :Commands<CR>
-vnoremap d "_d
-nnoremap d "_d
-" vnoremap c "_c 
-nnoremap c "_c
 
 nmap $ g_
 vmap $ g_
@@ -45,7 +39,6 @@ Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/vim-nerdtree/nerdtree.git'
-" Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/vim-scripts/json-formatter.vim.git'
 Plug 'https://github.com/joshdick/onedark.vim.git'
@@ -57,7 +50,6 @@ Plug 'lervag/vimtex'
 Plug 'christoomey/vim-conflicted'
 Plug 'dense-analysis/ale'
 Plug 'https://github.com/ycm-core/YouCompleteMe.git'
-"Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -77,76 +69,19 @@ let g:vimtex_quickfix_mode=0
 let g:tex_conceal='abdmg'
 
 " Tlist configs
-let Tlist_Use_Horiz_Window = 1  
-let Tlist_WinHeight = 15
-
-" No ycm for cs files 
-let g:ycm_filetype_blacklist = {'cs': 1}
+let Tlist_Use_Horiz_Window = 0  
+let Tlist_WinWidth = 70
 
 set updatetime=200
 
 let g:easytags_async = 1
 
-let g:OmniSharp_server_stdio = 1
-
-let g:ale_linters = {
-\ 'cs': ['OmniSharp']
-\}
-
-" More omnisharp stuff
-let g:ale_echo_cursor = 0
-let g:OmniSharp_highlight_types = 2
-let g:OmniSharp_selector_ui = 'fzf'
-
 let g:NERDTreeWinSize=60
 
-colorscheme onedark
+colorscheme dracula
 hi! Normal guibg=NONE ctermbg=NONE
 
-" Omnisharp configs
-augroup omnisharp_commands
-    autocmd!
-    " The following commands are contextual, based on the cursor position.
-    autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
-
-    " Finds members in the current buffer
-    autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
-
-    autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
-    autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
-    autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
-
-    " Navigate up and down by method/property/field
-    autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-    autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
-
-    " Find all code errors/warnings for the current solution and populate the quickfix window
-    autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
-augroup END
-
-" Contextual code actions (uses fzf, CtrlP or unite.vim when available)
-nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
-" Run code actions with text selected in visual mode to extract method
-xnoremap <Leader><Space> :call OmniSharp#GetCodeActions('visual')<CR>
-
-" Rename with dialog
-nnoremap <Leader>nm :OmniSharpRename<CR>
-nnoremap <F2> :OmniSharpRename<CR>
-" Rename without dialog - with cursor on the symbol to rename: `:Rename newname`
-command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
-
-nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
-
-" Start the omnisharp server for the current solution
 " General Hotkeys
-nnoremap <Leader>ss :OmniSharpStartServer<CR>
-nnoremap <Leader>sp :OmniSharpStopServer<CR>
-nnoremap <Leader>sr :OmniSharpRestartServer<CR>
 nnoremap <Leader>ad :ALEDetail<CR>
 nnoremap <Leader><Leader>fd :Files!<CR>
 nnoremap <Leader>fd :GFiles!<CR>
@@ -162,9 +97,3 @@ noremap <Leader>tl :TlistOpen<CR>
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gl :Glog<CR>
 nmap <Leader>gd :Gvdiffsplit<CR>
-
-" Set html syntax highlighting to cshtml
-au BufRead,BufNewFile *.cshtml set filetype=html
-
-" Fzf configs
-imap <c-x><c-x> <plug>(fzf-complete-path)
