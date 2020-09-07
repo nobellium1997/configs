@@ -30,9 +30,6 @@ nnoremap J <C-e>
 nnoremap K <C-y>
 
 noremap <leader>cm :Commands<CR>
-noremap y "+y
-noremap p "+p
-noremap P "+P
 vnoremap d "_d
 nnoremap d "_d
 " vnoremap c "_c 
@@ -48,18 +45,19 @@ Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/vim-nerdtree/nerdtree.git'
-Plug 'https://github.com/itchyny/lightline.vim.git'
+" Plug 'https://github.com/itchyny/lightline.vim.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/vim-scripts/json-formatter.vim.git'
 Plug 'https://github.com/joshdick/onedark.vim.git'
 Plug 'https://github.com/Chiel92/vim-autoformat.git'
 Plug 'https://github.com/pseewald/vim-anyfold.git'
-Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'lervag/vimtex'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'christoomey/vim-conflicted'
+Plug 'dense-analysis/ale'
+Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+"Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -82,11 +80,6 @@ let g:tex_conceal='abdmg'
 let Tlist_Use_Horiz_Window = 1  
 let Tlist_WinHeight = 15
 
-" Autosave configs 
-let g:auto_save = 1
-let g:auto_save_no_updatetime = 1
-let g:auto_save_in_insert_mode = 0
-
 " No ycm for cs files 
 let g:ycm_filetype_blacklist = {'cs': 1}
 
@@ -106,11 +99,6 @@ let g:OmniSharp_highlight_types = 2
 let g:OmniSharp_selector_ui = 'fzf'
 
 let g:NERDTreeWinSize=60
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-g>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 colorscheme onedark
 hi! Normal guibg=NONE ctermbg=NONE
@@ -174,17 +162,6 @@ noremap <Leader>tl :TlistOpen<CR>
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gl :Glog<CR>
 nmap <Leader>gd :Gvdiffsplit<CR>
-
-" Command for exectuing diffs
-function EmptyDiff(fileType)
-	execute 'tabe difftwo.' . a:fileType
-	execute 'vs diffone.' . a:fileType
-	windo difft
-endfunction
-
-if !has('gui_running')
-  set t_Co=256
-endif
 
 " Set html syntax highlighting to cshtml
 au BufRead,BufNewFile *.cshtml set filetype=html

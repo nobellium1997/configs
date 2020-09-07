@@ -1,10 +1,19 @@
+alias ls="ls -l --color"
+function cs {
+    cd $@ && ls
+}
+
+function open {
+    xdg-open $@ &; disown
+}
+
+alias cd=cs
 alias r=ranger
 alias q=exit
 alias tks="tmux kill-server"
-alias open=xdg-open
 alias ta="tmux attach"
 alias tinit="tmux attach || tmux"
-alias cdw="cd ~/Work"
+alias cdw="cd ~/School"
 alias cdn="cd ~/Notes"
 alias t=tig
 alias ts="tig status"
@@ -16,3 +25,4 @@ alias unproxy="set -e http_proxy; set -e https_proxy"
 alias ca-cert='export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
 alias no-cert="set -e REQUESTS_CA_BUNDLE"
 alias fd=fdfind
+alias b="cd .."
