@@ -78,13 +78,12 @@ let g:easytags_async = 1
 
 let g:NERDTreeWinSize=60
 
-colorscheme dracula
-hi! Normal guibg=NONE ctermbg=NONE
+colorscheme onedark
 
 " General Hotkeys
 nnoremap <Leader>ad :ALEDetail<CR>
-nnoremap <Leader><Leader>fd :Files!<CR>
-nnoremap <Leader>fd :GFiles!<CR>
+nnoremap <Leader><Leader>fd :GFiles!<CR>
+nnoremap <Leader>fd :Files!<CR>
 noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
 noremap <Leader>fb :Buffers!<CR>
