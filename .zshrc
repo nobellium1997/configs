@@ -97,11 +97,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/.config/aliasrc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=$PATH:~/anaconda3/bin
+source ~/.config/aliasrc
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -119,8 +119,8 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 export TERM=xterm-256color
-source ~/fzf-tab-completion/zsh/fzf-zsh-completion.sh
-zstyle ':completion:*' fzf-search-display true
-
 export EDITOR=nvim
+
+# set the env to current class 
 conda activate CS6475
+
