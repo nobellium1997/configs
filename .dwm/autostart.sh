@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Set the screen layout
-~/.screenlayout/twoscreen.sh &
+~/.screenlayout/res.sh &
 
 # Clipboard persistence
 parcellite &
@@ -10,7 +10,7 @@ parcellite &
 ~/initscript.sh &
 
 # Set background
-feh --bg-fill ~/Downloads/kitanaZeroWall.png &
+feh --bg-fill ~/Wallpapers/samurai.png &
 
 # Run clipboard manager daemon 
 /home/nobel/SuckLess/clipmenu/clipmenud &
@@ -23,22 +23,10 @@ wmname LG3D &
 # Start Compton for compositing effects
 compton &
 
-# Start bwall
-# bwall -pixel_city &
-
 # Set status bar to display time and battery
 while true; do
-	amixer -c 1 sget Mic | rg "\[on\]"
-	# amixer get Capture | rg "\[on\]"
-	MIC_IS_ON=$(echo $?)
-
-	MIC_MESSAGE="Mic is OFF"
-	if [ "$MIC_IS_ON" -eq 0 ]; then
-		MIC_MESSAGE="Mic is LIVE"
-	fi
-
 	LOAD_AVG=$(cat /proc/loadavg | awk -F ' ' '{print $1}')
 
-	xsetroot -name " Load Avg: $LOAD_AVG | $MIC_MESSAGE | $(acpi | rg "Battery 0" | sed "s/Battery 0: //g") | $(date +'%D %H:%M') "
+	xsetroot -name " Load Avg: $LOAD_AVG | $(acpi | rg "Battery 0" | sed "s/Battery 0: //g") | $(date +'%D %H:%M') "
 	sleep 1
 done &
