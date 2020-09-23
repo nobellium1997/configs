@@ -45,7 +45,6 @@ Plug 'https://github.com/Chiel92/vim-autoformat.git'
 Plug 'https://github.com/pseewald/vim-anyfold.git'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
-Plug 'lervag/vimtex'
 Plug 'christoomey/vim-conflicted'
 Plug 'dense-analysis/ale'
 Plug 'https://github.com/ycm-core/YouCompleteMe.git'
