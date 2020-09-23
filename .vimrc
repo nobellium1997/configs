@@ -34,7 +34,6 @@ vmap $ g_
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -54,19 +53,6 @@ Plug 'https://github.com/ycm-core/YouCompleteMe.git'
 call plug#end()
 
 set laststatus=2
-
-" Latex configurations
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-  endif
-  au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
-set foldlevel=99 " Open all folds
-
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-" set conceallevel=1
-let g:tex_conceal='abdmg'
 
 " Tlist configs
 let Tlist_Use_Horiz_Window = 0  
@@ -91,8 +77,3 @@ noremap <Leader>an :ALENext<CR>
 noremap <Leader>rg :Rg! 
 noremap <Leader>ed :call EmptyDiff("
 noremap <Leader>tl :TlistOpen<CR>
-
-" Git mappings 
-nmap <Leader>gs :Gstatus<CR>
-nmap <Leader>gl :Glog<CR>
-nmap <Leader>gd :Gvdiffsplit<CR>
