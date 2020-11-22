@@ -28,3 +28,4 @@ alias ea="nvim ~/.config/aliasrc"
 alias ua="source ~/.config/aliasrc"
 alias ipy=ipython
 alias v.="nvim ."
+alias :q=exit

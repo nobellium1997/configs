@@ -55,26 +55,26 @@ colorscheme onedark
 
 " General hotkeys
 nnoremap <Leader>ad :ALEDetail<CR>
-nnoremap <Leader><Leader>fd :GFiles!<CR>
-nnoremap <Leader>fd :GFiles!<CR>
-nnoremap <Leader>cd :Files!<CR>
+nnoremap <Leader>fd :Files!<CR>
 noremap <leader>cm :Commands<CR>
 noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
 noremap <Leader>fb :Buffers!<CR>
 noremap <Leader>an :ALENext<CR>
-noremap <Leader>rg :Rg! 
+noremap <Leader>rg :CocSearch
 noremap <Leader>ed :call EmptyDiff("
 noremap <Leader>tl :TlistOpen<CR>
 noremap <Leader>hs :History:<CR>
 
 " Copy paste hotkeys
 " Paste
-noremap <Leader>p "+p
-vnoremap <Leader>p "+p
+noremap p "+p
+vnoremap p "+p
+noremap P "+P
+vnoremap P "+P
 
-noremap <Leader>y "+y
-vnoremap <Leader>y "+y
+noremap y "+y
+vnoremap y "+y
 
 noremap <Leader>d "_d
 vnoremap <Leader>d "_d
