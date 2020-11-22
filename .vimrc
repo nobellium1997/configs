@@ -24,7 +24,6 @@ let mapleader = "\<Space>"
 
 call plug#begin('~/.vim/plugged')
 
-" Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -37,8 +36,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'christoomey/vim-conflicted'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-" Plug 'dense-analysis/ale'
-" Plug 'https://github.com/ycm-core/YouCompleteMe.git'
 
 call plug#end()
 

@@ -1,11 +1,5 @@
 #!/bin/zsh
 
-# Clipboard persistence
-parcellite &
-
-# Swap ctrl with caps lock 
-~/initscript.sh &
-
 # Set background
 feh --bg-fill ~/Wallpapers/samurai.png &
 
