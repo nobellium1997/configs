@@ -15,6 +15,7 @@ set textwidth=120
 set ts=4 sw=4
 set autoindent
 set smartindent
+set inccommand=nosplit
 
 filetype plugin indent on
 
@@ -61,7 +62,7 @@ noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
 noremap <Leader>fb :Buffers!<CR>
 noremap <Leader>an :ALENext<CR>
-noremap <Leader>rg :CocSearch
+noremap <Leader>rg :CocSearch 
 noremap <Leader>ed :call EmptyDiff("
 noremap <Leader>tl :TlistOpen<CR>
 noremap <Leader>hs :History:<CR>
