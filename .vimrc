@@ -1,5 +1,4 @@
 set number
-set relativenumber
 set ignorecase
 set incsearch
 set backspace=2
@@ -15,7 +14,8 @@ set textwidth=120
 set ts=4 sw=4
 set autoindent
 set smartindent
-set inccommand=nosplit
+" set inccommand=nosplit
+set hidden
 
 filetype plugin indent on
 
@@ -37,6 +37,10 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'christoomey/vim-conflicted'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'https://github.com/easymotion/vim-easymotion.git'
+Plug 'https://github.com/frazrepo/vim-rainbow.git'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -54,18 +58,17 @@ let g:NERDTreeWinSize=60
 
 colorscheme onedark
 
-" General hotkeys
-nnoremap <Leader>ad :ALEDetail<CR>
-nnoremap <Leader>fd :Files!<CR>
+nnoremap <Leader>fd :Files<CR>
 noremap <leader>cm :Commands<CR>
 noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
-noremap <Leader>fb :Buffers!<CR>
-noremap <Leader>an :ALENext<CR>
+noremap <Leader>fb :Buffers<CR>
 noremap <Leader>rg :CocSearch 
-noremap <Leader>ed :call EmptyDiff("
 noremap <Leader>tl :TlistOpen<CR>
 noremap <Leader>hs :History:<CR>
+noremap <Leader>bd :bd!<CR>
+
+nnoremap <BS> <C-^>
 
 " Copy paste hotkeys
 " Paste
@@ -82,3 +85,17 @@ vnoremap <Leader>d "_d
 
 nmap $ g_
 vmap $ g_
+
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map J <Plug>(easymotion-j)
+map K <Plug>(easymotion-k)
+
+" Exec shell scripts
+command Exec set splitright | vnew | set filetype=json | read !sh # 
+
+

@@ -29,3 +29,6 @@ alias ua="source ~/.config/aliasrc"
 alias ipy=ipython
 alias v.="nvim ."
 alias :q=exit
+alias gca="git commit -a"
+alias d=dotnet
+alias p="export https_proxy='localhost:8080'; export http_proxy='localhost:8080'"

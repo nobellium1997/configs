@@ -1,26 +1,26 @@
 #!/bin/zsh
 
 # Set background
-feh --bg-fill ~/Wallpapers/samurai.png &
+feh --bg-fill ~/Wallpapers/spiderverse.jpg &
 
 # Run clipboard manager daemon 
-/home/nobel/SuckLess/clipmenu/clipmenud &
+/home/nobel/Suckless/clipmenu/clipmenud &
 
 # Raise keyboard rate
 xset r rate 279 40 &
 
-# Settings for jetbrain products
-export _JAVA_AWT_WM_NONREPARENTING=1 &
-export AWT_TOOLKIT=MToolkit &
-wmname LG3D &
-
-# Start Compton for compositing effects
-compton &
-
 # Set status bar to display time and battery
 while true; do
+	amixer -c 3 sget Mic | rg "\[on\]"
+	MIC_IS_ON=$(echo $?)
+
+	MIC_MESSAGE="Mic is OFF"
+	if [ "$MIC_IS_ON" -eq 0 ]; then
+		MIC_MESSAGE="Mic is LIVE"
+	fi
+
 	LOAD_AVG=$(cat /proc/loadavg | awk -F ' ' '{print $1}')
 
-	xsetroot -name " Load Avg: $LOAD_AVG | $(date +'%D %H:%M') "
+	xsetroot -name " Load Avg: $LOAD_AVG | $MIC_MESSAGE | $(date +'%D %H:%M') "
 	sleep 1
 done &
