@@ -32,3 +32,4 @@ alias :q=exit
 alias gca="git commit -a"
 alias d=dotnet
 alias p="export https_proxy='localhost:8080'; export http_proxy='localhost:8080'"
+alias up="set -e https_proxy; set -e http_proxy"
