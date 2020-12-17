@@ -11,3 +11,5 @@ export TERM=xterm-256color
 source ~/.config/aliasrc
 set -gx EDITOR nvim
 # conda activate CS6475
+
+export BW_SESSION="fdq3XHYV9bkSfd4Ist6V6vW1t3FMU/QlhjfV1VVoLq0Q9XjevgCJl9OXFVAv3PL6rZYmpG960Wxv2sZ+w2iCQg=="
