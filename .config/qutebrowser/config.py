@@ -9,3 +9,5 @@ config.bind("<Ctrl+k>", "tab-prev")
 
 config.unbind("J")
 config.unbind("K")
+
+# config.bind(" ,M hint links spawn mpv {hint-url}
