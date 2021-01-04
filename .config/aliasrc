@@ -1,21 +1,15 @@
 alias ls="ls -l --color"
-function cs {
-    cd $@ && ls
-}
-
-function open {
-    xdg-open $@ &; disown
-}
-
-alias cd=cs
 alias r=ranger
 alias q=exit
+alias tm=tmux
 alias tks="tmux kill-server"
 alias ta="tmux attach"
 alias tinit="tmux attach || tmux"
-alias cdw="cd ~/School"
-alias cda="cd ~/School/CS6475/assignments"
-alias cdnb="cd ~/School/CS6475/lab_exercises"
+alias cdd="cd ~/Downloads"
+alias cdw="cd ~/work"
+alias cds="cd ~/School"
+alias cda="cd ~/School/CS6475-Assignments"
+alias cdl="cd ~/School/lab_exercises"
 alias cdn="cd ~/Notes"
 alias t=tig
 alias ts="tig status"
@@ -28,5 +22,28 @@ alias ca-cert='export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
 alias no-cert="set -e REQUESTS_CA_BUNDLE"
 alias fd=fdfind
 alias b="cd .."
-alias cr="code -r"
-alias co="code"
+alias v=nvim
+alias sus="systemctl suspend"
+alias g=git
+alias gs="git status"
+alias ea="nvim ~/.config/aliasrc"
+alias ua="source ~/.config/aliasrc"
+alias ipy=ipython
+alias v.="nvim ."
+alias :q=exit
+alias gca="git commit -a"
+alias d=dotnet
+alias p="export https_proxy='localhost:8080'; export http_proxy='localhost:8080'"
+alias up="set -e https_proxy; set -e http_proxy"
+alias dwr="dotnet watch run"
+alias dr="dotnet run"
+alias tls="tmux ls"
+
+function getpass
+    set -l NAME (bw list items | jq '.[].name' | dmenu)
+    set -l NAME_STRIPPED (echo $NAME | sed 's/"//g')
+    set -l PASS (bw get password $NAME_STRIPPED)
+    set -l USER (bw get username $NAME_STRIPPED)
+    echo $USER
+    echo $PASS | clip.exe
+end

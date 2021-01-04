@@ -1,32 +1,29 @@
 #!/bin/zsh
 
-# Set the screen layout
-~/.screenlayout/res.sh &
-
-# Clipboard persistence
-parcellite &
-
-# Swap ctrl with caps lock 
-~/initscript.sh &
+# Arandr
+~/.screenlayout/two_screen.sh &
 
 # Set background
-feh --bg-fill ~/Wallpapers/samurai.png &
+feh --bg-fill ~/Wallpapers/oldest_house.jpg &
 
 # Run clipboard manager daemon 
-/home/nobel/SuckLess/clipmenu/clipmenud &
+/home/nobel/Suckless/clipmenu/clipmenud &
 
-# Settings for jetbrain products
-export _JAVA_AWT_WM_NONREPARENTING=1 &
-export AWT_TOOLKIT=MToolkit &
-wmname LG3D &
-
-# Start Compton for compositing effects
-compton &
+# Raise keyboard rate
+xset r rate 279 40 &
 
 # Set status bar to display time and battery
 while true; do
+	amixer -c 3 sget Mic | rg "\[on\]"
+	MIC_IS_ON=$(echo $?)
+
+	MIC_MESSAGE="Mic is OFF"
+	if [ "$MIC_IS_ON" -eq 0 ]; then
+		MIC_MESSAGE="Mic is LIVE"
+	fi
+
 	LOAD_AVG=$(cat /proc/loadavg | awk -F ' ' '{print $1}')
 
-	xsetroot -name " Load Avg: $LOAD_AVG | $(acpi | rg "Battery 0" | sed "s/Battery 0: //g") | $(date +'%D %H:%M') "
+	xsetroot -name " Load Avg: $LOAD_AVG | $MIC_MESSAGE | $(date +'%D %H:%M') "
 	sleep 1
 done &

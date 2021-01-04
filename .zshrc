@@ -119,6 +119,9 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 export TERM=xterm-256color
+# source ~/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+# zstyle ':completion:*' fzf-search-display true
+
 export EDITOR=nvim
 
 # set the env to current class 
