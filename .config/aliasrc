@@ -38,6 +38,8 @@ alias up="set -e https_proxy; set -e http_proxy"
 alias dwr="dotnet watch run"
 alias dr="dotnet run"
 alias tls="tmux ls"
+alias c="code -r"
+alias cn="code"
 
 function getpass
     set -l NAME (bw list items | jq '.[].name' | dmenu)
