@@ -29,18 +29,18 @@ Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/vim-nerdtree/nerdtree.git'
-Plug 'https://github.com/airblade/vim-gitgutter.git'
+" Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/vim-scripts/json-formatter.vim.git'
 Plug 'https://github.com/joshdick/onedark.vim.git'
 Plug 'https://github.com/Chiel92/vim-autoformat.git'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'https://github.com/vim-scripts/taglist.vim.git'
-Plug 'christoomey/vim-conflicted'
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+" Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'https://github.com/vim-scripts/taglist.vim.git'
+" Plug 'christoomey/vim-conflicted'
+" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'https://github.com/easymotion/vim-easymotion.git'
-Plug 'https://github.com/frazrepo/vim-rainbow.git'
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'dense-analysis/ale'
+" Plug 'https://github.com/frazrepo/vim-rainbow.git'
+" Plug 'OmniSharp/omnisharp-vim'
+" Plug 'dense-analysis/ale'
 
 call plug#end()
 

@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Arandr
-~/.screenlayout/two_screen.sh &
+~/.screenlayout/single.sh &
 
 # Set background
 feh --bg-fill ~/Wallpapers/oldest_house.jpg &
@@ -23,7 +23,9 @@ while true; do
 	fi
 
 	LOAD_AVG=$(cat /proc/loadavg | awk -F ' ' '{print $1}')
+    BATT=$(acpi)
+	NETWORK=$(nmcli -t -f name connection show --active)
 
-	xsetroot -name " Load Avg: $LOAD_AVG | $MIC_MESSAGE | $(date +'%D %H:%M') "
+	xsetroot -name " $NETWORK | $BATT | Load Avg: $LOAD_AVG | $MIC_MESSAGE | $(date +'%D %H:%M') "
 	sleep 1
 done &
