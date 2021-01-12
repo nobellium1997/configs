@@ -25,6 +25,7 @@ let mapleader = "\<Space>"
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'https://github.com/morhetz/gruvbox.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -56,7 +57,7 @@ let g:easytags_async = 1
 
 let g:NERDTreeWinSize=60
 
-colorscheme onedark
+colorscheme gruvbox
 
 nnoremap <Leader>fd :Files<CR>
 noremap <leader>cm :Commands<CR>
