@@ -4,9 +4,9 @@ alias q=exit
 alias tm=tmux
 alias tks="tmux kill-server"
 alias ta="tmux attach"
-alias tinit="tmux attach || tmux"
+alias tmls="tmux ls"
 alias cdd="cd ~/Downloads"
-alias cdw="cd ~/work"
+alias cdw="cd ~/Work"
 alias cds="cd ~/School"
 alias cda="cd ~/School/CS6475-Assignments"
 alias cdl="cd ~/School/lab_exercises"
@@ -40,6 +40,7 @@ alias dr="dotnet run"
 alias tls="tmux ls"
 alias c="code -r"
 alias cn="code"
+alias vpn="ssh -C -q -N nobel.barakat@10.0.0.158 -D 5002" #-L 5432:some_host:5432"
 
 function getpass
     set -l NAME (bw list items | jq '.[].name' | dmenu)

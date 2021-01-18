@@ -1,5 +1,5 @@
 #!/bin/bash
-amixer get Capture | rg "\[on\]" >/dev/null
+amixer -c1 get Mic | rg "\[on\]" >/dev/null
 MIC_IS_ON=$(echo $?)
 
 MIC_MESSAGE="Mic is OFF"
