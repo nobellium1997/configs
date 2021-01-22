@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Arandr
-# ~/.screenlayout/two_screen.sh &
+~/.screenlayout/single.sh &
 
 # Set background
 feh --bg-fill ~/Wallpapers/oldest_house.jpg &
