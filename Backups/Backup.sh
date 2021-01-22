@@ -1,3 +1,4 @@
+#!/bin/bash
 git clone --bare https://github.com/nobellium1997/configs.git $HOME/.cfg
 function config {
    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
