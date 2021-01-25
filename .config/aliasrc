@@ -23,7 +23,7 @@ alias no-cert="set -e REQUESTS_CA_BUNDLE"
 alias fd=fdfind
 alias b="cd .."
 alias v=nvim
-alias sus="systemctl suspend"
+alias sus="bw lock; and systemctl suspend"
 alias g=git
 alias gs="git status"
 alias ea="nvim ~/.config/aliasrc"
@@ -41,12 +41,5 @@ alias tls="tmux ls"
 alias c="code -r"
 alias cn="code"
 alias vpn="ssh -C -q -N nobel.barakat@10.0.0.158 -D 5002" #-L 5432:some_host:5432"
-
-function getpass
-    set -l NAME (bw list items | jq '.[].name' | dmenu)
-    set -l NAME_STRIPPED (echo $NAME | sed 's/"//g')
-    set -l PASS (bw get password $NAME_STRIPPED)
-    set -l USER (bw get username $NAME_STRIPPED)
-    echo $USER
-    echo $PASS | clip.exe
-end
+alias po="bw lock; and systemctl poweroff"
+alias rb="bw lock; and systemctl reboot"
