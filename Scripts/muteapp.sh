@@ -35,15 +35,16 @@ usage() {
     exit $1
 }
 
-mute()   { adjust_muteness "$1" 1; }
-unmute() { adjust_muteness "$1" 0; }
+mute()   { adjust_muteness "$1" "+5"; }
+unmute() { adjust_muteness "$1" "-5"; }
 
 adjust_muteness() {
     local index=$(get_index "$1")
     if [[ -z "$index" ]]; then
         echo "error: no PulseAudio sink named $1 was found" >&2
     else
-        [[ "$index" ]] && pacmd set-sink-input-mute "$index" $2 >/dev/null
+        echo $index
+        [[ "$index" ]] && pactl set-sink-input-volume "$index" "$2%" #>/dev/null
     fi
 }
 

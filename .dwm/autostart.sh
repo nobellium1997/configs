@@ -12,4 +12,6 @@ feh --bg-fill ~/Wallpapers/oldest_house.jpg &
 # Raise keyboard rate
 xset r rate 279 40 &
 
+setxkbmap -option caps:swapescape &
+
 dwmblocks &
