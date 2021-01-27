@@ -25,6 +25,7 @@ let mapleader = "\<Space>"
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/morhetz/gruvbox.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
