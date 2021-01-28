@@ -13,4 +13,9 @@ config.bind('<Ctrl-w>', 'rl-backward-kill-word', mode="command")
 config.unbind("J")
 config.unbind("K")
 
+c.content.user_stylesheets = [
+    'solarized-dark.css',
+    'custom_solarized.css'
+]
+
 # config.bind(" ,M hint links spawn mpv {hint-url}
