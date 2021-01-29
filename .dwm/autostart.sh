@@ -12,7 +12,6 @@ feh --bg-fill ~/Wallpapers/executive.jpg &
 # Raise keyboard rate
 xset r rate 279 40 &
 
-# setxkbmap -option caps:swapescape &
-setxkbmap -layout us -option ctrl:nocaps &
+setxkbmap -option caps:swapescape &
 
 dwmblocks &
