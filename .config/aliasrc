@@ -43,3 +43,4 @@ alias cn="code"
 alias vpn="ssh -C -q -N nobel.barakat@10.0.0.158 -D 5002" #-L 5432:some_host:5432"
 alias po="systemctl poweroff"
 alias rb="systemctl reboot"
+alias z=zathura
