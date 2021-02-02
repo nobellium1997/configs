@@ -33,6 +33,8 @@ settings:
   editor.command:
     global:
     - /usr/bin/gvim
+    - -u
+    - NONE
     - -f
     - '{file}'
     - -c
