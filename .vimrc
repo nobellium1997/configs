@@ -34,8 +34,8 @@ Plug 'https://github.com/vim-nerdtree/nerdtree.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/vim-scripts/json-formatter.vim.git'
 Plug 'https://github.com/joshdick/onedark.vim.git'
+Plug 'https://github.com/tomasr/molokai.git'
 Plug 'https://github.com/Chiel92/vim-autoformat.git'
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'christoomey/vim-conflicted'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -58,7 +58,7 @@ let g:easytags_async = 1
 
 let g:NERDTreeWinSize=60
 
-colorscheme onedark
+colorscheme gruvbox
 
 nnoremap <Leader>fd :Files<CR>
 noremap <leader>cm :Commands<CR>
