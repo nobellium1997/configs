@@ -14,4 +14,6 @@ xset r rate 279 40 &
 
 setxkbmap -option caps:swapescape &
 
+compton &
+
 dwmblocks &
