@@ -58,7 +58,7 @@ let g:easytags_async = 1
 
 let g:NERDTreeWinSize=60
 
-colorscheme gruvbox
+colorscheme onedark
 
 nnoremap <Leader>fd :Files<CR>
 noremap <leader>cm :Commands<CR>
