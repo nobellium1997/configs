@@ -15,7 +15,7 @@ set ts=4 sw=4
 set autoindent
 set smartindent
 " set inccommand=nosplit
-set hidden
+" set hidden
 
 filetype plugin indent on
 

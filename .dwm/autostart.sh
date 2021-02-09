@@ -12,7 +12,7 @@ feh --bg-fill ~/Wallpapers/quarry.jpeg &
 # Raise keyboard rate
 xset r rate 279 40 &
 
-setxkbmap -option caps:swapescape &
+# setxkbmap -option caps:swapescape &
 
 compton &
 
