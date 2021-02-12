@@ -43,6 +43,7 @@ Plug 'https://github.com/easymotion/vim-easymotion.git'
 Plug 'https://github.com/frazrepo/vim-rainbow.git'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'dense-analysis/ale'
+Plug 'pprovost/vim-ps1'
 
 call plug#end()
 
@@ -58,7 +59,7 @@ let g:easytags_async = 1
 
 let g:NERDTreeWinSize=60
 
-colorscheme gruvbox
+colorscheme onedark
 
 nnoremap <Leader>fd :Files<CR>
 noremap <leader>cm :Commands<CR>

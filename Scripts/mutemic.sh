@@ -1,2 +1,2 @@
 #!/bin/bash
-amixer set -c3 Mic toggle
+amixer set -c1 Mic toggle
