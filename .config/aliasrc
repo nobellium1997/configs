@@ -1,4 +1,9 @@
 alias ls="ls -l --color --group-directories-first"
+
+function cl
+    cd $argv; and ls
+end
+
 alias r=ranger
 alias q=exit
 alias tm=tmux
