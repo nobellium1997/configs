@@ -44,6 +44,8 @@ Plug 'https://github.com/frazrepo/vim-rainbow.git'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'dense-analysis/ale'
 Plug 'pprovost/vim-ps1'
+Plug 'vim-airline/vim-airline'
+Plug 'mhartington/oceanic-next'
 
 call plug#end()
 
@@ -59,7 +61,7 @@ let g:easytags_async = 1
 
 let g:NERDTreeWinSize=60
 
-colorscheme onedark
+colorscheme OceanicNext
 
 nnoremap <Leader>fd :Files<CR>
 noremap <leader>cm :Commands<CR>
@@ -101,4 +103,7 @@ map K <Plug>(easymotion-k)
 " Exec shell scripts
 command Exec set splitright | vnew | set filetype=json | read !sh # 
 
-
+" Fugitive hotkeys
+nmap <leader>gs :G<CR>
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
