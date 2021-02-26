@@ -11,10 +11,12 @@ settings:
       command:
         <Ctrl+n>: completion-item-focus --history next
         <Ctrl+p>: completion-item-focus --history prev
+        <Ctrl+w>: rl-backward-kill-word
       normal:
-        ',M': hint links spawn mpv {hint-url}
+        ',M': hint links spawn vlc {hint-url}
         <Ctrl+j>: tab-next
         <Ctrl+k>: tab-prev
+        <Ctrl+w>: null
         J: null
         K: null
         M: hint links spawn mpv {hint-url}
