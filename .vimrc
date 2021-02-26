@@ -46,6 +46,7 @@ Plug 'dense-analysis/ale'
 Plug 'pprovost/vim-ps1'
 Plug 'vim-airline/vim-airline'
 Plug 'mhartington/oceanic-next'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 
@@ -61,7 +62,11 @@ let g:easytags_async = 1
 
 let g:NERDTreeWinSize=60
 
-colorscheme OceanicNext
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+colorscheme dracula
 
 nnoremap <Leader>fd :Files<CR>
 noremap <leader>cm :Commands<CR>

@@ -84,3 +84,6 @@ colors:
 
 key_bindings:
   - { key: Space,  mods: Control, action: ToggleViMode          }
+
+font:
+    size: 9

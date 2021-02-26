@@ -1,4 +1,4 @@
-alias ls="ls -l --color --group-directories-first"
+alias ls="ls --color --group-directories-first"
 alias r=ranger
 alias q=exit
 alias tm=tmux
@@ -6,8 +6,7 @@ alias tks="tmux kill-server"
 alias ta="tmux attach"
 alias tmls="tmux ls"
 alias cdd="cd ~/Downloads"
-alias cdw="cd ~/Work"
-alias cdws="cd ~/Work/Services"
+alias cdw="cd ~/Work/Services"
 alias cds="cd ~/School/IIS"
 alias cda="cd ~/School/CS6475-Assignments"
 alias cdl="cd ~/School/lab_exercises"
