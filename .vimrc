@@ -17,6 +17,12 @@ set smartindent
 " set inccommand=nosplit
 " set hidden
 
+" Folding settings
+set foldmethod=indent   
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
+
 filetype plugin indent on
 
 autocmd BufRead,BufNewFile *.fish set filetype=sh
@@ -34,7 +40,6 @@ Plug 'https://github.com/vim-nerdtree/nerdtree.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/vim-scripts/json-formatter.vim.git'
 Plug 'https://github.com/joshdick/onedark.vim.git'
-Plug 'https://github.com/tomasr/molokai.git'
 Plug 'https://github.com/Chiel92/vim-autoformat.git'
 Plug 'https://github.com/vim-scripts/taglist.vim.git'
 Plug 'christoomey/vim-conflicted'
@@ -47,6 +52,8 @@ Plug 'pprovost/vim-ps1'
 Plug 'vim-airline/vim-airline'
 Plug 'mhartington/oceanic-next'
 Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'https://github.com/pseewald/vim-anyfold.git'
+Plug 'andymass/vim-matchup'
 
 call plug#end()
 
@@ -56,18 +63,21 @@ set laststatus=2
 let Tlist_Use_Horiz_Window = 0  
 let Tlist_WinWidth = 70
 
+" Config settings
 set updatetime=200
 
 let g:easytags_async = 1
 
 let g:NERDTreeWinSize=60
 
+" Colorscheme
 if (has("termguicolors"))
  set termguicolors
 endif
 
 colorscheme dracula
 
+" Custom hotkeys
 nnoremap <Leader>fd :Files<CR>
 noremap <leader>cm :Commands<CR>
 noremap <Leader>uh :GitGutterUndoHunk<CR>
@@ -77,6 +87,7 @@ noremap <Leader>rg :CocSearch
 noremap <Leader>tl :TlistOpen<CR>
 noremap <Leader>hs :History:<CR>
 noremap <Leader>bd :bd!<CR>
+noremap <Leader>wh :MatchupWhereAmI<CR>
 
 nnoremap <BS> <C-^>
 
