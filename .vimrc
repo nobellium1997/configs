@@ -17,12 +17,6 @@ set smartindent
 " set inccommand=nosplit
 " set hidden
 
-" Folding settings
-set foldmethod=indent   
-set foldnestmax=10
-set nofoldenable
-set foldlevel=2
-
 filetype plugin indent on
 
 autocmd BufRead,BufNewFile *.fish set filetype=sh
@@ -52,7 +46,7 @@ Plug 'pprovost/vim-ps1'
 Plug 'vim-airline/vim-airline'
 Plug 'mhartington/oceanic-next'
 Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'https://github.com/pseewald/vim-anyfold.git'
+Plug 'https://github.com/pseewald/vim-anyfold.git'
 Plug 'andymass/vim-matchup'
 
 call plug#end()
@@ -86,8 +80,10 @@ noremap <Leader>fb :Buffers<CR>
 noremap <Leader>rg :CocSearch 
 noremap <Leader>tl :TlistOpen<CR>
 noremap <Leader>hs :History:<CR>
+noremap <Leader>h/ :History/<CR>
 noremap <Leader>bd :bd!<CR>
 noremap <Leader>wh :MatchupWhereAmI<CR>
+noremap <Leader>af :AnyFoldActivate<CR>
 
 nnoremap <BS> <C-^>
 
