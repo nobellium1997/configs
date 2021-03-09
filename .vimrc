@@ -1,4 +1,4 @@
-set number
+" set number
 set ignorecase
 set incsearch
 set backspace=2
@@ -48,6 +48,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'https://github.com/pseewald/vim-anyfold.git'
 Plug 'andymass/vim-matchup'
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
