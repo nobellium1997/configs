@@ -17,3 +17,5 @@ xset r rate 279 40 &
 compton &
 
 dwmblocks &
+
+kdeconnect-indicator &
