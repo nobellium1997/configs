@@ -11,3 +11,5 @@ export TERM=xterm-256color
 source ~/.config/aliasrc
 set -gx EDITOR nvim
 # conda activate CS6475
+
+set PATH ~/.local/bin $PATH

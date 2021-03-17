@@ -14,6 +14,7 @@ set textwidth=120
 set ts=4 sw=4
 set autoindent
 set smartindent
+set signcolumn=yes
 " set inccommand=nosplit
 " set hidden
 
@@ -121,3 +122,30 @@ command Exec set splitright | vnew | set filetype=json | read !sh #
 nmap <leader>gs :G<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
+
+" CocHotkeys
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+

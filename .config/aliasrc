@@ -17,6 +17,7 @@ alias ts="tig status"
 alias tr="tig refs"
 alias ns="notify-send"
 alias config='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
+alias c='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
 alias proxy="export http_proxy=127.0.0.1:44700; export https_proxy=127.0.0.1:44700"
 alias unproxy="set -e http_proxy; set -e https_proxy"
 alias ca-cert='export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
@@ -39,8 +40,6 @@ alias up="set -e https_proxy; set -e http_proxy"
 alias dwr="dotnet watch run"
 alias dr="dotnet run"
 alias tls="tmux ls"
-alias c="code -r"
-alias cn="code"
 alias vpn="ssh -C -q -N nobel.barakat@10.0.0.158 -D 5002" #-L 5432:some_host:5432"
 alias po="systemctl poweroff"
 alias rb="systemctl reboot"
