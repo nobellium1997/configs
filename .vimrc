@@ -16,7 +16,7 @@ set autoindent
 set smartindent
 set signcolumn=yes
 " set inccommand=nosplit
-" set hidden
+set hidden
 
 filetype plugin indent on
 
@@ -78,8 +78,8 @@ autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>
 autocmd VimEnter * command! -bang -nargs=? Files call fzf#vim#files(<q-args>, {'options': '--no-preview'}, <bang>0)
 
 " Custom hotkeys
-nnoremap <Leader>fd :GFiles<CR>
-nnoremap <Leader>fl :Files<CR>
+nnoremap <Leader>fd :Files<CR>
+nnoremap <Leader>fl :GFiles<CR>
 noremap <leader>cm :Commands<CR>
 noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
