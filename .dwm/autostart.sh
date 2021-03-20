@@ -4,7 +4,7 @@
 ~/.screenlayout/single.sh &
 
 # Set background
-feh --bg-fill ~/Wallpapers/quarry.jpeg &
+feh --bg-fill ~/Wallpapers/executive.jpg &
 
 # Run clipboard manager daemon 
 /home/nobel/Suckless/clipmenu/clipmenud &
