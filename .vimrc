@@ -133,14 +133,12 @@ nmap <leader>gf :diffget //2<CR>
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+" Comment/uncomment these for now
 " GoTo code navigation.
-" nmap <leader>gd <Plug>(coc-definition)
-" nmap <leader> gy <Plug>(coc-type-definition)
-" nmap <leader> gi <Plug>(coc-implementation)
-" nmap <leader> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader> gy <Plug>(coc-type-definition)
+nmap <leader> gi <Plug>(coc-implementation)
+nmap <leader> gr <Plug>(coc-references)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -152,4 +150,5 @@ function! s:show_documentation()
   endif
 endfunction
 
-
+" Use K to show documentation in preview window.
+nmap <leader>dc :call <SID>show_documentation()<CR>
