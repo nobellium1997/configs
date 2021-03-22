@@ -1,0 +1,5 @@
+[user]
+	email = nbarakat6@gatech.edu
+	name = Nobel
+[credential]
+    helper = store --file ~/.git-credentials
