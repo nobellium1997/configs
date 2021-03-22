@@ -9,6 +9,7 @@ alias cdd="cd ~/Downloads"
 alias cdw="cd ~/Work/Services"
 alias cdwm="cd ~/Work/Misc"
 alias cds="cd ~/School/IIS"
+alias cdsu="cd ~/Suckless"
 alias cda="cd ~/School/CS6475-Assignments"
 alias cdl="cd ~/School/lab_exercises"
 alias cdn="cd ~/Notes"
@@ -18,6 +19,7 @@ alias tr="tig refs"
 alias ns="notify-send"
 alias config='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
 alias c='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
+alias cs='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel status'
 alias proxy="export http_proxy=127.0.0.1:44700; export https_proxy=127.0.0.1:44700"
 alias unproxy="set -e http_proxy; set -e https_proxy"
 alias ca-cert='export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
@@ -31,6 +33,7 @@ alias gs="git status"
 alias ea="nvim ~/.config/aliasrc"
 alias ua="source ~/.config/aliasrc"
 alias ipy=ipython
+alias py=python3
 alias v.="nvim ."
 alias :q=exit
 alias gca="git commit -a"

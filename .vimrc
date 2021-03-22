@@ -16,7 +16,7 @@ set autoindent
 set smartindent
 set signcolumn=yes
 " set inccommand=nosplit
-" set hidden
+set hidden
 
 filetype plugin indent on
 
@@ -72,10 +72,14 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-colorscheme dracula
+colorscheme gruvbox
+
+autocmd VimEnter * command! -bang -nargs=? GFiles call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
+autocmd VimEnter * command! -bang -nargs=? Files call fzf#vim#files(<q-args>, {'options': '--no-preview'}, <bang>0)
 
 " Custom hotkeys
 nnoremap <Leader>fd :Files<CR>
+nnoremap <Leader>fl :GFiles<CR>
 noremap <leader>cm :Commands<CR>
 noremap <Leader>uh :GitGutterUndoHunk<CR>
 noremap <Leader>nt :NERDTreeFind<CR>
@@ -129,14 +133,12 @@ nmap <leader>gf :diffget //2<CR>
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+" Comment/uncomment these for now
 " GoTo code navigation.
-" nmap <leader>gd <Plug>(coc-definition)
-" nmap <leader> gy <Plug>(coc-type-definition)
-" nmap <leader> gi <Plug>(coc-implementation)
-" nmap <leader> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader> gy <Plug>(coc-type-definition)
+nmap <leader> gi <Plug>(coc-implementation)
+nmap <leader> gr <Plug>(coc-references)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -148,4 +150,5 @@ function! s:show_documentation()
   endif
 endfunction
 
-
+" Use K to show documentation in preview window.
+nmap <leader>dc :call <SID>show_documentation()<CR>
