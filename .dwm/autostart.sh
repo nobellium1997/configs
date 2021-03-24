@@ -16,7 +16,7 @@ xset r rate 279 40 &
 
 # compton &
 
-kdeconnect-sms &
+# kdeconnect-sms &
 
 dwmblocks &
 
