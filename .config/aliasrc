@@ -41,7 +41,7 @@ alias d=dotnet
 alias p="export https_proxy='localhost:8080'; export http_proxy='localhost:8080'"
 alias up="set -e https_proxy; set -e http_proxy"
 alias dwr="dotnet watch run"
-alias dwt="dotnet watch run"
+alias dwt="dotnet watch test"
 alias dr="dotnet run"
 alias tls="tmux ls"
 alias vpn="ssh -C -q -N nobel.barakat@10.0.0.158 -D 5002" #-L 5432:some_host:5432"
