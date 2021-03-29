@@ -18,8 +18,11 @@ set signcolumn=yes
 " set inccommand=nosplit
 set hidden
 
+set equalalways
+
 filetype plugin indent on
 
+autocmd VimResized * wincmd =
 autocmd BufRead,BufNewFile *.fish set filetype=sh
 
 let mapleader = "\<Space>"

@@ -52,6 +52,9 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# switch back and forth
+bindsym $mod+Tab workspace back_and_forth
+
 # split in horizontal orientation
 bindsym $mod+q split h
 
@@ -119,10 +122,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym l resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym j resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         # bindsym Left resize shrink width 10 px or 10 ppt
@@ -143,7 +146,7 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
-client.focused          #458588           #458588          $text-color          #458588
+client.focused          #458588           #458588          $text-color          #D65D0E
 client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $inactive-bg-colorhl
@@ -156,7 +159,7 @@ assign [class="Microsoft Teams - Preview"] "3"
 
 # Start i3bar to display a workspace bar 
 bar {
-	# status_command /home/nobel/custom_i3_status.sh
+	status_command i3status -c ~/.config/i3/i3status.conf
 	position top
 	colors {
 		background $bg-color
