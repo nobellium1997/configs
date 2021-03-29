@@ -1,2 +1,2 @@
 source ~/.vimrc
-source ~/.workrc
+" source ~/.workrc
