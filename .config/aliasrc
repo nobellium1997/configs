@@ -1,4 +1,4 @@
-alias ls="lsd --group-dirs first -l"
+# alias ls="lsd --group-dirs first -l"
 alias r=ranger
 alias q=exit
 alias tm=tmux
@@ -52,3 +52,9 @@ alias z=zathura
 alias fdd="fd -d 1"
 alias mitm="mitmproxy -m upstream:"http://localhost:8080' -p 5050'
 alias pdwr="mp; dwr; up"
+
+function proxy {
+    mp
+    eval $@
+    up
+}

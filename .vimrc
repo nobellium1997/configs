@@ -45,7 +45,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'https://github.com/easymotion/vim-easymotion.git'
 Plug 'https://github.com/frazrepo/vim-rainbow.git'
 Plug 'OmniSharp/omnisharp-vim'
-Plug 'dense-analysis/ale' ", { 'on':  'ALEToggle' }
+Plug 'dense-analysis/ale', { 'on':  'ALEToggle' }
 Plug 'pprovost/vim-ps1'
 Plug 'vim-airline/vim-airline'
 Plug 'mhartington/oceanic-next'
