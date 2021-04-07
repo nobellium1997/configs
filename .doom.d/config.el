@@ -70,7 +70,7 @@
       (call-process "tmux" nil 0 nil "new-window" "-c" default-directory "-n" "Emacs")))
   ;(call-process "tmux" nil 0 nil "kill-window" "-a"))
 
-(map! :leader "o e" 'open-term)
+(map! :leader "o e" 'ansi-term)
 (map! :leader "s p" 'deadgrep)
 (map! :leader "t z" 'centered-window-mode)
 

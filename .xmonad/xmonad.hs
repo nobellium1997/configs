@@ -326,7 +326,7 @@ wsWRK2  = "WRK:2"
 wsGGC   = "GGC"
 
 -- myWorkspaces = map show [1..9]
-myWorkspaces = [wsGEN, wsWRK, wsWRK2, wsSYS, wsMON, wsFLOAT, wsRW, wsTMP]
+myWorkspaces = [wsGEN, wsWRK, wsCOM, wsSYS, wsMON, wsFLOAT, wsRW, wsTMP]
 
 projects :: [Project]
 projects =
@@ -1229,8 +1229,8 @@ myKeys conf = let
     , ("M-z u"                  , addName "Focus urgent"                    focusUrgent)
     , ("M-z m"                  , addName "Focus master"                    $ windows W.focusMaster)
 
-    --, ("M-<Tab>"              	, addName "Focus down"                      $ windows W.focusDown)
-    --, ("M-S-<Tab>"              , addName "Focus up"                        $ windows W.focusUp)
+    , ("M-'"                    , addName "Focus down"                      $ windows W.focusDown)
+    , ("M-;"                    , addName "Focus up"                        $ windows W.focusUp)
 
     , ("C-'"                    , addName "Swap tab D"                      $ windows W.swapDown)
     , ("C-;"                    , addName "Swap tab U"                      $ windows W.swapUp)
