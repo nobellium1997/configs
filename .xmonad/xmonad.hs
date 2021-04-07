@@ -1195,6 +1195,7 @@ myKeys conf = let
     [ ("M-o"                    , addName "Display (output) launcher"       $ spawn "displayctl menu")
     , ("M-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("S-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
+    , ("<F1>"                   , addName "MuteMic"                         $ spawn "/home/nobel/Scripts/mutemic.sh")
     ] ^++^
 
     -----------------------------------------------------------------------
@@ -1242,7 +1243,7 @@ myKeys conf = let
     ++ zipM' "M-"               "Navigate window"                           dirKeys dirs windowGo True
     -- ++ zipM' "M-S-"               "Move window"                               dirKeys dirs windowSwap True
     -- TODO: following may necessitate use of a "passthrough" binding that can send C- values to focused w
-    ++ zipM' "C-"             "Move window"                               dirKeys dirs windowSwap True
+    -- ++ zipM' "C-"             "Move window"                               dirKeys dirs windowSwap True
     ++ zipM  "M-C-"             "Merge w/sublayout"                         dirKeys dirs (sendMessage . pullGroup)
     ++ zipM' "M-"               "Navigate screen"                           arrowKeys dirs screenGo True
     -- ++ zipM' "M-S-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
