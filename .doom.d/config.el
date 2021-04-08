@@ -62,14 +62,6 @@
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes/WorkNotes"))
 
-;; Function for opening tmux in the current directory/project
-(defun open-term ()
-  (interactive)
-  (if (not (string= (projectile-project-name) "-"))
-      (call-process "tmux" nil 0 nil "new-window" "-c" (projectile-project-root) "-n" (projectile-project-name))
-      (call-process "tmux" nil 0 nil "new-window" "-c" default-directory "-n" "Emacs")))
-  ;(call-process "tmux" nil 0 nil "kill-window" "-a"))
-
 (map! :leader "o e" 'ansi-term)
 (map! :leader "t z" 'centered-window-mode)
 
@@ -98,19 +90,6 @@
   (counsel-find-file "~/Work"))
 (map! :leader "f w" 'goto-work)
 
-;; Disable company mode in the following modes
-(defun jpk/eshell-mode-hook ()
-  (company-mode -1))
-(add-hook 'eshell-mode-hook 'jpk/eshell-mode-hook)
-(add-hook 'org-mode-hook 'jpk/eshell-mode-hook)
-
-;; Set vterm default shell
-;(setq vterm-shell "/usr/bin/fish")
-
-;; Force so-long mode for certain file types
-(add-to-list 'auto-mode-alist (cons (rx ".html" eos) 'so-long-mode))
-;; (add-to-list 'auto-mode-alist (cons (rx ".json" eos) 'so-long-mode))
-
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
 
@@ -118,24 +97,12 @@
 (setq magit-blame-echo-style 'margin)
 
 ;; Map scrolling to easier to reach keys
-(map! :nv "J" 'evil-scroll-line-down)
-(map! :nv "K" 'evil-scroll-line-up)
 (map! "C-h" '+workspace/switch-left)
 (map! "C-l" '+workspace/switch-right)
-(map! :nv "U" 'undo-tree-redo)
 
 ;; Map jump to <C-i>
 (map! :nv "C-i" 'evil-jump-forward)
 (map! :nv "C-o" 'evil-jump-backward)
 
-;; Make pop up buffers persist
-(setq persp-autokill-buffer-on-remove nil)
-
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
-
-;; Set modeline color
-(set-face-background 'mode-line "#332E42")
-
-;; Set realtive line numbers
-(setq display-line-numbers-type 'relative)
