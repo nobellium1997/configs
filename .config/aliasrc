@@ -21,7 +21,7 @@ alias config='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
 alias c='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel'
 alias cs='/usr/bin/git --git-dir=/home/nobel/.cfg/ --work-tree=/home/nobel status'
 alias ca-cert='export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt'
-alias no-cert="set -e REQUESTS_CA_BUNDLE"
+alias no-cert="unset REQUESTS_CA_BUNDLE"
 alias fd=fdfind
 alias b="cd .."
 alias v=nvim
@@ -39,7 +39,7 @@ alias :q=exit
 alias gca="git commit -a"
 alias d=dotnet
 alias p="export https_proxy='localhost:8080'; export http_proxy='localhost:8080'"
-alias up="set -e https_proxy; set -e http_proxy"
+alias up="unset https_proxy; unset http_proxy"
 alias mp="export https_proxy='localhost:5050'; export http_proxy='localhost:5050'"
 alias dwr="dotnet watch run"
 alias dwt="dotnet watch test"

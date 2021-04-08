@@ -71,7 +71,6 @@
   ;(call-process "tmux" nil 0 nil "kill-window" "-a"))
 
 (map! :leader "o e" 'ansi-term)
-(map! :leader "s p" 'deadgrep)
 (map! :leader "t z" 'centered-window-mode)
 
 ;; Set neo-window to be bigger
@@ -91,7 +90,7 @@
 
 (defun goto-rest ()
   (interactive)
-  (counsel-find-file "~/Work/EDS.TestingScripts"))
+  (counsel-find-file "~/Work/Rest"))
 (map! :leader "f m" 'goto-rest)
 
 (defun goto-work ()
