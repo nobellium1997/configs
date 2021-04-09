@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 14))
+(setq doom-font (font-spec :family "hack" :size 14))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -55,9 +55,10 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
-;; Make company faster
+;; Custom company mappings
 (setq company-dabbrev-downcase 0)
-(setq company-idle-delay 0)
+(setq company-idle-delay 'nil)
+(map! :i "C-n" 'company-complete)
 
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes/WorkNotes"))
