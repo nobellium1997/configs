@@ -52,6 +52,7 @@ alias z=zathura
 alias fdd="fd -d 1"
 alias mitm="mitmproxy -m upstream:"http://localhost:8080' -p 5050'
 alias pdwr="mp; dwr; up"
+alias tf="terraform"
 
 function proxy {
     mp

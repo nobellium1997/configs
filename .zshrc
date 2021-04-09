@@ -101,6 +101,7 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH=$PATH:~/anaconda3/bin
+export PATH=$PATH:~/Terraform
 source ~/.config/aliasrc
 
 export TERM=xterm-256color
