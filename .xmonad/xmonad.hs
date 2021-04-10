@@ -276,7 +276,6 @@ main = do
     -- for taffybar, add pagerHints below
 
     xmonad 
-        $ dynamicProjects projects
         $ withNavigation2DConfig myNav2DConf
         -- $ withUrgencyHook NoUrgencyHook
         $ withUrgencyHook LibNotifyUrgencyHook
@@ -328,63 +327,17 @@ wsGGC   = "GGC"
 -- myWorkspaces = map show [1..9]
 myWorkspaces = [wsGEN, wsWRK, wsCOM, wsSYS, wsMON, wsFLOAT, wsRW, wsTMP]
 
-projects :: [Project]
-projects =
-
-    [ Project   { projectName       = wsGEN
-                , projectDirectory  = "~/"
-                , projectStartHook  = Nothing
-                }
-
-    , Project   { projectName       = wsSYS
-                , projectDirectory  = "~/"
-                , projectStartHook  = Nothing
-                }
-
-    , Project   { projectName       = wsDMO
-                , projectDirectory  = "~/"
-                -- , projectStartHook  = Just $ do spawn "/usr/lib/xscreensaver/binaryring"
-                , projectStartHook  = Nothing                }
-
-    , Project   { projectName       = wsVIX
-                , projectDirectory  = "~/.xmonad"
-                , projectStartHook  = Nothing                }
-
-    , Project   { projectName       = wsMON
-                , projectDirectory  = "~/"
-                , projectStartHook  = Nothing
-                }
-
-    , Project   { projectName       = wsWRK
-                , projectDirectory  = "~/wrk"
-                , projectStartHook  = Nothing                }
-
-    , Project   { projectName       = wsRAD
-                , projectDirectory  = "~/"
-                , projectStartHook  = Nothing
-                }
-
-    , Project   { projectName       = wsTMP
-                , projectDirectory  = "~/"
-                , projectStartHook  = Nothing
-                }
-    ]
-
 ------------------------------------------------------------------------}}}
 -- Applications                                                         {{{
 ---------------------------------------------------------------------------
 
 -- | Uses supplied function to decide which action to run depending on current workspace name.
 
---myTerminal          = "terminator"
---myTerminalClass     = "Terminator"
 myTerminal          = "alacritty"
 myAltTerminal       = "cool-retro-term"
 myBrowser           = "browser" -- chrome with WS profile dirs
 myBrowserClass      = "Google-chrome-beta"
 myStatusBar         = "xmobar -x0 /home/nobel/.xmonad/xmobar.conf"
---myLauncher          = "dmenu_run"
---myLauncher          = "rofi -matching fuzzy -show run"
 myLauncher          = "rofi -matching fuzzy -modi combi -show combi -combi-modi run,drun -theme /home/nobel/onedark.rasi"
 
 
@@ -409,52 +362,18 @@ myLauncher          = "rofi -matching fuzzy -modi combi -show combi -combi-modi 
 -- * bindOn via X.A.ConditionalKeys
 
 -- TODO: change this to a lookup for all workspaces
-hangoutsCommand     = myBrowser ++ " --app-id=knipolnnllmklapflnccelgolnpehhpl"
-hangoutsTitle     = "Google Hangouts - es@ethanschoonover.com"
-hangoutsPrefix      = "Google Hangouts"
-hangoutsResource    = "crx_nckgahadagoaajjgafhacjanaoiihapd"
-isHangoutsFor s     = (className =? myBrowserClass
-                      <&&> fmap (isPrefixOf hangoutsPrefix) title
-                      <&&> fmap (isInfixOf s) title)
-isPersonalHangouts  = isHangoutsFor "ethanschoonover"
-isWorkHangouts      = isHangoutsFor "eschoonover"
-
--- TODO: change this to a lookup for all workspaces
-trelloCommand       = "dex $HOME/.local/share/applications/Trello.desktop"
-trelloWorkCommand   = "dex $HOME/.local/share/applications/TrelloWork.desktop"
-trelloWork2Command  = "dex $HOME/.local/share/applications/TrelloWork2.desktop"
-trelloInfix         = "Trello"
-trelloResource      = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"
-trelloWorkResource  = "crx_fkbbihpadkgbnhphndjgblgelahbiede"
-trelloWork2Resource = "crx_bgemgoheeofmogacohnlmpldjlogegoh"
-isTrello            = (resource =? trelloResource)
-isTrelloWork        = (resource =? trelloWorkResource)
-isTrelloWork2       = (resource =? trelloWork2Resource)
-
 googleMusicCommand  = "dex $HOME/.local/share/applications/Music.desktop"
 googleMusicInfix    = "Google Play Music"
 googleMusicResource = "crx_ioljlgoncmlkbcepmminebblkddfjofl"
 isGoogleMusic       = (resource =? googleMusicResource)
 
-plexCommand         = "dex $HOME/.local/share/applications/Plex.desktop"
-plexInfix           = "Plex"
-plexResource        = "crx_fpniocchabmgenibceglhnfeimmdhdfm"
-isPlex              = (resource =? plexResource)
-
-isConsole           = (className =? "Terminator")
+isConsole           = (className =? "Alacritty")
                     <&&> (stringProperty "WM_WINDOW_ROLE" =? "Scratchpad")
 myConsole           = "terminator -T console -p console --role=Scratchpad"
 
 scratchpads =
-    [   (NS "hangoutsPersonal"  hangoutsCommand isPersonalHangouts defaultFloating)
-    ,   (NS "hangoutsWork"  hangoutsCommand isWorkHangouts defaultFloating)
-    ,   (NS "trello"  trelloCommand isTrello nonFloating)
-    ,   (NS "trelloWork"  trelloWorkCommand isTrelloWork nonFloating)
-    ,   (NS "googleMusic"  googleMusicCommand isGoogleMusic nonFloating)
-    ,   (NS "plex"  plexCommand isPlex defaultFloating)
-    ,   (NS "console"  myConsole isConsole nonFloating)
-    ,   (NS "xawtv" "xawtv" (resource =? "xawtv") (customFloating $ W.RationalRect (2/3) (1/6) (1/5) (1/3)) )
-    ] 
+    [   (NS "googleMusic"  googleMusicCommand isGoogleMusic nonFloating)
+    ]
 
 ------------------------------------------------------------------------}}}
 -- Theme                                                                {{{
@@ -1196,6 +1115,9 @@ myKeys conf = let
     , ("M-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("S-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("<F1>"                   , addName "MuteMic"                         $ spawn "/home/nobel/Scripts/mutemic.sh")
+    , ("M-v"                   , addName "ClipMenu"                         $ spawn "clipmenu")
+    , ("M-x"                   , addName "systemctl suspend"                         $ spawn "clipmenu")
+    , ("M-C-S-x"                   , addName "systemctl poweroff"                         $ spawn "clipmenu")
     ] ^++^
 
     -----------------------------------------------------------------------
@@ -1216,8 +1138,6 @@ myKeys conf = let
     (
     [ ("M-<Backspace>"          , addName "Kill"                            kill1)
     , ("M-S-<Backspace>"        , addName "Kill all"                        $ confirmPrompt hotPromptTheme "kill all" $ killAll)
-    --, ("M-d"                    , addName "Duplicate w to all ws"           $ windows copyToAll)
-    --, ("M-S-d"                  , addName "Kill other duplicates"           $ killAllOtherCopies)
     , ("M-d"                    , addName "Duplicate w to all ws"           $ toggleCopyToAll)
     , ("M-p"                    , addName "Hide window to stack"            $ withFocused hideWindow)
     , ("M-S-p"                  , addName "Restore hidden window (FIFO)"    $ popOldestHiddenWindow)
@@ -1460,15 +1380,9 @@ myMouseBindings (XConfig {XMonad.modMask = myModMask}) = M.fromList $
 
 myStartupHook = do
 
-    -- init-tilingwm sets up all major "desktop environment" like components
-    -- spawnOnce "$HOME/bin/wm/init-tilingwm"
-    -- spawn "/home/ethan/bin/wm/init-tilingwm"
-    spawn "/home/ethan/bin/wm/init-wallpaper"
+    spawn "clipmenud"
 
-    -- init-tray kills and restarts stalone tray, hence just "spawn" so it
-    -- runs on restart and will suffice to reposition tray on display changes
-    -- TODO: evaluate moving to a "restart tray only" option on display change
-    -- spawn     "$HOME/bin/wm/init-tray"
+    spawn "feh --bg-fill /home/nobel/Wallpapers/quarry.jpeg"
 
     setDefaultCursor xC_left_ptr
 
@@ -1567,11 +1481,7 @@ myManageHook =
             [ resource =? "desktop_window" -?> doIgnore
             , resource =? "stalonetray"    -?> doIgnore
             , resource =? "vlc"    -?> doFloat
-            , resource =? trelloResource -?> doFullFloat
-            , resource =? trelloWorkResource -?> doFullFloat
             , resource =? googleMusicResource -?> doFullFloat
-            , resource =? plexResource -?> doCenterFloat
-            , resource =? hangoutsResource -?> insertPosition End Newer
             , transience
             , isBrowserDialog -?> forceCenterFloat
             --, isConsole -?> forceCenterFloat
@@ -1611,9 +1521,7 @@ myHandleEventHook = docksEventHook
                 <+> XMonad.Layout.Fullscreen.fullscreenEventHook
     where
         myDynHook = composeAll
-            [ isPersonalHangouts --> forceCenterFloat
-            , isWorkHangouts --> insertPosition End Newer
-            ]
+            []
 
 ---------------------------------------------------------------------------
 -- Custom hook helpers
