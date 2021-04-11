@@ -1102,7 +1102,6 @@ myKeys conf = let
     [ ("M-q"                    , addName "Restart XMonad"                  $ spawn "xmonad --restart")
     , ("M-C-c"                  , addName "Rebuild & restart XMonad"        $ spawn "xmonad --recompile && xmonad --restart")
     , ("M-S-c"                  , addName "Quit XMonad"                     $ confirmPrompt hotPromptTheme "Quit XMonad" $ io (exitWith ExitSuccess))
-    , ("M-x"                    , addName "Lock screen"                     $ spawn "xset s activate")
     , ("M-<F4>"                    , addName "Print Screen"                    $ return ())
   --, ("M-F1"                   , addName "Show Keybindings"                $ return ())
     ] ^++^
@@ -1116,8 +1115,8 @@ myKeys conf = let
     , ("S-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("<F1>"                   , addName "MuteMic"                         $ spawn "/home/nobel/Scripts/mutemic.sh")
     , ("M-v"                   , addName "ClipMenu"                         $ spawn "clipmenu")
-    , ("M-x"                   , addName "systemctl suspend"                         $ spawn "clipmenu")
-    , ("M-C-S-x"                   , addName "systemctl poweroff"                         $ spawn "clipmenu")
+    , ("M-x"                   , addName "suspend"                         $ spawn "systemctl suspend")
+    , ("M-C-S-x"                   , addName "poweroff"                         $ spawn "systemctl poweroff")
     ] ^++^
 
     -----------------------------------------------------------------------
@@ -1161,14 +1160,13 @@ myKeys conf = let
     ]
 
     ++ zipM' "M-"               "Navigate window"                           dirKeys dirs windowGo True
-    -- ++ zipM' "M-S-"               "Move window"                               dirKeys dirs windowSwap True
+    ++ zipM' "M-S-"               "Move window"                               dirKeys dirs windowSwap True
     -- TODO: following may necessitate use of a "passthrough" binding that can send C- values to focused w
-    -- ++ zipM' "C-"             "Move window"                               dirKeys dirs windowSwap True
     ++ zipM  "M-C-"             "Merge w/sublayout"                         dirKeys dirs (sendMessage . pullGroup)
     ++ zipM' "M-"               "Navigate screen"                           arrowKeys dirs screenGo True
     -- ++ zipM' "M-S-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
     ++ zipM' "M-C-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
-    ++ zipM' "M-S-"             "Swap workspace to screen"                  arrowKeys dirs screenSwap True
+    -- ++ zipM' "M-S-"             "Swap workspace to screen"                  arrowKeys dirs screenSwap True
 
     ) ^++^
 
