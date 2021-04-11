@@ -1379,7 +1379,7 @@ myMouseBindings (XConfig {XMonad.modMask = myModMask}) = M.fromList $
 myStartupHook = do
 
     spawn "clipmenud"
-
+    spawn "kdeconnect-indicator"
     spawn "feh --bg-fill /home/nobel/Wallpapers/quarry.jpeg"
 
     setDefaultCursor xC_left_ptr
