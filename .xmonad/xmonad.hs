@@ -1115,6 +1115,7 @@ myKeys conf = let
     , ("S-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("<F1>"                   , addName "MuteMic"                         $ spawn "/home/nobel/Scripts/mutemic.sh")
     , ("M-v"                   , addName "ClipMenu"                         $ spawn "clipmenu")
+    , ("M-p"                   , addName "Media Play Pause"                         $ spawn "playerctl play-pause")
     , ("M-S-s"                   , addName "Flameshot"                         $ spawn "flameshot gui")
     , ("M-x"                   , addName "suspend"                         $ spawn "systemctl suspend")
     , ("M-C-S-x"                   , addName "poweroff"                         $ spawn "systemctl poweroff")
@@ -1139,8 +1140,8 @@ myKeys conf = let
     [ ("M-<Backspace>"          , addName "Kill"                            kill1)
     , ("M-S-<Backspace>"        , addName "Kill all"                        $ confirmPrompt hotPromptTheme "kill all" $ killAll)
     , ("M-d"                    , addName "Duplicate w to all ws"           $ toggleCopyToAll)
-    , ("M-p"                    , addName "Hide window to stack"            $ withFocused hideWindow)
-    , ("M-S-p"                  , addName "Restore hidden window (FIFO)"    $ popOldestHiddenWindow)
+    -- , ("M-p"                    , addName "Hide window to stack"            $ withFocused hideWindow)
+    -- , ("M-S-p"                  , addName "Restore hidden window (FIFO)"    $ popOldestHiddenWindow)
 
     , ("M-b"                    , addName "Promote"                         $ promote) 
 
