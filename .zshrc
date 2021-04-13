@@ -108,4 +108,4 @@ export TERM=xterm-256color
 # source ~/fzf-tab-completion/zsh/fzf-zsh-completion.sh
 # zstyle ':completion:*' fzf-search-display true
 
-export EDITOR=emacs
+export EDITOR=emacsclient
