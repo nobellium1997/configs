@@ -107,6 +107,7 @@
 ;; Avy bindings
 (map! :nv "J" 'avy-goto-line-below)
 (map! :nv "K" 'avy-goto-line-above)
+(map! :leader :nv "s" 'avy-goto-char-2)
 
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
