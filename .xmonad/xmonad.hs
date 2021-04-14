@@ -285,7 +285,6 @@ main = do
 
 myConfig p = def
         { borderWidth        = border
-        , clickJustFocuses   = myClickJustFocuses
         , focusFollowsMouse  = myFocusFollowsMouse
         , normalBorderColor  = myNormalBorderColor
         , focusedBorderColor = myFocusedBorderColor
@@ -379,8 +378,7 @@ scratchpads =
 -- Theme                                                                {{{
 ---------------------------------------------------------------------------
 
-myFocusFollowsMouse  = False
-myClickJustFocuses   = True
+myFocusFollowsMouse  = True
 
 base03  = "#002b36"
 base02  = "#073642"
@@ -1365,6 +1363,8 @@ myMouseBindings (XConfig {XMonad.modMask = myModMask}) = M.fromList $
       >> Sqr.mouseResizeWindow w True
       >> ifClick (snapMagicResize [R,D] (Just 50) (Just 50) w)
       >> windows W.shiftMaster ))
+
+    , ((0, 8), (\_ -> spawn "/home/nobel/Scripts/mutemic.sh"))
 
 --    , ((mySecondaryModMask,      button4), (\w -> focus w
 --      >> prevNonEmptyWS))
