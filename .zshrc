@@ -102,6 +102,7 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=$PATH:~/anaconda3/bin
 export PATH=$PATH:~/Terraform
+export PATH=$PATH:~/Tfvc/TEE-CLC-14.135.0
 source ~/.config/aliasrc
 
 export TERM=xterm-256color

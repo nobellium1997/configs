@@ -97,12 +97,16 @@
 (setq magit-blame-echo-style 'margin)
 
 ;; Map scrolling to easier to reach keys
-(map! "C-h" '+workspace/switch-left)
+(map! "C-j" '+workspace/switch-left)
 (map! "C-l" '+workspace/switch-right)
 
 ;; Map jump to <C-i>
 (map! :nv "C-i" 'evil-jump-forward)
 (map! :nv "C-o" 'evil-jump-backward)
+
+;; Avy bindings
+(map! :nv "J" 'avy-goto-line-below)
+(map! :nv "K" 'avy-goto-line-above)
 
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
