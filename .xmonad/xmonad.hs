@@ -1108,7 +1108,8 @@ myKeys conf = let
     -- Actions
     -----------------------------------------------------------------------
     subKeys "Actions"
-    [ ("M-o"                    , addName "Display (output) launcher"       $ spawn "displayctl menu")
+    [ ("M-o"                    , addName "Speaker"       $ spawn "pacmd set-default-sink alsa_output.pci-0000_00_1f.3.hdmi-stereo")
+    , ("M-S-o"                    , addName "Headphones"       $ spawn "pacmd set-default-sink alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.analog-stereo")
     , ("M-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("S-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("<F1>"                   , addName "MuteMic"                         $ spawn "/home/nobel/Scripts/mutemic.sh")
