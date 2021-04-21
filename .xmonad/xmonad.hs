@@ -1,136 +1,4 @@
 {-# LANGUAGE AllowAmbiguousTypes, DeriveDataTypeable, TypeSynonymInstances, MultiParamTypeClasses #-}
----------------------------------------------------------------------------
---                                                                       --
---     _|      _|  _|      _|                                      _|    --
---       _|  _|    _|_|  _|_|    _|_|    _|_|_|      _|_|_|    _|_|_|    --
---         _|      _|  _|  _|  _|    _|  _|    _|  _|    _|  _|    _|    --
---       _|  _|    _|      _|  _|    _|  _|    _|  _|    _|  _|    _|    --
---     _|      _|  _|      _|    _|_|    _|    _|    _|_|_|    _|_|_|    --
---                                                                       --
----------------------------------------------------------------------------
--- Ethan Schoonover <es@ethanschoonover.com> @ethanschoonover            --
--- https://github.com/altercation                                        --
----------------------------------------------------------------------------
--- current as of XMonad 0.12
-
-------------------------------------------------------------------------}}}
--- TODO                                                                 {{{
----------------------------------------------------------------------------
-{-|
-
- GENERAL
- 
- * look into X.H.Scripts -- there are things I want to run at startup, for example
- * X.U.SpawnNamedPipe? xmobars. multiple screens.
- * X.U.WindowState
- * review XMonad.ManageHook https://hackage.haskell.org/package/xmonad-0.12/docs/XMonad-ManageHook.html
- * ? X.A.LinkWorkspaces
- * ? X.A.Search
- * ? X.A.ShowText
- * ? X.A.SimpleDate
- * ? X.A.Warp
- * ? X.A.WindowBringer
- * ? X.A.WorkspaceCursors
- * ? XMonad.Hooks.Minimize / X.H.Minimize or XMonad.Layout.Hidden
- * ? X.L.avoidFloats - tried and couldn't get it to work immediately but seemed interesting
- * XMonad.Hooks.DynamicBars looks useful
-
- NON XMONAD SPECIFIC
-
- * fix unplug events that throw false battery warning
- * fix volume controls
- * switch to urxvt with dynamic font sizing?
- * screen locker
- * audio tweaking ... volume working in all cases? output selected intelligently
- * ssd cloning via btrfs
- * go through sections of https://wiki.archlinux.org/index.php/List_of_applications and identify category selections, adding them to personal wiki
- 
- ACTIVE
-
- * try out XMonad.Layout.Hidden
- * check out https://github.com/paul-axe/dotfiles/blob/master/.xmonad/xmonad.hs for dual xmobar?
- * would be nice to have a couple project spaces that are sys:1 sys:2 etc and related keybindings
- * use toggle float for M-t and make M-S-t sinkAll or toggle float for all
- * Refine bindings. consider greater use of submaps
- * work on helper scripts in general (vol, etc.)
- * xdb / localectl in lieu of xmodmap
- * test hybrid graphics again?
- * power (test tlp again? need way to see if it's doing a whole lot of good, or should I just use manual options... either way nvidia is power hungry)
- * screensaver and screen stuff, caffeine
- * check on avoidmaster for float issues https://wiki.haskell.org/Xmonad/Frequently_asked_questions
- * consider inserting chrome above instead of below on stack
- * either an M-s d style submap for system operations, or top level M4-d M4-s style bindings
- * on project space default action, I'd like to spawn a couple terminals on SYS and group them immediately, then spawn another terminal or browser. how?
-
- DEFER (should do but uncertain how to solve after initial cursory review, so will defer till have more time to research)
-
- * just like toggleWS' from CycleWS, it would be nice to make a custom prev/nextWS' that would skip NSP
- * could make a new set of PerScreen width layouts for "small screens" (1280 and under) (non critical...)
- * look intot X.*.PositionStore* as well as whatever the other method of retaining float pos was
- * quickly swapping two windows between master and slave works nicely. I get a little of this with promote, but I'm
-   sure there is a more comprehensive solution I could implement (cycle windows / recent windows?)
- ! Want to be able to spawn a new window directly into a sublayout, not
-   spawn/merge as I'm doing now (this would be a SIGNIFICANT improvement)
- ! add tab/alt-tab cycling through windows
- * add a shutdown hook to spin down tray/other processes that throw unnecessary errors into xorg
- * add withall to send all windows to different workspace
- * look fully into resizing current layout including vertical on 3Col
- * make focused window master automatically on floating
- * see if there is a way to maintain tiled focus post toggle of scratchpad (cf X.L.TrackFloating)
- * move NSP windows that are tiled into workspace AT END or AS MASTER depending on management
- * https://github.com/pjones/xmonadrc has a focus-follows in the tiled layer only
-   also has some dynamic project helper functions
- * if not using dynamic workspaces (just projects) then remove the dynamic workspaces functions from window shifting
- * consider IfMax for further dynamic layout properties
- * revisit mouse resizing of windows in tiled layouts (nice to have not crit)
- * any utility in XMonad-Hooks-ServerMode (tested briefly, couldn't get it working properly)
- * work on my handling of x selection for utility functions ... timer/delay issue?
-
- DONE 
-
- * DynamicWorkspaces ... will DynamicProjects replace it entirely? Do I not need it
- * keybindings for unmerge are weird... sublayout not great for what might be a common op
-   could do M-u and M-S-u for mergeall
- * capture f11 and pass it along to window, then shift window (or come up with other way to redraw boundaries)
- * set conditional key bindings depending on layout for tabs view
-   (other pseudo-conditional bindings are handled with a trymessage construct)
- * add in full tabbed layout in standard sequence?
- * fix scratchpad float position - more or less ok now
- * test alternate sublayout style in order to explode current view
- * XMonad.Hooks.DynamicProperty - could be used for Chrome windows that pop up
-   if not already assigned a custom class via flags
- * change keybinding for cycling through tabs quickly.... this should be "top level" mod+something
- * would be nice to have fullscreen work the way I had it where I could fit it in a window as desired
- * make a partial full screen that respects struts
- * X.H.InsertPosition ... do I want to use this for different spawn location? can I use
-   it for only certain windows?
- * XMonad-Hooks-ToggleHook
- ! hotplug monitor scripts
- * fix alert styles
- * dealing with screens/workspaces (binding to move/shift to workspace)
- ! XMonad-Actions-Navigation2D has a lot of features I'm not yet using.
-   E.g. screen related
-   Review the documentation and consider adding.
-
- TESTED/REJECTED/WONTFIX
-
- * consider switching to X.L.SimpleFloat + SimpleDecoration for titlebars
- * planekeys? also the new ws project thing i read in change log. also link workspaces
-   RESULT: for now just using projects the prompt to move around ws
- * revisit whether my current use of top level tabbed layout is confusing or best case
-   - does it make sense?
-   - do I actually switch to it a lot? would I?
-   - maybe I could just use Tabs as an orphan layout that I jump to
-   RESULT: i'm ocnvinced the current top level tabs which is always in the
-   layout cycle is, if not optimal, the best I'm going to get for now
-
- * ? X.A.RotSlaves - not much use since I just use nav2D
-
- NON XMONAD SPECIFIC TODO
-
- * check if unclutter is being launched and if the new version is crashing
-
- -}
 
 ------------------------------------------------------------------------}}}
 -- Modules                                                              {{{
@@ -225,7 +93,6 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.WorkspaceCompare         -- custom WS functions filtering NSP
 import XMonad.Util.XSelection
 
-
 -- experimenting with tripane
 import XMonad.Layout.Decoration
 import XMonad.Layout.ResizableTile
@@ -234,33 +101,6 @@ import XMonad.Layout.Maximize
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
-
--- taffybar specific
--- import System.Taffybar.Hooks.PagerHints (pagerHints)
--- to demo and comment out or remove
--- import XMonad.Layout.Master -- used to test a dynamic layout. worked, but will remove in lieu of sublayouts
--- import XMonad.Actions.CycleSelectedLayouts -- nice but doesn't work well with sublayouts
--- import XMonad.Actions.Plane
--- import XMonad.Layout.IndependentScreens
--- import XMonad.Util.Timer
--- recent windows from cycle windows -- couldn't get it working on quick try: revisit this
--- import XMonad.Actions.CycleWindows
--- testing -- not a lot of value added, or am I missing something
--- import XMonad.Hooks.Place
-----
--- following for the combocombo test from
--- http://xmonad.org/xmonad-docs/xmonad-contrib/src/XMonad-Config-Droundy.html
--- import XMonad.Layout.Square ( Square(Square) )
--- import XMonad.Layout.BoringWindows
--- import XMonad.Layout.Grid
-----
--- import XMonad.Layout.SimpleDecoration
--- testing -- couldn't get this to work
--- import XMonad.Layout.TrackFloating
--- testing
--- import XMonad.Hooks.ServerMode
--- import XMonad.Actions.Commands 
--- import Control.Concurrent (threadDelay)
 
 ------------------------------------------------------------------------}}}
 -- Main                                                                 {{{
@@ -333,46 +173,8 @@ myWorkspaces = [wsGEN, wsWRK, wsCOM, wsSYS, wsMON, wsFLOAT, wsRW, wsTMP]
 -- | Uses supplied function to decide which action to run depending on current workspace name.
 
 myTerminal          = "alacritty"
-myAltTerminal       = "cool-retro-term"
-myBrowser           = "browser" -- chrome with WS profile dirs
-myBrowserClass      = "Google-chrome-beta"
 myStatusBar         = "xmobar -x0 /home/nobel/.xmonad/xmobar.conf"
 myLauncher          = "rofi -matching fuzzy -modi combi -show combi -combi-modi run,drun -theme /home/nobel/onedark.rasi"
-
-
--- I'm using a custom browser launching script (see myBrowser above) that
--- is workspace aware. It launches an instance of Chrome that is unique
--- on specific workspaces. Thus on "GEN" workspace I use my "normal"
--- browser profile, while on "WRK" I use a different profile. This is
--- roughly equivalent to using Chrome's built in profiles, but has the
--- benefit of launching immediately with the correct profile.
---
--- In addition to this, I use per workspace bindings to toggle Hangouts
--- chat windows and Trello windows based on whether I'm on, for example,
--- my personal or work workspace.
---
--- This is particularly useful for Trello since I can launch a project
--- related Trello "app" instance on a project workspace.
---
--- This system utilizes:
--- * my workspace aware browser script
--- * X.U.NamedScratchPads
--- * bindOn via X.A.PerWorkspaceKeys (NO... now using ConditionalKeys custom module)
--- * bindOn via X.A.ConditionalKeys
-
--- TODO: change this to a lookup for all workspaces
-googleMusicCommand  = "dex $HOME/.local/share/applications/Music.desktop"
-googleMusicInfix    = "Google Play Music"
-googleMusicResource = "crx_ioljlgoncmlkbcepmminebblkddfjofl"
-isGoogleMusic       = (resource =? googleMusicResource)
-
-isConsole           = (className =? "Alacritty")
-                    <&&> (stringProperty "WM_WINDOW_ROLE" =? "Scratchpad")
-myConsole           = "terminator -T console -p console --role=Scratchpad"
-
-scratchpads =
-    [   (NS "googleMusic"  googleMusicCommand isGoogleMusic nonFloating)
-    ]
 
 ------------------------------------------------------------------------}}}
 -- Theme                                                                {{{
@@ -513,7 +315,7 @@ myLayoutHook = showWorkspaceName
              $ fullBarToggle
              $ mirrorToggle
              $ reflectToggle
-             $ flex ||| tabs
+             $ tiled ||| tabs
   where
 
 --    testTall = Tall 1 (1/50) (2/3)
@@ -542,9 +344,22 @@ myLayoutHook = showWorkspaceName
     mySmallGaps         = gaps [(U, sGap),(D, sGap),(L, sGap),(R, sGap)]
     myBigGaps           = gaps [(U, gap*2),(D, gap*2),(L, gap*2),(R, gap*2)]
 
-    --------------------------------------------------------------------------
-    -- Tabs Layout                                                          --
-    --------------------------------------------------------------------------
+    -- default tiling algorithm partitions the screen into two panes
+    tiled   = named "Tiled"
+                $ avoidStruts
+                $ addTopBar
+                $ myGaps
+                $ mySpacing
+                $ Tall nmaster delta ratio
+
+    -- The default number of windows in the master pane
+    nmaster = 1
+
+    -- Default proportion of screen occupied by master pane
+    ratio   = 1/2
+
+    -- Percent of screen to increment by when resizing panes
+    delta   = 3/100
 
     threeCol = named "Unflexed"
          $ avoidStruts
@@ -558,451 +373,6 @@ myLayoutHook = showWorkspaceName
          $ addTopBar
          $ addTabs shrinkText myTabTheme
          $ Simplest
-
-    -----------------------------------------------------------------------
-    -- Flexi SubLayouts                                                  --
-    -----------------------------------------------------------------------
-    --
-    -- In many ways the best solution. Acts like ThreeColumns, Tall, BSP,
-    -- or any other container layout style. Can use this layout just as you
-    -- would those without tabs at all, or you can easily merge any windows
-    -- into a tabbed group.
-    --
-    -- Diagrams:
-    --
-    -- (examples only... this is a very flexible layout and as such the
-    -- layout style and arrangement isn't limited as much as the other
-    -- attempts below)
-    --
-    -- Ultrawide:
-    -- --------------------------------------------
-    -- |          |                    |          |
-    -- |          |                    |   Tabs   |
-    -- |          |                    |          |
-    -- |----------|       Master       |----------|
-    -- |          |                    |          |
-    -- |   Tabs   |                    |          |
-    -- |          |                    |          |
-    -- --------------------------------------------
-    --
-    -- Standard:
-    -- ---------------------------------
-    -- |                    |          |
-    -- |                    |          |
-    -- |                    |          |
-    -- |       Master       |----------|
-    -- |                    |          |
-    -- |                    |   Tabs   |
-    -- |                    |          |
-    -- ---------------------------------
-    --
-    --
-    -- Advantages
-    --
-    --   * tab group is movable as a unit and acts like any other window
-    --
-    --   * this is the "cleanest" of the dynamic layouts I've worked with
-    --     and leaves no "pixel dust" on the screen when switching to a WS
-    --     on a different monitor
-    --
-    --   * navigation and window/group movement is trivial with
-    --     X.A.Navigation2D
-    --
-    --   * master window remains master when switching screens (unlike
-    --     the "X.L.Master" based solution below)
-    --
-    --   * unlike some of the other solutions, it is trivial to change
-    --     the exterior layout format and so I could potentially add in
-    --     some layout change to BSP or other layout that I want to test
-    --     while still retaining the tab functionality
-    --
-    -- Disadvantages
-    --
-    --   * layout starts without any tabs (could be considered a feature
-    --     since in that case the layout performs exactly as the parent/
-    --     container layout does)
-    --
-    --   * To move a window into or out of the tabbed group requires
-    --     special key bindings unique to X.L.SubLayouts
-    --
-    --  Understanding XMonad.Layouts.SubLayouts
-    --
-    --  It took me a while to grok this.
-    --
-    --  the subLayout hook is used with the following format:
-    --
-    --    subLayout advanceInnerLayouts innerLayout outerLayout
-    --
-    --  It works like this: subLayout modifies an entire other layout (or
-    --  layouts), enabling you to turn what would be a normal window into
-    --  a little group of windows managed by an entirely different layout.
-    --
-    --  In my case, I'm using layouts like "Three Column" and "Tall" as the
-    --  nominal "container" layout (what SubLayouts calls the "outerLayout").
-    --
-    --  The "inner layout" in my case is just "Simplest". I'm also adding tabs
-    --  which are only applied to my sublayouts. Not sure how that works
-    --  but it's apparent from the X.L.SubLayouts documentation that this is
-    --  the intended use/behavior. Essential X.L.SubLayouts is hijacking these
-    --  added tabs and applying them just to the Simplest layout, and then that
-    --  in turn is stuck inside the rectangle that would normally hold a window
-    --  in my normal layouts.
-    --
-    --  One of the confusing things for me at first was that the layout doesn't
-    --  start with any subLayouts. So it appears to just be a normal layout.
-    --  You have to "merge all" to suck everything up into a Simplest tabbed
-    --  group and then you can add other windows normally and you'll
-    --  have a sublayout with tabs.
-    --
-    --  Note: subLayouts has some other features. For example, you can give it
-    --  a list of layouts to work through and it will advance through them in
-    --  series (or possibly in an order your provide) and will apply different
-    --  layouts to different subLayout groups. Each time you add a new window
-    --  to your layout, it acquires the sublayout, even if you don't know it.
-    --
-    --  In my case, my list is one long and is just the first window I add.
-    --
-    --  Ex. The second group is Tall, the third is Circle, all others are
-    --  tabbed with:
-    --
-    --  myLayout = addTabs shrinkText def
-    --           $ subLayout [0,1,2] (Simplest ||| Tall 1 0.2 0.5 ||| Circle)
-    --                    $ Tall 1 0.2 0.5 ||| Full
-   
-    -- this is a flexible sublayout layout that has only one container
-    -- layout style (depending on screen)
-    --     flexiSub = named "Flexi SubLayouts"
-    --               $ avoidStruts
-    --               $ windowNavigation
-    --               $ addTopBar
-    --               $ myGaps
-    --               $ addTabs shrinkText myTabTheme
-    --               $ mySpacing
-    --               $ subLayout [] Simplest
-    --               $ ifWider smallMonResWidth wideLayout standardLayout
-    --               where
-    --                   wideLayout = ThreeColMid 1 (1/100) (1/2)
-    --                   standardLayout = ResizableTall 1 (1/50) (2/3) []
-
-    -- retained during development: safe to remove later
-
-    flex = trimNamed 5 "Flex"
-              $ avoidStruts
-              -- don't forget: even though we are using X.A.Navigation2D
-              -- we need windowNavigation for merging to sublayouts
-              $ windowNavigation
-              $ addTopBar
-              $ addTabs shrinkText myTabTheme
-              -- $ subLayout [] (Simplest ||| (mySpacing $ Accordion))
-              $ subLayout [] (Simplest ||| Accordion)
-              $ ifWider smallMonResWidth wideLayouts standardLayouts
-              where
-                  wideLayouts = myGaps $ mySpacing
-                      $ (suffixed "Wide 3Col" $ ThreeColMid 1 (1/20) (1/2))
-                    ||| (trimSuffixed 1 "Wide BSP" $ hiddenWindows emptyBSP)
-                  --  ||| fullTabs
-                  standardLayouts = myGaps $ mySpacing
-                      $ (suffixed "Std 2/3" $ ResizableTall 1 (1/20) (2/3) [])
-                    ||| (suffixed "Std 1/2" $ ResizableTall 1 (1/20) (1/2) [])
-
-                  --  ||| fullTabs
-                  --fullTabs = suffixed "Tabs Full" $ Simplest
-                  --
-                  -- NOTE: removed this from the two (wide/std) sublayout
-                  -- sequences. if inside the ifWider, the ||| combinator
-                  -- from X.L.LayoutCombinators can't jump to it directly (
-                  -- or I'm doing something wrong, either way, it's simpler
-                  -- to solve it by just using a tabbed layout in the main
-                  -- layoutHook). The disadvantage is that I lose the "per
-                  -- screen" memory of which layout was where if using the
-                  -- tabbed layout (if using the the ifWider construct as
-                  -- I am currently, it seems to work fine)
-                  --
-                  -- Using "Full" here (instead of Simplest) will retain the
-                  -- tabbed sublayout structure and allow paging through each
-                  -- group/window in full screen mode. However my preference
-                  -- is to just see all the windows as tabs immediately.  
-                  -- Using "Simplest" here will do this: display all windows
-                  -- as tabs across the top, no "paging" required. However
-                  -- this is misleading as the sublayouts are of course still
-                  -- there and you will have to use the nornmal W.focusUp/Down
-                  -- to successfully flip through them. Despite this
-                  -- limitation I prefer this to the results with "Full".
-
-{-|
-    -----------------------------------------------------------------------
-    -- Simple Flexi                                                      --
-    -----------------------------------------------------------------------
-    --
-    -- Simple dynamically resizing layout as with the other variations in
-    -- this config. This layout has not tabs in it and simply uses
-    -- Resizable Tall and Three Column layouts.
-
-    simpleFlexi = named "Simple Flexible"
-              $ ifWider smallMonResWidth simpleThree simpleTall
-
-    simpleTall = named "Tall"
-              $ addTopBar
-              $ avoidStruts
-              $ mySpacing
-              $ myGaps
-              $ ResizableTall 1 (1/300) (2/3) []
-              
-    simpleThree = named "Three Col"
-              $ avoidStruts
-              $ addTopBar
-              $ mySpacing
-              $ myGaps
-              $ ThreeColMid 1 (3/100) (1/2)
-
-    -----------------------------------------------------------------------
-    -- Other Misc Layouts                                                --
-    -----------------------------------------------------------------------
-    --
-    --
-
-    masterTabbedP   = named "MASTER TABBED"
-              $ addTopBar
-              $ avoidStruts
-              $ mySpacing
-              $ myGaps
-              $ mastered (1/100) (1/2) $ tabbed shrinkText myTabTheme
-
-    bsp       = named "BSP"
-              $ borderResize (avoidStruts
-              $ addTopBar
-              $ mySpacing
-              $ myGaps
-              $ emptyBSP )
-              -- $ borderResize (emptyBSP)
-
-    oneBig    = named "1BG"
-              $ avoidStruts
-              $ addTopBar
-              $ mySpacing
-              $ myGaps
-              $ OneBig (3/4) (3/4)
-
-    tiledP    = named "TILED"
-              $ addTopBar
-              $ avoidStruts
-              $ mySpacing
-              $ myGaps
-              $ consoleOn
-              $ tiled'
-
-    oneUp =   named "1UP"
-              $ avoidStruts
-              $ myGaps
-              $ combineTwoP (ThreeCol 1 (3/100) (1/2))
-                            (Simplest)
-                            (Tall 1 0.03 0.5)
-                            (ClassName "Google-chrome-beta")
-
-    -----------------------------------------------------------------------
-    -- Master-Tabbed Dymamic                                             --
-    -----------------------------------------------------------------------
-    --
-    -- Dynamic 3 pane layout with one tabbed panel using X.L.Master
-    -- advantage is that it can do a nice 3-up on both ultrawide and
-    -- standard (laptop in my case) screen sizes, where the layouts
-    -- look like this:
-    --
-    -- Ultrawide:
-    -- --------------------------------------------
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |  Master  |       Master       |   Tabs   |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- --------------------------------------------
-    -- \____________________ _____________________/
-    --                      '
-    --                 all one layout
-    --
-    -- Standard:
-    -- ---------------------------------
-    -- |                    |          |
-    -- |                    |          |
-    -- |                    |          |
-    -- |       Master       |   Tabs   |
-    -- |                    |          |
-    -- |                    |          |
-    -- |                    |          |
-    -- ---------------------------------
-    -- \_______________ _______________/
-    --                 '
-    --            all one layout
-    --
-    -- Advantages to this use of X.L.Master to created this dynamic
-    -- layout include:
-    --
-    --   * No fussing with special keys to swap windows between the
-    --     Tabs and Master zones
-    --
-    --   * Window movement and resizing is very straightforward
-    --
-    --   * Limited need to maintain a mental-map of the layout
-    --     (pretty easy to understand... it's just a layout)
-    --
-    -- Disadvantages include:
-    --
-    --   * Swapping a window from tabbed area will of necessity swap
-    --     one of the Master windows back into tabs (since there can
-    --     only be two master windows)
-    --
-    --   * Master area can have only one/two windows in std/wide modes
-    --     respectively
-    --
-    --   * When switching from wide to standard, the leftmost pane
-    --     (which is visually secondary to the large central master
-    --     window) becomes the new dominant master window on the
-    --     standard display (this is easy enough to deal with but
-    --     is a non-intuitive effect)
-
-    masterTabbedDynamic = named "Master-Tabbed Dynamic"
-              $ ifWider smallMonResWidth masterTabbedWide masterTabbedStd
-
-    masterTabbedStd = named "Master-Tabbed Standard"
-              $ addTopBar
-              $ avoidStruts
-              $ gaps [(U, gap*2),(D, gap*2),(L, gap*2),(R, gap*2)]
-              $ mastered (1/100) (2/3)
-              $ gaps [(U, 0),(D, 0),(L, gap*2),(R, 0)]
-              $ tabbed shrinkText myTabTheme
-
-    masterTabbedWide = named "Master-Tabbed Wide"
-              $ addTopBar
-              $ avoidStruts
-              $ gaps [(U, gap*2),(D, gap*2),(L, gap*2),(R, gap*2)]
-              $ mastered (1/100) (1/4)
-              $ gaps [(U, 0),(D, 0),(L, gap*2),(R, 0)]
-              $ mastered (1/100) (2/3)
-              $ gaps [(U, 0),(D, 0),(L, gap*2),(R, 0)]
-              $ tabbed shrinkText myTabTheme
-
-    -----------------------------------------------------------------------
-    -- Tall-Tabbed Dymamic                                               --
-    -----------------------------------------------------------------------
-    --
-    -- Dynamic 3 pane layout with one tabbed panel using X.L.ComboP
-    -- advantage is that it can do a nice 3-up on both ultrawide and
-    -- standard (laptop in my case) screen sizes, where the layouts
-    -- look like this:
-    --
-    -- Ultrawide:
-    -- --------------------------------------------
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |----------|       Master       |   Tabs   |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- --------------------------------------------
-    -- \______________ _______________/\____ _____/
-    --                '                     '
-    --        this set of panes is      This is a
-    --        its' own layout in a      separate
-    --        Tall configuration        tab format
-    --                                  layout
-    --
-    -- Standard:
-    -- ---------------------------------
-    -- |                    |          |
-    -- |                    |          |
-    -- |                    |          |
-    -- |       Master       |   Tabs   |
-    -- |                    |          |
-    -- |--------------------|          |
-    -- |         |          |          |
-    -- ---------------------------------
-    -- \_________ _________/\____ _____/
-    --           '               '
-    -- this set of panes is  This is a
-    -- its' own layout in a  separate
-    -- Tall configuration    tab format
-    --                       layout
-    --
-    -- Advantages to this use of ComboP to created this dynamic
-    -- layout include:
-    --
-    --   * the center Master stays the same when the layout
-    --     changes (unlike the X.L.Master based dyn. layout)
-    --
-    --   * the Master can have a set of panes under it on the
-    --     small screen (standard) layout
-    --
-    --   * on ultrawide the leftmost pane may be divided into
-    --     multiple windows
-    --
-    --   * possible to toss a tabbed window to the "Master" area
-    --     without swapping a window back into tabs
-    --
-    --   * use of ComboP allows redirection windows to either
-    --     left or right section
-    --
-    -- Disadvantages include:
-    --
-    --   * normal window swaps fail between the two separate
-    --     layouts. There must be a special swap-between-layouts
-    --     binding (normal window NAVIGATION works, at least using
-    --     X.A.Navigation2D).
-    --
-    --   * switching between screens can leave title bar clutter
-    --     that hasn't been cleaned up properly (restarting
-    --     XMonad works to clean this up, but that's hacky)
-    --
-    --   * somewhat greater need to maintain a mental-map of the
-    --     layout (you need to have a sense for the windows being
-    --     in separate sections of the different layouts)
-
-    smartTallTabbed = named "Smart Tall-Tabbed"
-            $ avoidStruts
-            $ ifWider smallMonResWidth wideScreen normalScreen
-            where
-            wideScreen   = combineTwoP (TwoPane 0.03 (3/4))
-                           (smartTall)
-                           (smartTabbed)
-                           (ClassName "Google-chrome-beta")
-            normalScreen = combineTwoP (TwoPane 0.03 (2/3))
-                           (smartTall)
-                           (smartTabbed)
-                           (ClassName "Google-chrome-beta")
-
-    smartTall = named "Smart Tall"
-            $ addTopBar
-        $ mySpacing
-            $ myGaps
-        $ boringAuto
-            $ ifWider smallMonResWidth wideScreen normalScreen
-            where
-                wideScreen = reflectHoriz $ Tall 1 0.03 (2/3)
-                normalScreen = Mirror $ Tall 1 0.03 (4/5)
-
-    smartTabbed = named "Smart Tabbed"
-              $ addTopBar
-              $ myCustomGaps
-              $ tabbed shrinkText myTabTheme
--}
-    -----------------------------------------------------------------------
-    -- Flexi Combinators                                                 --
-    -----------------------------------------------------------------------
-    --
-    -- failed attempt. creates a nice looking layout but I'm not sure
-    -- how to actually direct tabs to the tabbed area
-    --
-    --     flexiCombinators = named "Flexi Combinators"
-    --             $ avoidStruts
-    --             $ ifWider smallMonResWidth wideScreen normalScreen
-    --             where
-    --             wideScreen   = smartTall ****||* smartTabbed
-    --             normalScreen = smartTall ***||** smartTabbed
-
-
-
 
 ------------------------------------------------------------------------}}}
 -- Bindings                                                             {{{
@@ -1019,20 +389,6 @@ showKeybindings x = addName "Show Keybindings" $ io $ do
     hPutStr h (unlines $ showKm x)
     hClose h
     return ()
-
--- some of the structure of the following cribbed from 
--- https://github.com/SimSaladin/configs/blob/master/.xmonad/xmonad.hs
--- https://github.com/paul-axe/dotfiles/blob/master/.xmonad/xmonad.hs
--- https://github.com/pjones/xmonadrc (+ all the dyn project stuff)
-
--- wsKeys = map (\x -> "; " ++ [x]) ['1'..'9']
--- this along with workspace section below results in something link
--- M1-semicolon         1 View      ws
--- M1-semicolon         2 View      ws
--- M1-Shift-semicolon   1 Move w to ws
--- M1-Shift-semicolon   2 Move w to ws
--- M1-C-Shift-semicolon 1 Copy w to ws
--- M1-C-Shift-semicolon 2 Copy w to ws
 
 wsKeys = map show $ [1..9] ++ [0]
 
@@ -1237,61 +593,12 @@ myKeys conf = let
     ] ^++^
 
     -----------------------------------------------------------------------
-    -- Reference
-    -----------------------------------------------------------------------
-    -- recent windows not working
-    -- , ("M4-<Tab>",              , addName "Cycle recent windows"        $ (cycleRecentWindows [xK_Super_L] xK_Tab xK_Tab))
-    -- either not using these much or (in case of two tab items below), they conflict with other bindings
-    -- so I'm just turning off this whole section for now. retaining for refernce after a couple months
-    -- of working with my bindings to see if I want them back. TODO REVIEW
-    --, ("M-s m"                  , addName "Swap master"                 $ windows W.shiftMaster)
-    --, ("M-s p"                  , addName "Swap next"                   $ windows W.swapUp)
-    --, ("M-s n"                  , addName "Swap prev"                   $ windows W.swapDown)
-    --, ("M-<Tab>"                , addName "Cycle up"                    $ windows W.swapUp)
-    --, ("M-S-<Tab>"              , addName "Cycle down"                  $ windows W.swapDown)
-
-    -- sublayout specific (unused)
-    -- , ("M4-C-S-m"               , addName "onGroup focusMaster"         $ onGroup focusMaster')
-    -- , ("M4-C-S-]"               , addName "toSubl IncMasterN 1"         $ toSubl $ IncMasterN 1)
-    -- , ("M4-C-S-["               , addName "toSubl IncMasterN -1"        $ toSubl $ IncMasterN (-1))
-    -- , ("M4-C-S-<Return>"        , addName "onGroup swapMaster"          $ onGroup swapMaster')
-
-
-    -----------------------------------------------------------------------
     -- Resizing
     -----------------------------------------------------------------------
 
     subKeys "Resize"
 
     [
-
-    -- following is a hacky hack hack
-    --
-    -- I want to be able to use the same resize bindings on both BinarySpacePartition and other
-    -- less sophisticated layouts. BSP handles resizing in four directions (amazing!) but other
-    -- layouts have less refined tastes and we're lucky if they just resize the master on a single
-    -- axis.
-    --
-    -- To this end, I am using X.A.MessageFeedback to test for success on using the BSP resizing
-    -- and, if it fails, defaulting to the standard (or the X.L.ResizableTile Mirror variants)
-    -- Expand and Shrink commands.
-    --
-    -- The "sequence_" wrapper is needed because for some reason the windows weren't resizing till
-    -- I moved to a different window or refreshed, so I added that here. Shrug.
-    
-    -- mnemonic: less than / greater than
-    --, ("M4-<L>"       , addName "Expand (L on BSP)"     $ sequence_ [(tryMessage_ (ExpandTowards L) (Expand)), refresh])
-
---      ("C-<L>"                  , addName "Expand (L on BSP)"           $ tryMsgR (ExpandTowards L) (Shrink))
---    , ("C-<R>"                  , addName "Expand (R on BSP)"           $ tryMsgR (ExpandTowards R) (Expand))
---    , ("C-<U>"                  , addName "Expand (U on BSP)"           $ tryMsgR (ExpandTowards U) (MirrorShrink))
---    , ("C-<D>"                  , addName "Expand (D on BSP)"           $ tryMsgR (ExpandTowards D) (MirrorExpand))
---
---    , ("C-S-<L>"                , addName "Shrink (L on BSP)"           $ tryMsgR (ShrinkFrom R) (Shrink))
---    , ("C-S-<R>"                , addName "Shrink (R on BSP)"           $ tryMsgR (ShrinkFrom L) (Expand))
---    , ("C-S-<U>"                , addName "Shrink (U on BSP)"           $ tryMsgR (ShrinkFrom D) (MirrorShrink))
---    , ("C-S-<D>"                , addName "Shrink (D on BSP)"           $ tryMsgR (ShrinkFrom U) (MirrorExpand))
-
       ("M-["                    , addName "Expand (L on BSP)"           $ tryMsgR (ExpandTowards L) (Shrink))
     , ("M-]"                    , addName "Expand (R on BSP)"           $ tryMsgR (ExpandTowards R) (Expand))
     , ("M-S-["                  , addName "Expand (U on BSP)"           $ tryMsgR (ExpandTowards U) (MirrorShrink))
@@ -1302,47 +609,12 @@ myKeys conf = let
     , ("M-C-S-["                , addName "Shrink (U on BSP)"           $ tryMsgR (ShrinkFrom D) (MirrorShrink))
     , ("M-C-S-]"                , addName "Shrink (D on BSP)"           $ tryMsgR (ShrinkFrom U) (MirrorExpand))
 
-  --, ("M-r"                    , addName "Mirror (BSP rotate)"         $ tryMsgR (Rotate) (XMonad.Layout.MultiToggle.Toggle MIRROR))
-  --, ("M-S-C-m"                , addName "Mirror (always)"             $ sendMessage $ XMonad.Layout.MultiToggle.Toggle MIRROR)
-  --, ("M4-r"                   , addName "BSP Rotate"                  $ sendMessage Rotate)
-
--- TODO: the following are potentially useful but I won't know till I work with BSP further
---    , ("M4-s"                   , addName "BSP Swap"                    $ sendMessage XMonad.Layout.BinarySpacePartition.Swap)
---    , ("M4-p"                   , addName "BSP Focus Parent"            $ sendMessage FocusParent)
---    , ("M4-n"                   , addName "BSP Select Node"             $ sendMessage SelectNode)
-    --, ("M4-m"                   , addName "BSP Move Node"               $ sendMessage MoveNode)
-
-    -- sublayout specific (unused)
-    --  ("M4-C-S-."               , addName "toSubl Shrink"               $ toSubl Shrink)
-    --, ("M4-C-S-,"               , addName "toSubl Expand"               $ toSubl Expand)
     ]
 		where
 			toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
 							[] -> windows copyToAll
 							_ -> killAllOtherCopies
 
-    -----------------------------------------------------------------------
-    -- Screens
-    -----------------------------------------------------------------------
---    subKeys "Screens"
---    ([("M-C-<Right>", addName "Focus prev screen" prevScreen)
---    , ("M-C-<Left>" , addName "Focus next screen" nextScreen)
---    ]
---    ++ zipMod "Focus screen"                         screenKeys [0..] "M-"    (screenAction W.view)
---    ++ zipMod "Move client to screen"                screenKeys [0..] "M-S-"  (screenAction W.shift)
---    ++ zipMod "Swap workspace with screen"           screenKeys [0..] "M-M1-" (screenAction W.greedyView)
---    ++ zipMod "Swap workspace with and focus screen" screenKeys [0..] "M-C-"  (\s -> screenAction W.greedyView s >> screenAction W.view s)
---    ) ^++^
-
---    subKeys "Media Controls"
---    [
---    ("<XF86AudioMicMute>"      , addName "Mic Mute"                    $ spawn "notify-send mic mute")
---    ]
-    
-
--- Mouse bindings: default actions bound to mouse events
--- Includes window snapping on move/resize using X.A.FloatSnap
--- Includes window w/h ratio constraint (square) using X.H.ConstrainedResize
 myMouseBindings (XConfig {XMonad.modMask = myModMask}) = M.fromList $
 
     [ ((myModMask,               button1) ,(\w -> focus w
@@ -1474,7 +746,6 @@ myManageHook :: ManageHook
 myManageHook =
         manageSpecific
     <+> manageDocks
-    <+> namedScratchpadManageHook scratchpads
     <+> fullscreenManageHook
     <+> manageSpawn
     where
@@ -1482,9 +753,7 @@ myManageHook =
             [ resource =? "desktop_window" -?> doIgnore
             , resource =? "stalonetray"    -?> doIgnore
             , resource =? "vlc"    -?> doFloat
-            , resource =? googleMusicResource -?> doFullFloat
             , transience
-            , isBrowserDialog -?> forceCenterFloat
             --, isConsole -?> forceCenterFloat
             , isRole =? gtkFile  -?> forceCenterFloat
             , isDialog -?> doCenterFloat
@@ -1494,7 +763,6 @@ myManageHook =
             , resource =? "console" -?> tileBelowNoFocus
             , isFullscreen -?> doFullFloat
             , pure True -?> tileBelow ]
-        isBrowserDialog = isDialog <&&> className =? myBrowserClass
         gtkFile = "GtkFileChooserDialog"
         isRole = stringProperty "WM_WINDOW_ROLE"
         -- insert WHERE and focus WHAT
@@ -1528,13 +796,6 @@ myHandleEventHook = docksEventHook
 -- Custom hook helpers
 ---------------------------------------------------------------------------
 
--- from:
--- https://github.com/pjones/xmonadrc/blob/master/src/XMonad/Local/Action.hs
---
--- Useful when a floating window requests stupid dimensions.  There
--- was a bug in Handbrake that would pop up the file dialog with
--- almost no height due to one of my rotated monitors.
-
 forceCenterFloat :: ManageHook
 forceCenterFloat = doFloatDep move
   where
@@ -1546,18 +807,3 @@ forceCenterFloat = doFloatDep move
     h = 1/2
     x = (1-w)/2
     y = (1-h)/2
-
--- I left this here because I want to explore using tags more
--- ... did I crib this from pjones config?
---
----- | If the given condition is 'True' then add the given tag name to
----- the window being mapped.  Always returns 'Nothing' to continue
----- processing other manage hooks.
---addTagAndContinue :: Query Bool -> String -> MaybeManageHook
---addTagAndContinue p tag = do
---  x <- p
---  when x (liftX . addTag tag =<< ask)
---  return Nothing
-
-
--- vim: ft=haskell:foldmethod=marker:expandtab:ts=4:shiftwidth=4
