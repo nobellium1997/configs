@@ -49,3 +49,12 @@
 ;; This is required for some packages whose default branch isn't 'master' (which
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
+(package! exwm)
+(package! exwm-edit)
+(package! jq-mode)
+(package! json-mode)
+(package! language-detection)
+
+(package! this-package
+  :recipe (:host github :repo "agzam/exwm-edit"
+           :files ("exwm-edit.el")))
