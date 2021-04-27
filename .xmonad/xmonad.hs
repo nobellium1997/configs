@@ -326,7 +326,6 @@ myLayoutHook = showWorkspaceName
     fullScreenToggle    = mkToggle (single FULL)
     mirrorToggle        = mkToggle (single MIRROR)
     reflectToggle       = mkToggle (single REFLECTX)
-    smallMonResWidth    = 1920
     showWorkspaceName   = showWName' myShowWNameTheme
 
     named n             = renamed [(XMonad.Layout.Renamed.Replace n)]
