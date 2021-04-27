@@ -119,6 +119,9 @@
 (require 'exwm)
 (require 'exwm-config)
 (exwm-config-example)
+(setq display-time-default-load-average nil)
+(display-time-mode t)
+(setq exwm-input-line-mode-passthrough t)
 
 ;; EWW syntax highlighting
 (require 'cl-lib)
