@@ -3,6 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 (package-initialize)
+(load "exwm-edit")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -24,10 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'adwaita)
-;; (setq evil-normal-state-cursor '(box "black")
-;;       evil-insert-state-cursor '(bar "black")
-;;       evil-visual-state-cursor '(hollow "black"))
+(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -63,6 +61,9 @@
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes/WorkNotes"))
 
+;; Bind leader to M-spc
+(setq doom-leader-key "M-SPC")
+
 (map! :leader "t z" 'centered-window-mode)
 
 ;; Set neo-window to be bigger
@@ -90,6 +91,11 @@
   (counsel-find-file "~/Work"))
 (map! :leader "f w" 'goto-work)
 
+(defun mutemic()
+  (interactive)
+  (start-process "" nil "/home/nobel/Scripts/mutemic.sh"))
+(map! :leader "a" 'mutemic)
+
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
 
@@ -97,8 +103,8 @@
 (setq magit-blame-echo-style 'margin)
 
 ;; Map scrolling to easier to reach keys
-(map! "C-h" '+workspace/switch-left)
-(map! "C-l" '+workspace/switch-right)
+;; (map! "C-h" '+workspace/switch-left)
+;; (map! "C-l" '+workspace/switch-right)
 
 ;; Map jump to <C-i>
 (map! :nv "C-i" 'evil-jump-forward)
@@ -116,18 +122,53 @@
 (setq eww-search-prefix "https://www.google.com/search?q=")
 
 ;; EXWM configs
-(require 'exwm)
-(require 'exwm-config)
-(exwm-config-example)
+;; Disable menu-bar, tool-bar and scroll-bar to increase the usable space.
+(evil-set-initial-state 'exwm-mode 'emacs)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; Also shrink fringes to 1 pixel.
+(fringe-mode 1)
+
+;; Turn on `display-time-mode' if you don't use an external bar.
 (setq display-time-default-load-average nil)
 (display-time-mode t)
-(setq exwm-input-line-mode-passthrough t)
-(setq exwm-manage-configurations '((t char-mode t)))
+
+;; You are strongly encouraged to enable something like `ido-mode' to alter
+;; the default behavior of 'C-x b', or you will take great pains to switch
+;; to or back from a floating frame (remember 'C-x 5 o' if you refuse this
+;; proposal however).
+;; You may also want to call `exwm-config-ido' later (see below).
+(ido-mode 1)
+(require 'exwm)
+
+;; Fix problems with Ido (if you use it).
+(require 'exwm-config)
+(exwm-config-ido)
+
+;; Set the initial number of workspaces (they can also be created later).
+(setq exwm-workspace-number 4)
+
+(add-hook 'exwm-update-class-hook
+          (lambda ()
+            (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                        (string= "gimp" exwm-instance-name))
+              (exwm-workspace-rename-buffer exwm-class-name))))
+(add-hook 'exwm-update-title-hook
+          (lambda ()
+            (when (or (not exwm-instance-name)
+                      (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                      (string= "gimp" exwm-instance-name))
+              (exwm-workspace-rename-buffer exwm-title))))
+
+;; Global keybindings can be defined with `exwm-input-global-keys'.
+;; Here are a few examples:
 (setq exwm-input-global-keys
       `(
         ;; Bind "s-r" to exit char-mode and fullscreen mode.
         ([?\s-r] . exwm-reset)
-        ([?\s-i] . exwm-input-release-keyboard)
+        ([?\s-i] . exwm-input-grab-keyboard)
         ;; Bind "s-w" to switch workspace interactively.
         ([?\s-w] . exwm-workspace-switch)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
@@ -140,9 +181,44 @@
         ;; Bind "s-&" to launch applications ('M-&' also works if the output
         ;; buffer does not bother you).
         ([?\s-&] . (lambda (command)
-                     (interactive (list (read-shell-command "$ ")))
-                     (start-process-shell-command command nil command)))
+		     (interactive (list (read-shell-command "$ ")))
+		     (start-process-shell-command command nil command)))
         ;; Bind "s-<f2>" to "slock", a simple X display locker.
         ([s-f2] . (lambda ()
-                    (interactive)
-                    (start-process "" nil "/usr/bin/slock")))))
+		    (interactive)
+		    (start-process "" nil "/usr/bin/slock")))))
+
+;; To add a key binding only available in line-mode, simply define it in
+;; `exwm-mode-map'.  The following example shortens 'C-c q' to 'C-q'.
+(define-key exwm-mode-map [?\C-q] #'exwm-input-send-next-key)
+
+;; The following example demonstrates how to use simulation keys to mimic
+;; the behavior of Emacs.  The value of `exwm-input-simulation-keys` is a
+;; list of cons cells (SRC . DEST), where SRC is the key sequence you press
+;; and DEST is what EXWM actually sends to application.  Note that both SRC
+;; and DEST should be key sequences (vector or string).
+(setq exwm-input-simulation-keys
+      '(
+        ;; movement
+        ([?\C-b] . [left])
+        ([?\M-b] . [C-left])
+        ([?\C-f] . [right])
+        ([?\M-f] . [C-right])
+        ([?\C-p] . [up])
+        ([?\C-n] . [down])
+        ([?\C-a] . [home])
+        ([?\C-e] . [end])
+        ([?\M-v] . [prior])
+        ([?\C-v] . [next])
+        ([?\C-d] . [delete])
+        ([?\C-k] . [S-end delete])
+        ;; cut/paste.
+        ([?\C-w] . [?\C-x])
+        ([?\M-w] . [?\C-c])
+        ([?\C-y] . [?\C-v])
+        ;; search
+        ([?\C-s] . [?\C-f])))
+
+;; Do not forget to enable EXWM. It will start by itself when things are
+;; ready.  You can put it _anywhere_ in your configuration.
+(exwm-enable)
