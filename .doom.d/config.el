@@ -59,7 +59,7 @@
 (map! :i "C-n" 'company-complete)
 
 ;; Set org-agenda-files
-(setq org-agenda-files '("/home/nobel/Notes/WorkNotes"))
+(setq org-agenda-files '("/home/nobel/Notes"))
 
 ;; Bind leader to M-spc
 (setq doom-leader-key "M-SPC")
@@ -161,6 +161,11 @@
                       (string-prefix-p "sun-awt-X11-" exwm-instance-name)
                       (string= "gimp" exwm-instance-name))
               (exwm-workspace-rename-buffer exwm-title))))
+;; These keys should always pass through to Emacs
+(setq exwm-input-prefix-keys
+      '(?\C-w
+        ?\M-x
+        ?\M-\ ))  ;; Ctrl+Space
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
 ;; Here are a few examples:
@@ -206,18 +211,16 @@
         ([?\M-f] . [C-right])
         ([?\C-p] . [up])
         ([?\C-n] . [down])
-        ([?\C-a] . [home])
+        ;;([?\C-a] . [home])
         ([?\C-e] . [end])
         ([?\M-v] . [prior])
         ([?\C-v] . [next])
         ([?\C-d] . [delete])
-        ([?\C-k] . [S-end delete])
+        ;;([?\C-k] . [S-end delete])
         ;; cut/paste.
-        ([?\C-w] . [?\C-x])
+        ;; ([?\C-w] . [?\C-x])
         ([?\M-w] . [?\C-c])
-        ([?\C-y] . [?\C-v])
-        ;; search
-        ([?\C-s] . [?\C-f])))
+        ([?\C-y] . [?\C-v])))
 
 ;; Do not forget to enable EXWM. It will start by itself when things are
 ;; ready.  You can put it _anywhere_ in your configuration.
