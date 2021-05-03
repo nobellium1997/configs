@@ -163,9 +163,8 @@
               (exwm-workspace-rename-buffer exwm-title))))
 ;; These keys should always pass through to Emacs
 (setq exwm-input-prefix-keys
-      '(?\C-w
-        ?\M-x
-        ?\M-\ ))  ;; Ctrl+Space
+      '(?\M-x
+        ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
 ;; Here are a few examples:
