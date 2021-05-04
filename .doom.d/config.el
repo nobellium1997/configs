@@ -62,7 +62,9 @@
 (setq org-agenda-files '("/home/nobel/Notes"))
 
 ;; Bind leader to M-spc
-(setq doom-leader-key "M-SPC")
+(unbind-key "C-l")
+(setq doom-leader-key "C-l")
+(setq doom-leader-alt-key "C-l")
 
 (map! :leader "t z" 'centered-window-mode)
 
@@ -94,7 +96,7 @@
 (defun mutemic()
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/mutemic.sh"))
-(map! :leader "a" 'mutemic)
+;; (map! :leader "a" 'mutemic)
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
@@ -168,6 +170,7 @@
 (setq exwm-input-prefix-keys
       '(?\M-x
         ?\C-g
+        ?\C-l
         ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
@@ -179,6 +182,18 @@
         ([?\s-i] . exwm-input-release-keyboard)
         ;; Bind "s-w" to switch workspace interactively.
         ([?\s-w] . exwm-workspace-switch)
+        ([?\s-h] . evil-window-left)
+        ([?\s-l] . evil-window-right)
+        ([?\s-k] . evil-window-up)
+        ([?\s-j] . evil-window-down)
+        ([?\s-v] . evil-window-vsplit)
+        ([?\s-s] . evil-window-split)
+        ([?\s-b] . ido-switch-buffer)
+        ([?\s-a] . mutemic)
+        ([?\s-q] . evil-quit)
+        ([?\s-o] . delete-other-windows)
+        ([?\s-u] . winner-undo)
+        ([?\s-p] . evil-switch-to-windows-last-buffer)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
                     `(,(kbd (format "s-%d" i)) .
