@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'deeper-blue)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -99,6 +99,9 @@
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
 
+;; Map doom escape
+(map! :g "C-g" 'doom/escape)
+
 ;; Magit blame style
 (setq magit-blame-echo-style 'margin)
 
@@ -164,6 +167,7 @@
 ;; These keys should always pass through to Emacs
 (setq exwm-input-prefix-keys
       '(?\M-x
+        ?\C-g
         ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
@@ -172,7 +176,7 @@
       `(
         ;; Bind "s-r" to exit char-mode and fullscreen mode.
         ([?\s-r] . exwm-reset)
-        ([?\s-i] . exwm-input-grab-keyboard)
+        ([?\s-i] . exwm-input-release-keyboard)
         ;; Bind "s-w" to switch workspace interactively.
         ([?\s-w] . exwm-workspace-switch)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
