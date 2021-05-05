@@ -191,6 +191,7 @@
         ([?\s-b] . ido-switch-buffer)
         ([?\s-a] . mutemic)
         ([?\s-q] . evil-quit)
+        ([?\s-d] . kill-current-buffer)
         ([?\s-o] . delete-other-windows)
         ([?\s-u] . winner-undo)
         ([?\s-p] . evil-switch-to-windows-last-buffer)
