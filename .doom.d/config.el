@@ -186,6 +186,10 @@
         ([?\s-l] . evil-window-right)
         ([?\s-k] . evil-window-up)
         ([?\s-j] . evil-window-down)
+        ([?\s-H] . +evil/window-move-left)
+        ([?\s-L] . +evil/window-move-right)
+        ([?\s-K] . +evil/window-move-up)
+        ([?\s-J] . +evil/window-move-down)
         ([?\s-v] . evil-window-vsplit)
         ([?\s-s] . evil-window-split)
         ([?\s-b] . ido-switch-buffer)
@@ -195,6 +199,7 @@
         ([?\s-o] . delete-other-windows)
         ([?\s-u] . winner-undo)
         ([?\s-p] . evil-switch-to-windows-last-buffer)
+        ([?\s-t] . +term/toggle)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
                     `(,(kbd (format "s-%d" i)) .
@@ -224,20 +229,20 @@
 (setq exwm-input-simulation-keys
       '(
         ;; movement
-        ([?\C-b] . [left])
-        ([?\M-b] . [C-left])
-        ([?\C-f] . [right])
-        ([?\M-f] . [C-right])
+        ;; ([?\C-b] . [left])
+        ;; ([?\M-b] . [C-left])
+        ;; ([?\C-f] . [right])
+        ;; ([?\M-f] . [C-right])
         ([?\C-p] . [up])
         ([?\C-n] . [down])
         ;;([?\C-a] . [home])
-        ([?\C-e] . [end])
-        ([?\M-v] . [prior])
-        ([?\C-v] . [next])
-        ([?\C-d] . [delete])
+        ;; ([?\C-e] . [end])
+        ;; ([?\M-v] . [prior])
+        ;; ([?\C-v] . [next])
+        ;; ([?\C-d] . [delete])
         ;;([?\C-k] . [S-end delete])
         ;; cut/paste.
-        ;; ([?\C-w] . [?\C-x])
+        ;; ([?\C-w] . [C-backspace])
         ([?\M-w] . [?\C-c])
         ([?\C-y] . [?\C-v])))
 
