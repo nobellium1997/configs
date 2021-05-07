@@ -53,7 +53,7 @@
 (package! exwm-edit)
 (package! jq-mode)
 (package! json-mode)
-(package! language-detection)
+(package! yaml-mode)
 
 (package! this-package
   :recipe (:host github :repo "agzam/exwm-edit"

@@ -120,6 +120,22 @@
 (map! :nv "K" 'avy-goto-line-above)
 (map! :leader :nv "s" 'avy-goto-char-2)
 
+;; Eshell modules
+(defvar eshell-modules-list
+  '(eshell-alias
+    eshell-banner
+    eshell-basic
+    eshell-cmpl
+    eshell-dirs
+    eshell-glob
+    eshell-hist
+    eshell-ls
+    eshell-pred
+    eshell-prompt
+    eshell-script
+    eshell-term
+    eshell-unix))
+
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
 
@@ -198,7 +214,9 @@
         ([?\s-d] . kill-current-buffer)
         ([?\s-o] . delete-other-windows)
         ([?\s-u] . winner-undo)
-        ([?\s-p] . evil-switch-to-windows-last-buffer)
+        ([?\s-p] . previous-buffer)
+        ([?\s-n] . next-buffer)
+        ([?\s-a] . evil-switch-to-windows-last-buffer)
         ([?\s-t] . +term/toggle)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)

@@ -1,5 +1,0 @@
-export PATH=/home/nobel/.dotnet/tools:$PATH
-
-export PATH=/home/nobel/SonarQubeCli/sonar-scanner-4.2.0.1873-linux/bin:$PATH
-
-alias aws aws2
