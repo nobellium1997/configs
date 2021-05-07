@@ -61,11 +61,6 @@
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
 
-;; Bind leader to M-spc
-(unbind-key "C-l")
-(setq doom-leader-key "C-l")
-(setq doom-leader-alt-key "C-l")
-
 (map! :leader "t z" 'centered-window-mode)
 
 ;; Set neo-window to be bigger
@@ -186,7 +181,6 @@
 (setq exwm-input-prefix-keys
       '(?\M-x
         ?\C-g
-        ?\C-l
         ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
