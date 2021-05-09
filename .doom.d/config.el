@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'deeper-blue)
+(setq doom-theme 'tsdh-dark)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -60,6 +60,12 @@
 
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
+
+;; Bind leader to M-spc
+(unbind-key "C-l")
+(map! :map general-override-mode-map
+      :nvm "C-l" #'doom/leader)
+(setq doom-leader-alt-key "C-l")
 
 (map! :leader "t z" 'centered-window-mode)
 
@@ -101,10 +107,6 @@
 
 ;; Magit blame style
 (setq magit-blame-echo-style 'margin)
-
-;; Map scrolling to easier to reach keys
-;; (map! "C-h" '+workspace/switch-left)
-;; (map! "C-l" '+workspace/switch-right)
 
 ;; Map jump to <C-i>
 (map! :nv "C-i" 'evil-jump-forward)
@@ -181,6 +183,7 @@
 (setq exwm-input-prefix-keys
       '(?\M-x
         ?\C-g
+        ?\C-l
         ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
