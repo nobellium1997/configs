@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'misterioso)
+(setq doom-theme 'gruvbox-dark-medium)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -101,6 +101,10 @@
 (defun cycle-display()
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/cycle_display.sh"))
+
+(defun cycle-outputs()
+  (interactive)
+  (start-process "" nil "/home/nobel/Scripts/cycle_outputs.sh"))
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
@@ -211,6 +215,7 @@
         ([?\s-b] . ido-switch-buffer)
         ([?\s-w] . mutemic)
         ([?\s-z] . cycle-display)
+        ([?\s-x] . cycle-outputs)
         ([?\s-q] . evil-quit)
         ([?\s-d] . kill-current-buffer)
         ([?\s-o] . delete-other-windows)
