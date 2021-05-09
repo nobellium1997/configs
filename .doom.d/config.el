@@ -97,7 +97,10 @@
 (defun mutemic()
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/mutemic.sh"))
-;; (map! :leader "a" 'mutemic)
+
+(defun cycle-display()
+  (interactive)
+  (start-process "" nil "/home/nobel/Scripts/cycle_display.sh"))
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
@@ -194,7 +197,7 @@
         ([?\s-r] . exwm-reset)
         ([?\s-i] . exwm-input-release-keyboard)
         ;; Bind "s-w" to switch workspace interactively.
-        ([?\s-w] . exwm-workspace-switch)
+        ;; ([?\s-w] . exwm-workspace-switch)
         ([?\s-h] . evil-window-left)
         ([?\s-l] . evil-window-right)
         ([?\s-k] . evil-window-up)
@@ -206,7 +209,8 @@
         ([?\s-v] . evil-window-vsplit)
         ([?\s-s] . evil-window-split)
         ([?\s-b] . ido-switch-buffer)
-        ([?\s-a] . mutemic)
+        ([?\s-w] . mutemic)
+        ([?\s-z] . cycle-display)
         ([?\s-q] . evil-quit)
         ([?\s-d] . kill-current-buffer)
         ([?\s-o] . delete-other-windows)

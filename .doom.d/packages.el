@@ -54,6 +54,7 @@
 (package! jq-mode)
 (package! json-mode)
 (package! yaml-mode)
+(package! gruvbox-theme)
 
 (package! this-package
   :recipe (:host github :repo "agzam/exwm-edit"
