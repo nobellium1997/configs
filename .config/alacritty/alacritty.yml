@@ -88,4 +88,4 @@ key_bindings:
   - { key: Space,  mods: Control, action: ToggleViMode          }
 
 font:
-    size: 10
+    size: 9
