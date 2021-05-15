@@ -140,6 +140,12 @@
     eshell-term
     eshell-unix))
 
+(defun my-eshell-remove-pcomplete ()
+  (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t))
+
+(add-hook 'eshell-mode-hook #'my-eshell-remove-pcomplete)
+(map! :mode eshell-mode :i "C-n" '+eshell/pcomplete)
+
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
 

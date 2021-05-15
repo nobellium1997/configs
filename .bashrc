@@ -121,5 +121,6 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export PATH=$PATH:~/Mitm
+export PATH=$PATH:~/Terraform
 source "$HOME/.cargo/env"
 source ~/.config/aliasrc
