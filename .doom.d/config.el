@@ -53,6 +53,9 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
+;; DAP MODE
+(require 'dap-python)
+
 ;; Custom company mappings
 (setq company-dabbrev-downcase 0)
 (setq company-idle-delay 0)
@@ -68,10 +71,6 @@
 (setq doom-leader-alt-key "C-l")
 
 (map! :leader "t z" 'centered-window-mode)
-
-;; Set neo-window to be bigger
-(setq neo-window-fixed-size nil)
-(setq neo-window-width 45)
 
 ;; Custom file open locations
 (defun goto-notes ()
