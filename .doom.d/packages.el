@@ -55,6 +55,7 @@
 (package! json-mode)
 (package! yaml-mode)
 (package! gruvbox-theme)
+(package! language-detection)
 (package! dap-mode)
 
 (package! this-package

@@ -122,5 +122,6 @@ fi
 
 export PATH=$PATH:~/Mitm
 export PATH=$PATH:~/Terraform
+export PATH=$PATH:~/clang_llvm/bin
 source "$HOME/.cargo/env"
 source ~/.config/aliasrc
