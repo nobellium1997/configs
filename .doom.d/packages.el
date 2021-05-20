@@ -57,6 +57,7 @@
 (package! gruvbox-theme)
 (package! language-detection)
 (package! dap-mode)
+(package! clipmon)
 (package! browse-kill-ring)
 
 (package! this-package
