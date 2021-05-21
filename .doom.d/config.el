@@ -302,10 +302,10 @@
         ([?\s-x] . cycle-outputs)
         ([?\s-q] . evil-quit)
         ([?\s-d] . kill-current-buffer)
-        ([?\s-o] . delete-other-windows)
+        ([?\s-f] . delete-other-windows)
         ([?\s-u] . winner-undo)
-        ([?\s-p] . previous-buffer)
-        ([?\s-n] . next-buffer)
+        ([?\s-o] . previous-buffer)
+        ([?\s-i] . next-buffer)
         ([?\s-a] . evil-switch-to-windows-last-buffer)
         ([?\s-t] . +term/toggle)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
