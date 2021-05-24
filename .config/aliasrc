@@ -25,6 +25,7 @@ alias no-cert="unset REQUESTS_CA_BUNDLE"
 alias fd=fdfind
 alias b="cd .."
 alias v=nvim
+alias vim=nvim
 alias sus="systemctl suspend"
 alias g=git
 alias gs="git status"

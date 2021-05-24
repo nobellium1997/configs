@@ -106,6 +106,10 @@
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/cycle_outputs.sh"))
 
+(defun flameshot()
+  (interactive)
+  (start-process "" nil "flameshot" "gui"))
+
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
 
@@ -306,7 +310,7 @@
         ([?\s-u] . winner-undo)
         ([?\s-o] . previous-buffer)
         ([?\s-i] . next-buffer)
-        ([?\s-a] . evil-switch-to-windows-last-buffer)
+        ([?\s-a] . flameshot)
         ([?\s-t] . +term/toggle)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
@@ -337,22 +341,22 @@
 (setq exwm-input-simulation-keys
       '(
         ;; movement
-        ([?\C-b] . [left])
-        ([?\M-b] . [C-left])
-        ([?\C-f] . [right])
-        ([?\M-f] . [C-right])
+        ;; ([?\C-b] . [left])
+        ;; ([?\M-b] . [C-left])
+        ;; ([?\C-f] . [right])
+        ;; ([?\M-f] . [C-right])
         ([?\C-p] . [up])
         ([?\C-n] . [down])
-        ([?\C-a] . [home])
-        ([?\C-e] . [end])
+        ;; ([?\C-a] . [home])
+        ;; ([?\C-e] . [end])
         ;; ([?\M-v] . [prior])
         ;; ([?\C-v] . [next])
         ;; ([?\C-d] . [delete])
-        ([?\C-k] . [?\C-a])
+        ;; ([?\C-k] . [?\C-a])
         ;; ([?\C-x h] . [?\C-a])
         ;; cut/paste.
         ;; ([?\C-w] . [C-backspace])
-        ([?\M-w] . [?\C-c])
+        ;; ([?\M-w] . [?\C-c])
         ([?\C-y] . [?\C-v])))
 
 ;; Do not forget to enable EXWM. It will start by itself when things are
