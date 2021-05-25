@@ -1,4 +1,4 @@
-# alias ls="lsd --group-dirs first -l"
+alias ls="ls -l --color --group-directories-first"
 alias r=ranger
 alias q=exit
 alias tm=tmux
