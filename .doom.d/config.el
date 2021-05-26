@@ -65,12 +65,6 @@
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
 
-;; Bind leader to M-spc
-(unbind-key "C-l")
-(map! :map general-override-mode-map
-      :nvm "C-l" #'doom/leader)
-(setq doom-leader-alt-key "C-l")
-
 (map! :leader "t z" 'centered-window-mode)
 
 ;; Custom file open locations
@@ -120,8 +114,8 @@
 (setq magit-blame-echo-style 'margin)
 
 ;; Map jump to <C-i>
-(map! :nv "C-i" 'evil-jump-forward)
-(map! :nv "C-o" 'evil-jump-backward)
+;; (map! :nv "C-i" 'evil-jump-forward)
+;; (map! :nv "C-o" 'evil-jump-backward)
 
 ;; Avy bindings
 (map! :nv "J" 'avy-goto-line-below)
@@ -236,7 +230,7 @@
 
 ;; EXWM configs
 ;; Disable menu-bar, tool-bar and scroll-bar to increase the usable space.
-(evil-set-initial-state 'exwm-mode 'emacs)
+;; (evil-set-initial-state 'exwm-mode 'emacs)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -290,21 +284,21 @@
         ([?\s-i] . exwm-input-release-keyboard)
         ;; Bind "s-w" to switch workspace interactively.
         ;; ([?\s-w] . exwm-workspace-switch)
-        ([?\s-h] . evil-window-left)
-        ([?\s-l] . evil-window-right)
-        ([?\s-k] . evil-window-up)
-        ([?\s-j] . evil-window-down)
-        ([?\s-H] . +evil/window-move-left)
-        ([?\s-L] . +evil/window-move-right)
-        ([?\s-K] . +evil/window-move-up)
-        ([?\s-J] . +evil/window-move-down)
-        ([?\s-v] . evil-window-vsplit)
-        ([?\s-s] . evil-window-split)
+        ;; ([?\s-h] . evil-window-left)
+        ;; ([?\s-l] . evil-window-right)
+        ;; ([?\s-k] . evil-window-up)
+        ;; ([?\s-j] . evil-window-down)
+        ;; ([?\s-H] . +evil/window-move-left)
+        ;; ([?\s-L] . +evil/window-move-right)
+        ;; ([?\s-K] . +evil/window-move-up)
+        ;; ([?\s-J] . +evil/window-move-down)
+        ;; ([?\s-v] . evil-window-vsplit)
+        ;; ([?\s-s] . evil-window-split)
         ([?\s-b] . ido-switch-buffer)
         ([?\s-w] . mutemic)
         ([?\s-z] . cycle-display)
         ([?\s-x] . cycle-outputs)
-        ([?\s-q] . evil-quit)
+        ;; ([?\s-q] . evil-quit)
         ([?\s-d] . kill-current-buffer)
         ([?\s-f] . delete-other-windows)
         ([?\s-u] . winner-undo)
