@@ -60,7 +60,6 @@
 ;; Custom company mappings
 (setq company-dabbrev-downcase 0)
 (setq company-idle-delay nil)
-(map! :i "C-n" 'company-complete)
 
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
@@ -118,9 +117,9 @@
 ;; (map! :nv "C-o" 'evil-jump-backward)
 
 ;; Avy bindings
-(map! :nv "J" 'avy-goto-line-below)
-(map! :nv "K" 'avy-goto-line-above)
-(map! :leader :nv "s" 'avy-goto-char-2)
+;; (map! :nv "J" 'avy-goto-line-below)
+;; (map! :nv "K" 'avy-goto-line-above)
+;; (map! :leader :nv "s" 'avy-goto-char-2)
 
 ;; Eshell modules
 (defvar eshell-modules-list
@@ -142,7 +141,6 @@
   (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t))
 
 (add-hook 'eshell-mode-hook #'my-eshell-remove-pcomplete)
-(map! :mode eshell-mode :i "C-n" '+eshell/pcomplete)
 
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
@@ -335,22 +333,22 @@
 (setq exwm-input-simulation-keys
       '(
         ;; movement
-        ;; ([?\C-b] . [left])
-        ;; ([?\M-b] . [C-left])
-        ;; ([?\C-f] . [right])
-        ;; ([?\M-f] . [C-right])
+        ([?\C-b] . [left])
+        ([?\M-b] . [C-left])
+        ([?\C-f] . [right])
+        ([?\M-f] . [C-right])
         ([?\C-p] . [up])
         ([?\C-n] . [down])
-        ;; ([?\C-a] . [home])
-        ;; ([?\C-e] . [end])
+        ([?\C-a] . [home])
+        ([?\C-e] . [end])
         ;; ([?\M-v] . [prior])
         ;; ([?\C-v] . [next])
-        ;; ([?\C-d] . [delete])
-        ;; ([?\C-k] . [?\C-a])
+        ([?\C-d] . [delete])
+        ([?\C-k] . [?\C-a])
         ;; ([?\C-x h] . [?\C-a])
         ;; cut/paste.
-        ;; ([?\C-w] . [C-backspace])
-        ;; ([?\M-w] . [?\C-c])
+        ([?\C-w] . [C-backspace])
+        ([?\M-w] . [?\C-c])
         ([?\C-y] . [?\C-v])))
 
 ;; Do not forget to enable EXWM. It will start by itself when things are
