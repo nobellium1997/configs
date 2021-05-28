@@ -64,8 +64,6 @@
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
 
-(map! :leader "t z" 'centered-window-mode)
-
 ;; Custom file open locations
 (defun goto-notes ()
   (interactive)
@@ -89,6 +87,8 @@
 
 (map! :leader "j" 'avy-goto-char-2)
 
+(global-set-key (kbd "C-M-;") 'down-list)
+
 (defun mutemic()
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/mutemic.sh"))
@@ -110,27 +110,6 @@
 
 ;; Magit blame style
 (setq magit-blame-echo-style 'margin)
-
-;; Eshell modules
-(defvar eshell-modules-list
-  '(eshell-alias
-    eshell-banner
-    eshell-basic
-    eshell-cmpl
-    eshell-dirs
-    eshell-glob
-    eshell-hist
-    eshell-ls
-    eshell-pred
-    eshell-prompt
-    eshell-script
-    eshell-term
-    eshell-unix))
-
-(defun my-eshell-remove-pcomplete ()
-  (remove-hook 'completion-at-point-functions #'pcomplete-completions-at-point t))
-
-(add-hook 'eshell-mode-hook #'my-eshell-remove-pcomplete)
 
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
@@ -260,6 +239,7 @@
 (setq exwm-input-prefix-keys
       '(?\M-x
         ?\C-g
+        ?\C-c
         ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
