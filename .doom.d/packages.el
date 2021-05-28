@@ -57,8 +57,8 @@
 (package! gruvbox-theme)
 (package! language-detection)
 (package! dap-mode)
-(package! clipmon)
-(package! browse-kill-ring)
+;; (package! clipmon)
+;; (package! browse-kill-ring)
 
 (package! this-package
   :recipe (:host github :repo "agzam/exwm-edit"

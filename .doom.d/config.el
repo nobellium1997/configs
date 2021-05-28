@@ -87,6 +87,8 @@
   (counsel-find-file "~/Work"))
 (map! :leader "f w" 'goto-work)
 
+(map! :leader "j" 'avy-goto-char-2)
+
 (defun mutemic()
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/mutemic.sh"))
@@ -106,20 +108,8 @@
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
 
-;; Map doom escape
-(map! :g "C-g" 'doom/escape)
-
 ;; Magit blame style
 (setq magit-blame-echo-style 'margin)
-
-;; Map jump to <C-i>
-;; (map! :nv "C-i" 'evil-jump-forward)
-;; (map! :nv "C-o" 'evil-jump-backward)
-
-;; Avy bindings
-;; (map! :nv "J" 'avy-goto-line-below)
-;; (map! :nv "K" 'avy-goto-line-above)
-;; (map! :leader :nv "s" 'avy-goto-char-2)
 
 ;; Eshell modules
 (defvar eshell-modules-list
@@ -270,7 +260,6 @@
 (setq exwm-input-prefix-keys
       '(?\M-x
         ?\C-g
-        ?\C-l
         ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
@@ -296,12 +285,12 @@
         ([?\s-w] . mutemic)
         ([?\s-z] . cycle-display)
         ([?\s-x] . cycle-outputs)
-        ;; ([?\s-q] . evil-quit)
+        ([?\s-q] . delete-window)
         ([?\s-d] . kill-current-buffer)
         ([?\s-f] . delete-other-windows)
         ([?\s-u] . winner-undo)
-        ([?\s-o] . previous-buffer)
-        ([?\s-i] . next-buffer)
+        ([?\s-p] . previous-buffer)
+        ([?\s-n] . next-buffer)
         ([?\s-a] . flameshot)
         ([?\s-t] . +term/toggle)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
@@ -341,13 +330,12 @@
         ([?\C-n] . [down])
         ([?\C-a] . [home])
         ([?\C-e] . [end])
-        ;; ([?\M-v] . [prior])
-        ;; ([?\C-v] . [next])
+        ([?\M-v] . [prior])
+        ([?\C-v] . [next])
         ([?\C-d] . [delete])
-        ([?\C-k] . [?\C-a])
-        ;; ([?\C-x h] . [?\C-a])
+        ([?\C-k] . [S-end delete])
         ;; cut/paste.
-        ([?\C-w] . [C-backspace])
+        ;; ([?\M-backspace] . [C-backspace])
         ([?\M-w] . [?\C-c])
         ([?\C-y] . [?\C-v])))
 
