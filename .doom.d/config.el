@@ -302,6 +302,17 @@
 (setq exwm-input-simulation-keys
       '(
         ;; movement
+        ([?\C-\S-a] . [S-home])
+        ([?\C-\S-e] . [S-end])
+        ([?\C-\S-n] . [S-down])
+        ([?\C-\S-p] . [S-up])
+        ([?\C-\S-f] . [S-right])
+        ([?\C-\S-b] . [S-left])
+        ([?\C-g] . [escape])
+        ([?\M-<] . [C-home])
+        ([?\M->] . [C-end])
+        ([?\M-F] . [S-C-right])
+        ([?\M-B] . [S-C-left])
         ([?\C-b] . [left])
         ([?\M-b] . [C-left])
         ([?\C-f] . [right])
@@ -314,7 +325,9 @@
         ([?\C-v] . [next])
         ([?\C-d] . [delete])
         ([?\C-k] . [S-end delete])
-        ([?\C-s] . [?\C-f])
+        ([?\C-s] . [C-f])
+        ([?\M-d] . [C-S-right delete])
+        ([?\C-d] . [delete])
         ;; cut/paste.
         ;; ([?\M-backspace] . [C-backspace])
         ([?\M-w] . [?\C-c])
