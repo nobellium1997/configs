@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'gruvbox-dark-medium)
+(setq doom-theme 'dracula)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -35,6 +35,7 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(setq exwm-edit-split t)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -60,6 +61,7 @@
 ;; Custom company mappings
 (setq company-dabbrev-downcase 0)
 (setq company-idle-delay nil)
+(setq company-tooltip-limit 5)
 
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
@@ -85,7 +87,7 @@
   (counsel-find-file "~/Work"))
 (map! :leader "f w" 'goto-work)
 
-(map! :leader "j" 'avy-goto-char-2)
+(map! :leader "j" 'avy-goto-line)
 
 (global-set-key (kbd "C-M-;") 'down-list)
 
@@ -240,6 +242,7 @@
       '(?\M-x
         ?\C-g
         ?\C-c
+        ?\C-x
         ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
@@ -251,16 +254,13 @@
         ([?\s-i] . exwm-input-release-keyboard)
         ;; Bind "s-w" to switch workspace interactively.
         ;; ([?\s-w] . exwm-workspace-switch)
-        ;; ([?\s-h] . evil-window-left)
-        ;; ([?\s-l] . evil-window-right)
-        ;; ([?\s-k] . evil-window-up)
-        ;; ([?\s-j] . evil-window-down)
         ;; ([?\s-H] . +evil/window-move-left)
         ;; ([?\s-L] . +evil/window-move-right)
         ;; ([?\s-K] . +evil/window-move-up)
         ;; ([?\s-J] . +evil/window-move-down)
-        ;; ([?\s-v] . evil-window-vsplit)
-        ;; ([?\s-s] . evil-window-split)
+        ([?\s-j] . ace-window)
+        ([?\s-v] . split-window-right)
+        ([?\s-s] . split-window-below)
         ([?\s-b] . ido-switch-buffer)
         ([?\s-w] . mutemic)
         ([?\s-z] . cycle-display)
@@ -314,6 +314,7 @@
         ([?\C-v] . [next])
         ([?\C-d] . [delete])
         ([?\C-k] . [S-end delete])
+        ([?\C-s] . [?\C-f])
         ;; cut/paste.
         ;; ([?\M-backspace] . [C-backspace])
         ([?\M-w] . [?\C-c])
