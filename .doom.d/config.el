@@ -87,9 +87,9 @@
   (counsel-find-file "~/Work"))
 (map! :leader "f w" 'goto-work)
 
-(map! :leader "j" 'avy-goto-line)
+(map! "M-n" 'avy-goto-char-timer)
 
-(global-set-key (kbd "C-M-;") 'down-list)
+(map! "C-M-;" 'down-list)
 
 (defun mutemic()
   (interactive)
@@ -230,7 +230,7 @@
           (lambda ()
             (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
                         (string= "gimp" exwm-instance-name))
-              (exwm-workspace-rename-buffer exwm-class-name))))
+              (exwm-workspace-rename-buffer exwm-instance-name))))
 (add-hook 'exwm-update-title-hook
           (lambda ()
             (when (or (not exwm-instance-name)
