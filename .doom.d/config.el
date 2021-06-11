@@ -87,8 +87,10 @@
   (counsel-find-file "~/Work"))
 (map! :leader "f w" 'goto-work)
 
+;; Hotkeys
 (map! "M-n" 'avy-goto-char-timer)
-
+(map! "C-S-p" 'scroll-down-line)
+(map! "C-S-n" 'scroll-up-line)
 (map! "C-M-;" 'down-list)
 
 (defun mutemic()
@@ -106,6 +108,10 @@
 (defun flameshot()
   (interactive)
   (start-process "" nil "flameshot" "gui"))
+
+(defun toggle-trackpad()
+  (interactive)
+  (start-process "" nil "/home/nobel/Scripts/toggle_trackpad.sh"))
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
@@ -210,6 +216,7 @@
 ;; Turn on `display-time-mode' if you don't use an external bar.
 (setq display-time-default-load-average nil)
 (display-time-mode t)
+(display-battery-mode t)
 
 ;; You are strongly encouraged to enable something like `ido-mode' to alter
 ;; the default behavior of 'C-x b', or you will take great pains to switch
@@ -224,7 +231,7 @@
 ;; (exwm-config-ido)
 
 ;; Set the initial number of workspaces (they can also be created later).
-(setq exwm-workspace-number 4)
+(setq exwm-workspace-number 10)
 
 (add-hook 'exwm-update-class-hook
           (lambda ()
@@ -240,7 +247,6 @@
 ;; These keys should always pass through to Emacs
 (setq exwm-input-prefix-keys
       '(?\M-x
-        ?\C-g
         ?\C-c
         ?\C-x
         ?\M-\ ))
@@ -272,6 +278,7 @@
         ([?\s-p] . previous-buffer)
         ([?\s-n] . next-buffer)
         ([?\s-a] . flameshot)
+        ([?\s-T] . toggle-trackpad)
         ([?\s-t] . +term/toggle)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
@@ -329,7 +336,7 @@
         ([?\M-d] . [C-S-right delete])
         ([?\C-d] . [delete])
         ;; cut/paste.
-        ;; ([?\M-backspace] . [C-backspace])
+        ;; ([?\C-w] . [C-backspace])
         ([?\M-w] . [?\C-c])
         ([?\C-y] . [?\C-v])))
 
