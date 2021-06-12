@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-device=10
+device=17
 state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
 
 if [ $state == '1' ];then
