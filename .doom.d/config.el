@@ -92,6 +92,8 @@
 (map! "C-S-p" 'scroll-down-line)
 (map! "C-S-n" 'scroll-up-line)
 (map! "C-M-;" 'down-list)
+(map! "C-\\" 'er/expand-region)
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 
 (defun mutemic()
   (interactive)
@@ -109,9 +111,17 @@
   (interactive)
   (start-process "" nil "flameshot" "gui"))
 
+(defun suspend()
+  (interactive)
+  (start-process "" nil "systemctl" "suspend"))
+
 (defun toggle-trackpad()
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/toggle_trackpad.sh"))
+
+(defun switch-to-last-buffer ()
+  (interactive)
+  (switch-to-buffer nil))
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
@@ -278,6 +288,8 @@
         ([?\s-p] . previous-buffer)
         ([?\s-n] . next-buffer)
         ([?\s-a] . flameshot)
+        ([?\s-g] . suspend)
+        ([?\s-h] . switch-to-last-buffer)
         ([?\s-T] . toggle-trackpad)
         ([?\s-t] . +term/toggle)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
