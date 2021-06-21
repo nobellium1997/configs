@@ -111,10 +111,6 @@
   (interactive)
   (start-process "" nil "flameshot" "gui"))
 
-(defun suspend()
-  (interactive)
-  (start-process "" nil "systemctl" "suspend"))
-
 (defun toggle-trackpad()
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/toggle_trackpad.sh"))
@@ -288,7 +284,6 @@
         ([?\s-p] . previous-buffer)
         ([?\s-n] . next-buffer)
         ([?\s-a] . flameshot)
-        ([?\s-g] . suspend)
         ([?\s-h] . switch-to-last-buffer)
         ([?\s-T] . toggle-trackpad)
         ([?\s-t] . +term/toggle)
