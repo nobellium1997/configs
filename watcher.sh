@@ -14,4 +14,10 @@ function watcher {
         done
 }
 
+SUB_PATH=$(echo $1 | sed "s:/home/nobel/Work/Services/::g")
+echo $SUB_PATH
+FULL_PATH="C:/Users/nobel.barakat/Work/Services/$SUB_PATH"
+echo $FULL_PATH
+ssh nobel.barakat@10.0.0.53 Remove-Item "$FULL_PATH" -Recurse -Force -Confirm:\$false
+scp -r "$1" "nobel.barakat@10.0.0.53:$FULL_PATH"
 watcher $1
