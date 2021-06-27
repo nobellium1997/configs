@@ -15,9 +15,15 @@ function watcher {
 }
 
 SUB_PATH=$(echo $1 | sed "s:/home/nobel/Work/Services/::g")
-echo $SUB_PATH
 FULL_PATH="C:/Users/nobel.barakat/Work/Services/$SUB_PATH"
-echo $FULL_PATH
+
+echo "Deleting $FULL_PATH..."
 ssh nobel.barakat@10.0.0.53 Remove-Item "$FULL_PATH" -Recurse -Force -Confirm:\$false
-scp -r "$1" "nobel.barakat@10.0.0.53:$FULL_PATH"
-watcher $1
+echo "Deleted"
+
+echo "Creating $FULL_PATH/application_csharp..."
+ssh nobel.barakat@10.0.0.53 mkdir "$FULL_PATH"
+echo "Created"
+
+scp -r "$1/application_csharp" "nobel.barakat@10.0.0.53:$FULL_PATH/application_csharp"
+watcher "$1/application_csharp"
