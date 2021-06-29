@@ -3,13 +3,14 @@
 ;; Define buffer search-engines slot to be a list of several
 ;; nx-search-engines-provided ones.
 (define-configuration (buffer web-buffer)
-  ((override-map (keymap:define-key %slot-default%
-                   ;; Bind your favorite key to `search-hint'.
-                   ;; You need to enable `search-engines-mode' for that.
-                   "M-s" 'set-url))
+   ((override-map (let ((map (make-keymap "override-map")))
+                             (define-key map
+                               "M-s" 'set-url
+                               "M-S" 'set-url-new-buffer
+                               "M-r" 'reload-current-buffer)
+                   map))
    (search-engines (list (engines:google :shortcut "gmaps"
                                          :object :maps)
-                         (engines:wordnet :shortcut "wn"
-                                          :show-word-frequencies t)
+                         (engines:wikipedia :shortcut "wiki")
                          (engines:google :shortcut "goog"
                                          :safe-search nil)))))
