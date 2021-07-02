@@ -3,3 +3,5 @@
 	name = Nobel
 [credential]
     helper = store --file ~/.git-credentials
+[alias]
+	root = rev-parse --show-toplevel

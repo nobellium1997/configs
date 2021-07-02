@@ -7,7 +7,9 @@
                              (define-key map
                                "M-s" 'set-url
                                "M-S" 'set-url-new-buffer
-                               "M-r" 'reload-current-buffer)
+                               "M-r" 'reload-current-buffer
+                               "M-p" 'switch-buffer-next
+                               "M-n" 'switch-buffer-previous)
                    map))
    (search-engines (list (engines:google :shortcut "gmaps"
                                          :object :maps)

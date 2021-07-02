@@ -88,12 +88,14 @@
 (map! :leader "f w" 'goto-work)
 
 ;; Hotkeys
-(map! "M-n" 'avy-goto-char-timer)
+;; (map! "M-n" 'avy-goto-char-timer)
 (map! "C-S-p" 'scroll-down-line)
 (map! "C-S-n" 'scroll-up-line)
 (map! "C-M-;" 'down-list)
 (map! "C-\\" 'er/expand-region)
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+(global-set-key (kbd "M-n") #'avy-goto-char-timer)
+(global-set-key (kbd "C-s") #'swiper)
 
 (defun mutemic()
   (interactive)
