@@ -1,6 +1,6 @@
 (defcfg
   ;; For Linux
-  input  (device-file "/dev/input/by-id/usb-OBINS_OBINS_AnnePro2_SN0000000001-event-kbd")
+  input  (device-file "/dev/input/by-id/usb-Holtek_Anne_Pro_2__c18__QMK-event-kbd")
   output (uinput-sink "My KMonad output"
     ;; To understand the importance of the following line, see the section on
     ;; Compose-key sequences at the near-bottom of this file.
@@ -29,15 +29,15 @@
 
 
 (defalias
-    home_a (tap-hold-next-release 150 a lctl)
-    home_s (tap-hold-next-release 150 s lalt)
-    home_d (tap-hold-next-release 150 d lmet)
-    home_f (tap-hold-next-release 150 f lsft)
+    home_a (tap-hold-next-release 125 a lctl)
+    home_s (tap-hold-next-release 125 s lalt)
+    home_d (tap-hold-next-release 125 d lmet)
+    home_f (tap-hold-next-release 125 f lsft)
 
-    home_j (tap-hold-next-release 150 j rsft)
-    home_k (tap-hold-next-release 150 k rmet)
-    home_l (tap-hold-next-release 150 l lalt)
-    home_; (tap-hold-next-release 150 ; rctl)
+    home_j (tap-hold-next-release 125 j rsft)
+    home_k (tap-hold-next-release 125 k rmet)
+    home_l (tap-hold-next-release 125 l lalt)
+    home_; (tap-hold-next-release 125 ; rctl)
 )
 
 (deflayer homerowmods

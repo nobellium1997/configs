@@ -88,14 +88,11 @@
 (map! :leader "f w" 'goto-work)
 
 ;; Hotkeys
-;; (map! "M-n" 'avy-goto-char-timer)
-(map! "C-S-p" 'scroll-down-line)
-(map! "C-S-n" 'scroll-up-line)
-(map! "C-M-;" 'down-list)
 (map! "C-\\" 'er/expand-region)
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
-(global-set-key (kbd "M-n") #'avy-goto-char-timer)
-(global-set-key (kbd "C-s") #'swiper)
+(map! :nv "s" 'avy-goto-char-timer)
+(map! :nv "\/" 'swiper)
+(map! :nv "?" 'swiper-backward)
 
 (defun mutemic()
   (interactive)
@@ -133,87 +130,10 @@
 ;; Set default search to google
 (setq eww-search-prefix "https://www.google.com/search?q=")
 
-;; Syntax highlighting eww
-(require 'cl-lib)
-
-(defun eww-tag-pre (dom)
-  (let ((shr-folding-mode 'none)
-        (shr-current-font 'default))
-    (shr-ensure-newline)
-    (insert (eww-fontify-pre dom))
-    (shr-ensure-newline)))
-
-(defun eww-fontify-pre (dom)
-  (with-temp-buffer
-    (shr-generic dom)
-    (let ((mode (eww-buffer-auto-detect-mode)))
-      (when mode
-        (eww-fontify-buffer mode)))
-    (buffer-string)))
-
-(defun eww-fontify-buffer (mode)
-  (delay-mode-hooks (funcall mode))
-  (font-lock-default-function mode)
-  (font-lock-default-fontify-region (point-min)
-                                    (point-max)
-                                    nil))
-
-(defun eww-buffer-auto-detect-mode ()
-  (let* ((map '((ada ada-mode)
-                (awk awk-mode)
-                (c c-mode)
-                (cpp c++-mode)
-                (clojure clojure-mode lisp-mode)
-                (csharp csharp-mode java-mode)
-                (css css-mode)
-                (dart dart-mode)
-                (delphi delphi-mode)
-                (emacslisp emacs-lisp-mode)
-                (erlang erlang-mode)
-                (fortran fortran-mode)
-                (fsharp fsharp-mode)
-                (go go-mode)
-                (groovy groovy-mode)
-                (haskell haskell-mode)
-                (html html-mode)
-                (java java-mode)
-                (javascript javascript-mode)
-                (json json-mode javascript-mode)
-                (latex latex-mode)
-                (lisp lisp-mode)
-                (lua lua-mode)
-                (matlab matlab-mode octave-mode)
-                (objc objc-mode c-mode)
-                (perl perl-mode)
-                (php php-mode)
-                (prolog prolog-mode)
-                (python python-mode)
-                (r r-mode)
-                (ruby ruby-mode)
-                (rust rust-mode)
-                (scala scala-mode)
-                (shell shell-script-mode)
-                (smalltalk smalltalk-mode)
-                (sql sql-mode)
-                (swift swift-mode)
-                (visualbasic visual-basic-mode)
-                (xml sgml-mode)))
-         (language (language-detection-string
-                    (buffer-substring-no-properties (point-min) (point-max))))
-         (modes (cdr (assoc language map)))
-         (mode (cl-loop for mode in modes
-                        when (fboundp mode)
-                        return mode)))
-    (message (format "%s" language))
-    (when (fboundp mode)
-      mode)))
-
-(setq shr-external-rendering-functions
-      '((pre . eww-tag-pre)))
 
 ;; EXWM configs
 ;; Disable menu-bar, tool-bar and scroll-bar to increase the usable space.
-;; (evil-set-initial-state 'exwm-mode 'emacs)
+(evil-set-initial-state 'exwm-mode 'emacs)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -254,28 +174,24 @@
               (exwm-workspace-rename-buffer exwm-title))))
 ;; These keys should always pass through to Emacs
 (setq exwm-input-prefix-keys
-      '(?\M-x
-        ?\C-c
-        ?\C-x
-        ?\M-\ ))
+      '(?\M-x))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
 ;; Here are a few examples:
 (setq exwm-input-global-keys
       `(
-        ;; Bind "s-r" to exit char-mode and fullscreen mode.
         ([?\s-r] . exwm-reset)
-        ([?\s-i] . exwm-input-release-keyboard)
-        ;; Bind "s-w" to switch workspace interactively.
-        ;; ([?\s-w] . exwm-workspace-switch)
-        ;; ([?\s-H] . +evil/window-move-left)
-        ;; ([?\s-L] . +evil/window-move-right)
-        ;; ([?\s-K] . +evil/window-move-up)
-        ;; ([?\s-J] . +evil/window-move-down)
-        ([?\s-j] . ace-window)
+        ([?\s-H] . +evil/window-move-left)
+        ([?\s-L] . +evil/window-move-right)
+        ([?\s-K] . +evil/window-move-up)
+        ([?\s-J] . +evil/window-move-down)
+        ([?\s-h] . windmove-left)
+        ([?\s-l] . windmove-right)
+        ([?\s-j] . windmove-up)
+        ([?\s-k] . windmove-down)
         ([?\s-v] . split-window-right)
         ([?\s-s] . split-window-below)
-        ([?\s-b] . ido-switch-buffer)
+        ([?\s-b] . +ivy/switch-buffer)
         ([?\s-w] . mutemic)
         ([?\s-z] . cycle-display)
         ([?\s-x] . cycle-outputs)
@@ -286,9 +202,9 @@
         ([?\s-p] . previous-buffer)
         ([?\s-n] . next-buffer)
         ([?\s-a] . flameshot)
-        ([?\s-h] . switch-to-last-buffer)
+        ([?\s-o] . switch-to-last-buffer)
         ([?\s-T] . toggle-trackpad)
-        ([?\s-t] . +term/toggle)
+        ([?\s-t] . +eshell/toggle)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
                     `(,(kbd (format "s-%d" i)) .
@@ -318,36 +234,8 @@
 (setq exwm-input-simulation-keys
       '(
         ;; movement
-        ([?\C-\S-a] . [S-home])
-        ([?\C-\S-e] . [S-end])
-        ([?\C-\S-n] . [S-down])
-        ([?\C-\S-p] . [S-up])
-        ([?\C-\S-f] . [S-right])
-        ([?\C-\S-b] . [S-left])
-        ([?\C-g] . [escape])
-        ([?\M-<] . [C-home])
-        ([?\M->] . [C-end])
-        ([?\M-F] . [S-C-right])
-        ([?\M-B] . [S-C-left])
-        ([?\C-b] . [left])
-        ([?\M-b] . [C-left])
-        ([?\C-f] . [right])
-        ([?\M-f] . [C-right])
         ([?\C-p] . [up])
-        ([?\C-n] . [down])
-        ([?\C-a] . [home])
-        ([?\C-e] . [end])
-        ([?\M-v] . [prior])
-        ([?\C-v] . [next])
-        ([?\C-d] . [delete])
-        ([?\C-k] . [S-end delete])
-        ([?\C-s] . [C-f])
-        ([?\M-d] . [C-S-right delete])
-        ([?\C-d] . [delete])
-        ;; cut/paste.
-        ;; ([?\C-w] . [C-backspace])
-        ([?\M-w] . [?\C-c])
-        ([?\C-y] . [?\C-v])))
+        ([?\C-n] . [down])))
 
 ;; Do not forget to enable EXWM. It will start by itself when things are
 ;; ready.  You can put it _anywhere_ in your configuration.
