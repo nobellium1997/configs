@@ -90,6 +90,7 @@
 ;; Hotkeys
 (map! "C-\\" 'er/expand-region)
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+(map! :map evil-snipe-local-mode-map :vnm "s" nil :vnm "S" nil)
 (map! :nv "s" 'avy-goto-char-timer)
 (map! :nv "\/" 'swiper)
 (map! :nv "?" 'swiper-backward)
@@ -155,7 +156,15 @@
 (require 'exwm)
 
 ;; Fix problems with Ido (if you use it).
-(require 'exwm-config)
+;; (require 'exwm-config)
+(require 'exwm-randr)
+
+(exwm-randr-enable)
+
+(start-process "" nil "/home/nobel/.screenlayout/dual.sh")
+
+(setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 4 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
+
 ;; (exwm-config-ido)
 
 ;; Set the initial number of workspaces (they can also be created later).
@@ -187,8 +196,8 @@
         ([?\s-J] . +evil/window-move-down)
         ([?\s-h] . windmove-left)
         ([?\s-l] . windmove-right)
-        ([?\s-j] . windmove-up)
-        ([?\s-k] . windmove-down)
+        ([?\s-k] . windmove-up)
+        ([?\s-j] . windmove-down)
         ([?\s-v] . split-window-right)
         ([?\s-s] . split-window-below)
         ([?\s-b] . +ivy/switch-buffer)
