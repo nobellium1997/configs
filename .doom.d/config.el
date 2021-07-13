@@ -5,6 +5,8 @@
 (package-initialize)
 (load "exwm-edit")
 
+(add-hook 'exwm-edit-compose-hook '+word-wrap-mode)
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "John Doe"
@@ -25,7 +27,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'dracula)
+(setq doom-theme 'zenburn)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -34,8 +36,6 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
-(setq exwm-edit-split t)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -163,7 +163,20 @@
 
 (start-process "" nil "/home/nobel/.screenlayout/dual.sh")
 
-(setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 4 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
+(defun efs/set-wallpaper ()
+  (interactive)
+  ;; NOTE: You will need to update this to a valid background path!
+  (start-process-shell-command
+      "feh" nil  "feh --bg-scale /home/nobel/Wallpapers/oldest_house_2.jpeg"))
+
+(efs/set-wallpaper)
+
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
 
 ;; (exwm-config-ido)
 
