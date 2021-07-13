@@ -163,14 +163,6 @@
 
 (start-process "" nil "/home/nobel/.screenlayout/dual.sh")
 
-(defun efs/set-wallpaper ()
-  (interactive)
-  ;; NOTE: You will need to update this to a valid background path!
-  (start-process-shell-command
-      "feh" nil  "feh --bg-scale /home/nobel/Wallpapers/oldest_house_2.jpeg"))
-
-(efs/set-wallpaper)
-
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
