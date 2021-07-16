@@ -27,7 +27,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'zenburn)
+(setq doom-theme 'gruvbox-dark-medium)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -60,11 +60,17 @@
 
 ;; Custom company mappings
 (setq company-dabbrev-downcase 0)
-(setq company-idle-delay nil)
+(setq company-idle-delay 0)
 (setq company-tooltip-limit 5)
 
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
+
+;; No line numbers for extra cool buffers
+(setq display-line-numbers-type nil)
+
+;; Custom evil settings
+(setq evil-move-beyond-eol t)
 
 ;; Custom file open locations
 (defun goto-notes ()
@@ -87,6 +93,21 @@
   (counsel-find-file "~/Work"))
 (map! :leader "f w" 'goto-work)
 
+(defun current-line-empty-p ()
+  (save-excursion
+    (beginning-of-line)
+    (or (looking-at-p "[[:space:]]*$") (looking-at-p "^[[:space:]]*[[:ascii:]][[:space:]]*$"))))
+
+(defun jump-to-same-indent (direction)
+  (interactive "P")
+  (let ((start-indent (current-indentation)))
+    (while
+      (and (not (bobp))
+           (zerop (forward-line (or direction 1)))
+           (or (current-line-empty-p)
+               (> (current-indentation) start-indent)))))
+  (back-to-indentation))
+
 ;; Hotkeys
 (map! "C-\\" 'er/expand-region)
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
@@ -94,6 +115,12 @@
 (map! :nv "s" 'avy-goto-char-timer)
 (map! :nv "\/" 'swiper)
 (map! :nv "?" 'swiper-backward)
+(map! :leader :nv "[" 'backward-up-list)
+(map! :leader :nv "]" 'down-list)
+(map! :nv "[[" '(lambda () (interactive) (jump-to-same-indent -1)))
+(map! :nv "]]" 'jump-to-same-indent)
+(map! :nvi "C--" 'er/contract-region)
+(map! :nv "C-r" 'undo-fu-only-redo)
 
 (defun mutemic()
   (interactive)
@@ -163,8 +190,16 @@
 
 (start-process "" nil "/home/nobel/.screenlayout/dual.sh")
 
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(defun efs/set-wallpaper ()
+  (interactive)
+  ;; NOTE: You will need to update this to a valid background path!
+  (start-process-shell-command
+      "feh" nil  "feh --bg-scale /home/nobel/Wallpapers/oldest_house_2.jpeg"))
+
+(efs/set-wallpaper)
+
+(set-frame-parameter (selected-frame) 'alpha '(92 . 92))
+(add-to-list 'default-frame-alist '(alpha . (92 . 92)))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
