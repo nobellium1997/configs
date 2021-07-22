@@ -142,9 +142,17 @@
   (interactive)
   (start-process "" nil "/home/nobel/Scripts/toggle_trackpad.sh"))
 
+(defun toggle-audio()
+  (interactive)
+  (start-process "" nil "playerctl" "play-pause"))
+
 (defun switch-to-last-buffer ()
   (interactive)
   (switch-to-buffer nil))
+
+(defun switch-to-firefox ()
+  (interactive)
+  (switch-to-buffer "google-chrome"))
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
@@ -210,6 +218,10 @@
 ;; Set the initial number of workspaces (they can also be created later).
 (setq exwm-workspace-number 10)
 
+;; Allow all buffers in any workspace
+(setq exwm-layout-show-all-buffers t)
+(setq exwm-workspace-show-all-buffers t)
+
 (add-hook 'exwm-update-class-hook
           (lambda ()
             (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
@@ -251,9 +263,11 @@
         ([?\s-p] . previous-buffer)
         ([?\s-n] . next-buffer)
         ([?\s-a] . flameshot)
+        ([?\s-s] . toggle-audio)
         ([?\s-o] . switch-to-last-buffer)
         ([?\s-T] . toggle-trackpad)
         ([?\s-t] . +eshell/toggle)
+        ([?\s-g] . switch-to-firefox)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
                     `(,(kbd (format "s-%d" i)) .
@@ -274,17 +288,6 @@
 ;; To add a key binding only available in line-mode, simply define it in
 ;; `exwm-mode-map'.  The following example shortens 'C-c q' to 'C-q'.
 (define-key exwm-mode-map [?\C-q] #'exwm-input-send-next-key)
-
-;; The following example demonstrates how to use simulation keys to mimic
-;; the behavior of Emacs.  The value of `exwm-input-simulation-keys` is a
-;; list of cons cells (SRC . DEST), where SRC is the key sequence you press
-;; and DEST is what EXWM actually sends to application.  Note that both SRC
-;; and DEST should be key sequences (vector or string).
-(setq exwm-input-simulation-keys
-      '(
-        ;; movement
-        ([?\C-p] . [up])
-        ([?\C-n] . [down])))
 
 ;; Do not forget to enable EXWM. It will start by itself when things are
 ;; ready.  You can put it _anywhere_ in your configuration.
