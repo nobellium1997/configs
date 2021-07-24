@@ -43,7 +43,8 @@ font-1 = "Font Awesome:size=14;2"
 font-2 = "Material Icons:size=20;5"
 font-3 = "Fira Mono:size=13;-3"
 
-modules-right = cpu temperature battery date
+modules-right = mic-volume cpu temperature battery date
+modules-left = exwm-workspace
 
 tray-position = right
 tray-padding = 2
@@ -51,6 +52,13 @@ tray-maxsize = 28
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/exwm-workspace]
+type = custom/ipc
+hook-0 = emacsclient -e "exwm-workspace-current-index" | sed -e 's/^"//' -e 's/"$//'
+initial = 1
+format-underline = ${colors.underline-1}
+format-padding = 1
 
 [module/cpu]
 type = internal/cpu
@@ -128,3 +136,8 @@ format-warn-underline = ${self.format-underline}
 label = %temperature-c%
 label-warn = %temperature-c%!
 label-warn-foreground = ${colors.secondary}
+
+[module/mic-volume]
+type = custom/script
+interval = 1
+exec = /home/nobel/Scripts/micmute.sh

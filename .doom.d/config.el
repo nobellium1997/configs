@@ -200,6 +200,7 @@
 (exwm-randr-enable)
 
 (start-process "" nil "/home/nobel/.screenlayout/dual.sh")
+(start-process "" nil "polybar" "panel" "-r")
 
 (defun efs/set-wallpaper ()
   (interactive)
@@ -292,6 +293,15 @@
 ;; To add a key binding only available in line-mode, simply define it in
 ;; `exwm-mode-map'.  The following example shortens 'C-c q' to 'C-q'.
 (define-key exwm-mode-map [?\C-q] #'exwm-input-send-next-key)
+
+(defun efs/send-polybar-hook (module-name hook-index)
+  (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" module-name hook-index)))
+
+(defun efs/send-polybar-exwm-workspace ()
+  (efs/send-polybar-hook "exwm-workspace" 1))
+
+;; Update panel indicator when workspace changes
+(add-hook 'exwm-workspace-switch-hook #'efs/send-polybar-exwm-workspace)
 
 ;; Do not forget to enable EXWM. It will start by itself when things are
 ;; ready.  You can put it _anywhere_ in your configuration.
