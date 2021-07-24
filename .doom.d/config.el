@@ -154,6 +154,12 @@
   (interactive)
   (switch-to-buffer "google-chrome"))
 
+(defun split-and-focus-left ()
+  (interactive)
+  (split-window-right)
+  (redisplay)
+  (windmove-right))
+
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
 
@@ -165,7 +171,6 @@
 
 ;; Set default search to google
 (setq eww-search-prefix "https://www.google.com/search?q=")
-
 
 ;; EXWM configs
 ;; Disable menu-bar, tool-bar and scroll-bar to increase the usable space.
@@ -179,8 +184,6 @@
 
 ;; Turn on `display-time-mode' if you don't use an external bar.
 (setq display-time-default-load-average nil)
-(display-time-mode t)
-(display-battery-mode t)
 
 ;; You are strongly encouraged to enable something like `ido-mode' to alter
 ;; the default behavior of 'C-x b', or you will take great pains to switch
@@ -211,9 +214,7 @@
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
-
-;; (exwm-config-ido)
+(setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
 
 ;; Set the initial number of workspaces (they can also be created later).
 (setq exwm-workspace-number 10)
@@ -250,7 +251,7 @@
         ([?\s-l] . windmove-right)
         ([?\s-k] . windmove-up)
         ([?\s-j] . windmove-down)
-        ([?\s-v] . split-window-right)
+        ([?\s-v] . split-and-focus-left)
         ([?\s-s] . split-window-below)
         ([?\s-b] . +ivy/switch-buffer)
         ([?\s-w] . mutemic)
@@ -281,9 +282,12 @@
 		     (interactive (list (read-shell-command "$ ")))
 		     (start-process-shell-command command nil command)))
         ;; Bind "s-<f2>" to "slock", a simple X display locker.
-        ([s-f2] . (lambda ()
-		    (interactive)
-		    (start-process "" nil "/usr/bin/slock")))))
+        ([?\s-*] . (lambda (command)
+		    (interactive (list (read-shell-command "* ")))
+                    (split-window-right)
+                    (redisplay)
+                    (windmove-right)
+		    (start-process-shell-command command nil command)))))
 
 ;; To add a key binding only available in line-mode, simply define it in
 ;; `exwm-mode-map'.  The following example shortens 'C-c q' to 'C-q'.
