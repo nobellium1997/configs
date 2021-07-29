@@ -56,7 +56,7 @@
 (package! yaml-mode)
 (package! gruvbox-theme)
 (package! dracula-theme)
-(package! zenburn-theme)
+(package! spacemacs-theme)
 (package! language-detection)
 (package! dap-mode)
 

@@ -27,7 +27,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'dracula)
+(setq doom-theme 'spacemacs-dark)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -150,21 +150,33 @@
   (interactive)
   (switch-to-buffer nil))
 
+(defun switch-to-last-buffer ()
+  (interactive)
+  (switch-to-buffer "Alacritty"))
+
 (defun switch-to-firefox ()
   (interactive)
   (switch-to-buffer "google-chrome"))
+
+(defun switch-to-teams ()
+  (interactive)
+  (switch-to-buffer "teams.microsoft.com"))
 
 (defun split-and-focus-left ()
   (interactive)
   (split-window-right)
   (redisplay)
-  (windmove-right))
+  (windmove-right)
+  (+ivy/switch-buffer))
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
 
 ;; Magit blame style
 (setq magit-blame-echo-style 'margin)
+
+;; Disable smart-parens
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
@@ -267,8 +279,9 @@
         ([?\s-a] . flameshot)
         ([?\s-s] . toggle-audio)
         ([?\s-o] . switch-to-last-buffer)
-        ([?\s-T] . toggle-trackpad)
-        ([?\s-t] . +eshell/toggle)
+        ([?\s-e] . toggle-trackpad)
+        ([?\s-T] . switch-to-alacritty)
+        ([?\s-t] . switch-to-teams)
         ([?\s-g] . switch-to-firefox)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
