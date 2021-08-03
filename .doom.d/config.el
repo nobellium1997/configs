@@ -218,16 +218,19 @@
   (interactive)
   ;; NOTE: You will need to update this to a valid background path!
   (start-process-shell-command
-      "feh" nil  "feh --bg-scale /home/nobel/Wallpapers/oldest_house_2.jpeg"))
+      "feh" nil  "feh --bg-scale /home/nobel/Wallpapers/interstellar.png"))
 
 (efs/set-wallpaper)
 
-(set-frame-parameter (selected-frame) 'alpha '(92 . 92))
-(add-to-list 'default-frame-alist '(alpha . (92 . 92)))
+(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+(add-to-list 'default-frame-alist '(alpha . (80 . 80)))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
+(setq mouse-autoselect-window t
+      focus-follows-mouse t)
+
 
 ;; Set the initial number of workspaces (they can also be created later).
 (setq exwm-workspace-number 10)
