@@ -58,10 +58,17 @@
 (require 'dap-python)
 (require 'dap-netcore)
 
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
 ;; Custom company mappings
 (setq company-dabbrev-downcase 0)
 (setq company-idle-delay 0)
 (setq company-tooltip-limit 5)
+(setq company-minimum-prefix-length 3)
 
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
@@ -110,7 +117,7 @@
 
 ;; Hotkeys
 (map! "C-\\" 'er/expand-region)
-(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 (map! :map evil-snipe-local-mode-map :vnm "s" nil :vnm "S" nil)
 (map! :nv "s" 'avy-goto-char-timer)
 (map! :nv "\/" 'swiper)

@@ -59,6 +59,8 @@
 (package! spacemacs-theme)
 (package! language-detection)
 (package! dap-mode)
+(package! tree-sitter)
+(package! tree-sitter-langs)
 
 (package! this-package
   :recipe (:host github :repo "agzam/exwm-edit"

@@ -104,6 +104,7 @@ export PATH=$PATH:~/anaconda3/bin
 export PATH=$PATH:~/Terraform
 export PATH=$PATH:~/Mitm
 export PATH=$PATH:~/Tfvc/TEE-CLC-14.135.0
+export PATH=~/depot_tools:$PATH
 source ~/.config/aliasrc
 
 export TERM=xterm-256color
