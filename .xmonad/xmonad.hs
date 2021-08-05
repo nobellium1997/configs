@@ -467,7 +467,7 @@ myKeys conf = let
     , ("M-S-o"                    , addName "Headphones"       $ spawn "pacmd set-default-sink alsa_output.usb-Logitech_G533_Gaming_Headset-00.analog-stereo")
     , ("M-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("S-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
-    , ("<F1>"                   , addName "MuteMic"                         $ spawn "/home/nobel/Scripts/mutemic.sh")
+    , ("M-w"                   , addName "MuteMic"                         $ spawn "/home/nobel/Scripts/mutemic.sh")
     , ("M-v"                   , addName "ClipMenu"                         $ spawn "clipmenu")
     , ("M-p"                   , addName "Media Play Pause"                         $ spawn "playerctl play-pause")
     , ("M-S-s"                   , addName "Flameshot"                         $ spawn "flameshot gui")
@@ -536,8 +536,7 @@ myKeys conf = let
 
     subKeys "Workspaces & Projects"
     (
-    [ ("M-w"                    , addName "Switch to Project"           $ switchProjectPrompt warmPromptTheme)
-    , ("M-S-w"                  , addName "Shift to Project"            $ shiftToProjectPrompt warmPromptTheme)
+    [ ("M-S-w"                  , addName "Shift to Project"            $ shiftToProjectPrompt warmPromptTheme)
     , ("M-<Escape>"             , addName "Next non-empty workspace"    $ nextNonEmptyWS)
     , ("M-S-<Escape>"           , addName "Prev non-empty workspace"    $ prevNonEmptyWS)
     , ("M-`"                    , addName "Next non-empty workspace"    $ nextNonEmptyWS)

@@ -3,9 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 (package-initialize)
-(load "exwm-edit")
-
-(add-hook 'exwm-edit-compose-hook '+word-wrap-mode)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -27,7 +24,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'spacemacs-dark)
+(setq doom-theme 'gruvbox)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -65,7 +62,6 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; Custom company mappings
-(setq company-dabbrev-downcase 0)
 (setq company-idle-delay 0)
 (setq company-tooltip-limit 5)
 (setq company-minimum-prefix-length 3)
@@ -117,7 +113,7 @@
 
 ;; Hotkeys
 (map! "C-\\" 'er/expand-region)
-;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 (map! :map evil-snipe-local-mode-map :vnm "s" nil :vnm "S" nil)
 (map! :nv "s" 'avy-goto-char-timer)
 (map! :nv "\/" 'swiper)
@@ -128,53 +124,6 @@
 (map! :nv "]]" 'jump-to-same-indent)
 (map! :nvi "C--" 'er/contract-region)
 (map! :nv "C-r" 'undo-fu-only-redo)
-
-(defun mutemic()
-  (interactive)
-  (start-process "" nil "/home/nobel/Scripts/mutemic.sh"))
-
-(defun cycle-display()
-  (interactive)
-  (start-process "" nil "/home/nobel/Scripts/cycle_display.sh"))
-
-(defun cycle-outputs()
-  (interactive)
-  (start-process "" nil "/home/nobel/Scripts/cycle_outputs.sh"))
-
-(defun flameshot()
-  (interactive)
-  (start-process "" nil "flameshot" "gui"))
-
-(defun toggle-trackpad()
-  (interactive)
-  (start-process "" nil "/home/nobel/Scripts/toggle_trackpad.sh"))
-
-(defun toggle-audio()
-  (interactive)
-  (start-process "" nil "playerctl" "play-pause"))
-
-(defun switch-to-last-buffer ()
-  (interactive)
-  (switch-to-buffer nil))
-
-(defun switch-to-last-buffer ()
-  (interactive)
-  (switch-to-buffer "Alacritty"))
-
-(defun switch-to-firefox ()
-  (interactive)
-  (switch-to-buffer "google-chrome"))
-
-(defun switch-to-teams ()
-  (interactive)
-  (switch-to-buffer "teams.microsoft.com"))
-
-(defun split-and-focus-left ()
-  (interactive)
-  (split-window-right)
-  (redisplay)
-  (windmove-right)
-  (+ivy/switch-buffer))
 
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
@@ -190,142 +139,3 @@
 
 ;; Set default search to google
 (setq eww-search-prefix "https://www.google.com/search?q=")
-
-;; EXWM configs
-;; Disable menu-bar, tool-bar and scroll-bar to increase the usable space.
-(evil-set-initial-state 'exwm-mode 'emacs)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-
-;; Also shrink fringes to 1 pixel.
-(fringe-mode 1)
-
-;; Turn on `display-time-mode' if you don't use an external bar.
-(setq display-time-default-load-average nil)
-
-;; You are strongly encouraged to enable something like `ido-mode' to alter
-;; the default behavior of 'C-x b', or you will take great pains to switch
-;; to or back from a floating frame (remember 'C-x 5 o' if you refuse this
-;; proposal however).
-;; You may also want to call `exwm-config-ido' later (see below).
-;; (ido-mode 1)
-(require 'exwm)
-
-;; Fix problems with Ido (if you use it).
-;; (require 'exwm-config)
-(require 'exwm-randr)
-
-(exwm-randr-enable)
-
-(start-process "" nil "/home/nobel/.screenlayout/dual.sh")
-(start-process "" nil "polybar" "panel" "-r")
-
-(defun efs/set-wallpaper ()
-  (interactive)
-  ;; NOTE: You will need to update this to a valid background path!
-  (start-process-shell-command
-      "feh" nil  "feh --bg-scale /home/nobel/Wallpapers/interstellar.png"))
-
-(efs/set-wallpaper)
-
-(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
-(add-to-list 'default-frame-alist '(alpha . (80 . 80)))
-(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-(setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
-(setq mouse-autoselect-window t
-      focus-follows-mouse t)
-
-
-;; Set the initial number of workspaces (they can also be created later).
-(setq exwm-workspace-number 10)
-
-;; Allow all buffers in any workspace
-(setq exwm-layout-show-all-buffers t)
-(setq exwm-workspace-show-all-buffers t)
-
-(add-hook 'exwm-update-class-hook
-          (lambda ()
-            (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                        (string= "gimp" exwm-instance-name))
-              (exwm-workspace-rename-buffer exwm-instance-name))))
-(add-hook 'exwm-update-title-hook
-          (lambda ()
-            (when (or (not exwm-instance-name)
-                      (string-prefix-p "sun-awt-X11-" exwm-instance-name)
-                      (string= "gimp" exwm-instance-name))
-              (exwm-workspace-rename-buffer exwm-title))))
-;; These keys should always pass through to Emacs
-(setq exwm-input-prefix-keys
-      '(?\M-x))
-
-;; Global keybindings can be defined with `exwm-input-global-keys'.
-;; Here are a few examples:
-(setq exwm-input-global-keys
-      `(
-        ([?\s-r] . exwm-reset)
-        ([?\s-H] . +evil/window-move-left)
-        ([?\s-L] . +evil/window-move-right)
-        ([?\s-K] . +evil/window-move-up)
-        ([?\s-J] . +evil/window-move-down)
-        ([?\s-h] . windmove-left)
-        ([?\s-l] . windmove-right)
-        ([?\s-k] . windmove-up)
-        ([?\s-j] . windmove-down)
-        ([?\s-v] . split-and-focus-left)
-        ([?\s-s] . split-window-below)
-        ([?\s-b] . +ivy/switch-buffer)
-        ([?\s-w] . mutemic)
-        ([?\s-z] . cycle-display)
-        ([?\s-x] . cycle-outputs)
-        ([?\s-q] . delete-window)
-        ([?\s-d] . kill-current-buffer)
-        ([?\s-f] . delete-other-windows)
-        ([?\s-u] . winner-undo)
-        ([?\s-p] . previous-buffer)
-        ([?\s-n] . next-buffer)
-        ([?\s-a] . flameshot)
-        ([?\s-s] . toggle-audio)
-        ([?\s-o] . switch-to-last-buffer)
-        ([?\s-e] . toggle-trackpad)
-        ([?\s-T] . switch-to-alacritty)
-        ([?\s-t] . switch-to-teams)
-        ([?\s-g] . switch-to-firefox)
-        ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
-        ,@(mapcar (lambda (i)
-                    `(,(kbd (format "s-%d" i)) .
-                      (lambda ()
-                        (interactive)
-                        (exwm-workspace-switch-create ,i))))
-                  (number-sequence 0 9))
-        ;; Bind "s-&" to launch applications ('M-&' also works if the output
-        ;; buffer does not bother you).
-        ([?\s-&] . (lambda (command)
-		     (interactive (list (read-shell-command "$ ")))
-		     (start-process-shell-command command nil command)))
-        ;; Bind "s-<f2>" to "slock", a simple X display locker.
-        ([?\s-*] . (lambda (command)
-		    (interactive (list (read-shell-command "* ")))
-                    (split-window-right)
-                    (redisplay)
-                    (windmove-right)
-		    (start-process-shell-command command nil command)))))
-
-;; To add a key binding only available in line-mode, simply define it in
-;; `exwm-mode-map'.  The following example shortens 'C-c q' to 'C-q'.
-(define-key exwm-mode-map [?\C-q] #'exwm-input-send-next-key)
-
-(defun efs/send-polybar-hook (module-name hook-index)
-  (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" module-name hook-index)))
-
-(defun efs/send-polybar-exwm-workspace ()
-  (efs/send-polybar-hook "exwm-workspace" 1))
-
-;; Update panel indicator when workspace changes
-(add-hook 'exwm-workspace-switch-hook #'efs/send-polybar-exwm-workspace)
-
-;; Do not forget to enable EXWM. It will start by itself when things are
-;; ready.  You can put it _anywhere_ in your configuration.
-(exwm-enable)
