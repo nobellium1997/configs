@@ -62,7 +62,7 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; Custom company mappings
-(setq company-idle-delay 0)
+(setq company-idle-delay nil)
 (setq company-tooltip-limit 5)
 (setq company-minimum-prefix-length 3)
 
@@ -113,7 +113,7 @@
 
 ;; Hotkeys
 (map! "C-\\" 'er/expand-region)
-(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 (map! :map evil-snipe-local-mode-map :vnm "s" nil :vnm "S" nil)
 (map! :nv "s" 'avy-goto-char-timer)
 (map! :nv "\/" 'swiper)

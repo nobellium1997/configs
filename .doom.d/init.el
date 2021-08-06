@@ -19,7 +19,7 @@
        ;;japanese
 
        :completion
-       company           ; the ultimate code completion backend
+       (company +tng)           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
@@ -73,9 +73,9 @@
 
        :term
        eshell            ; a consistent, cross-platform shell (WIP)
-       shell             ; a terminal REPL for Emacs
-       term              ; terminals in Emacs
-       ;; vterm             ; another terminals in Emacs
+       ;; shell             ; a terminal REPL for Emacs
+       ;; term              ; terminals in Emacs
+       vterm             ; another terminals in Emacs
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -172,6 +172,7 @@
        ;;(wanderlust +gmail)
 
        :app
+       everywhere
        ;;calendar
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader

@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting vi-mode zsh-autosuggestions)
+plugins=(git zsh-syntax-highlighting) # vi-mode) # zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,7 +100,6 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH=$PATH:~/anaconda3/bin
 export PATH=$PATH:~/Terraform
 export PATH=$PATH:~/Mitm
 export PATH=$PATH:~/Tfvc/TEE-CLC-14.135.0

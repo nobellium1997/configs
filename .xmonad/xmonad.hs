@@ -174,7 +174,7 @@ myWorkspaces = [wsGEN, wsWRK, wsCOM, wsSYS, wsMON, wsFLOAT, wsRW, wsTMP]
 
 myTerminal          = "alacritty"
 myStatusBar         = "xmobar -x0 /home/nobel/.xmonad/xmobar.conf"
-myLauncher          = "rofi -matching fuzzy -modi combi -show combi -combi-modi run,drun -theme /home/nobel/onedark.rasi"
+myLauncher          = "dmenu_run"
 
 ------------------------------------------------------------------------}}}
 -- Theme                                                                {{{
@@ -465,14 +465,12 @@ myKeys conf = let
     subKeys "Actions"
     [ ("M-o"                    , addName "Speaker"       $ spawn "pacmd set-default-sink alsa_output.pci-0000_00_1f.3.hdmi-stereo-extra1")
     , ("M-S-o"                    , addName "Headphones"       $ spawn "pacmd set-default-sink alsa_output.usb-Logitech_G533_Gaming_Headset-00.analog-stereo")
-    , ("M-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
-    , ("S-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
     , ("M-w"                   , addName "MuteMic"                         $ spawn "/home/nobel/Scripts/mutemic.sh")
     , ("M-v"                   , addName "ClipMenu"                         $ spawn "clipmenu")
     , ("M-p"                   , addName "Media Play Pause"                         $ spawn "playerctl play-pause")
     , ("M-S-s"                   , addName "Flameshot"                         $ spawn "flameshot gui")
     , ("M-x"                   , addName "suspend"                         $ spawn "systemctl suspend")
-    , ("M-C-S-x"                   , addName "poweroff"                         $ spawn "systemctl poweroff")
+    , ("M-e"                   , addName "emacs-everywhere"                         $ spawn "emacsclient --eval '(emacs-everywhere)'")
     ] ^++^
 
     -----------------------------------------------------------------------
@@ -481,8 +479,6 @@ myKeys conf = let
     subKeys "Launchers"
     [ ("M-i"              , addName "Launcher"                        $ spawn myLauncher)
     , ("M-<Return>"             , addName "Terminal"                        $ spawn myTerminal)
-    , ("M-s s"                  , addName "Cancel submap"                   $ return ())
-    , ("M-s M-s"                , addName "Cancel submap"                   $ return ())
     ] ^++^
 
     -----------------------------------------------------------------------
@@ -494,36 +490,20 @@ myKeys conf = let
     [ ("M-<Backspace>"          , addName "Kill"                            kill1)
     , ("M-S-<Backspace>"        , addName "Kill all"                        $ confirmPrompt hotPromptTheme "kill all" $ killAll)
     , ("M-d"                    , addName "Duplicate w to all ws"           $ toggleCopyToAll)
-    -- , ("M-p"                    , addName "Hide window to stack"            $ withFocused hideWindow)
-    -- , ("M-S-p"                  , addName "Restore hidden window (FIFO)"    $ popOldestHiddenWindow)
-
-    , ("M-b"                    , addName "Promote"                         $ promote) 
-
-    , ("M-g"                    , addName "Un-merge from sublayout"         $ withFocused (sendMessage . UnMerge))
-    , ("M-S-g"                  , addName "Merge all into sublayout"        $ withFocused (sendMessage . MergeAll))
-
+    , ("M-b"                    , addName "Promote"                         $ promote)
     , ("M-z u"                  , addName "Focus urgent"                    focusUrgent)
     , ("M-z m"                  , addName "Focus master"                    $ windows W.focusMaster)
-
     , ("M-'"                    , addName "Focus down"                      $ windows W.focusDown)
     , ("M-;"                    , addName "Focus up"                        $ windows W.focusUp)
-
     , ("C-'"                    , addName "Swap tab D"                      $ windows W.swapDown)
     , ("C-;"                    , addName "Swap tab U"                      $ windows W.swapUp)
-
-    -- ComboP specific (can remove after demo)
-    , ("M-C-S-m"                , addName "Combo swap"                      $ sendMessage $ SwapWindow)
     ]
 
     ++ zipM' "M-"               "Navigate window"                           dirKeys dirs windowGo True
     ++ zipM' "M-S-"               "Move window"                               dirKeys dirs windowSwap True
-    -- TODO: following may necessitate use of a "passthrough" binding that can send C- values to focused w
     ++ zipM  "M-C-"             "Merge w/sublayout"                         dirKeys dirs (sendMessage . pullGroup)
     ++ zipM' "M-"               "Navigate screen"                           arrowKeys dirs screenGo True
-    -- ++ zipM' "M-S-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
     ++ zipM' "M-C-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
-    -- ++ zipM' "M-S-"             "Swap workspace to screen"                  arrowKeys dirs screenSwap True
-
     ) ^++^
 
     -----------------------------------------------------------------------
@@ -539,13 +519,10 @@ myKeys conf = let
     [ ("M-S-w"                  , addName "Shift to Project"            $ shiftToProjectPrompt warmPromptTheme)
     , ("M-<Escape>"             , addName "Next non-empty workspace"    $ nextNonEmptyWS)
     , ("M-S-<Escape>"           , addName "Prev non-empty workspace"    $ prevNonEmptyWS)
-    , ("M-`"                    , addName "Next non-empty workspace"    $ nextNonEmptyWS)
-    , ("M-S-`"                  , addName "Prev non-empty workspace"    $ prevNonEmptyWS)
     , ("M-a"                    , addName "Toggle last workspace"       $ toggleWS' ["NSP"])
     ]
     ++ zipM "M-"                "View      ws"                          wsKeys [0..] (withNthWorkspace W.greedyView)
     -- ++ zipM "M-S-"              "Move w to ws"                          wsKeys [0..] (withNthWorkspace W.shift)
-    -- TODO: following may necessitate use of a "passthrough" binding that can send C- values to focused w
     ++ zipM "C-"                "Move w to ws"                          wsKeys [0..] (withNthWorkspace W.shift)
     -- TODO: make following a submap
     ++ zipM "M-S-C-"            "Copy w to ws"                          wsKeys [0..] (withNthWorkspace copy)
@@ -559,19 +536,12 @@ myKeys conf = let
 
     subKeys "Layout Management"
 
-    [ ("M-<Tab>"                , addName "Cycle all layouts"               $ sendMessage NextLayout)
+    [ ("M-t"                , addName "Cycle all layouts"               $ sendMessage NextLayout)
     , ("M-C-<Tab>"              , addName "Cycle sublayout"                 $ toSubl NextLayout)
     , ("M-S-<Tab>"              , addName "Reset layout"                    $ setLayout $ XMonad.layoutHook conf)
 
     , ("M-y"                    , addName "Float tiled w"                   $ withFocused toggleFloat)
     , ("M-S-y"                  , addName "Tile all floating w"             $ sinkAll)
-
-    , ("M-,"                    , addName "Decrease master windows"         $ sendMessage (IncMasterN (-1)))
-    , ("M-."                    , addName "Increase master windows"         $ sendMessage (IncMasterN 1))
-
-    , ("M-r"                    , addName "Reflect/Rotate"              $ tryMsgR (Rotate) (XMonad.Layout.MultiToggle.Toggle REFLECTX))
-    , ("M-S-r"                  , addName "Force Reflect (even on BSP)" $ sendMessage (XMonad.Layout.MultiToggle.Toggle REFLECTX))
-
 
     -- If following is run on a floating window, the sequence first tiles it.
     -- Not perfect, but works.
@@ -652,7 +622,6 @@ myMouseBindings (XConfig {XMonad.modMask = myModMask}) = M.fromList $
 myStartupHook = do
 
     spawn "clipmenud"
-    spawn "kdeconnect-indicator"
     spawn "feh --bg-fill /home/nobel/Wallpapers/quarry.jpeg"
 
     setDefaultCursor xC_left_ptr
