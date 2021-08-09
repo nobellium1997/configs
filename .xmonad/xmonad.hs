@@ -499,10 +499,10 @@ myKeys conf = let
     , ("C-;"                    , addName "Swap tab U"                      $ windows W.swapUp)
     ]
 
-    ++ zipM' "M-"               "Navigate window"                           dirKeys dirs windowGo True
+    ++ zipM' "M-"               "Navigate window"                           arrowKeys dirs windowGo False
     ++ zipM' "M-S-"               "Move window"                               dirKeys dirs windowSwap True
     ++ zipM  "M-C-"             "Merge w/sublayout"                         dirKeys dirs (sendMessage . pullGroup)
-    ++ zipM' "M-"               "Navigate screen"                           arrowKeys dirs screenGo True
+    ++ zipM' "M-"               "Navigate screen"                           dirKeys dirs screenGo False
     ++ zipM' "M-C-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
     ) ^++^
 
