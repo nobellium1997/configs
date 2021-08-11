@@ -72,9 +72,6 @@
 ;; No line numbers for extra cool buffers
 (setq display-line-numbers-type nil)
 
-;; Custom evil settings
-(setq evil-move-beyond-eol t)
-
 ;; Custom file open locations
 (defun goto-notes ()
   (interactive)
@@ -113,11 +110,8 @@
 
 ;; Hotkeys
 (map! "C-\\" 'er/expand-region)
-;; (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 (map! :map evil-snipe-local-mode-map :vnm "s" nil :vnm "S" nil)
 (map! :nv "s" 'avy-goto-char-timer)
-(map! :nv "\/" 'swiper)
-(map! :nv "?" 'swiper-backward)
 (map! :leader :nv "[" 'backward-up-list)
 (map! :leader :nv "]" 'down-list)
 (map! :nv "[[" '(lambda () (interactive) (jump-to-same-indent -1)))
@@ -125,11 +119,11 @@
 (map! :nvi "C--" 'er/contract-region)
 (map! :nv "C-r" 'undo-fu-only-redo)
 
+;; EOL config
+(setq evil-move-beyond-eol nil)
+
 ;; Dired mappings
 (map! :leader "f d" 'fd-dired)
-
-;; Magit blame style
-(setq magit-blame-echo-style 'margin)
 
 ;; Disable smart-parens
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
@@ -139,3 +133,144 @@
 
 ;; Set default search to google
 (setq eww-search-prefix "https://www.google.com/search?q=")
+
+;; EXWM processes
+(defun mutemic()
+  (interactive)
+  (start-process "" nil "/home/nobel/Scripts/mutemic.sh"))
+
+(defun cycle-display()
+  (interactive)
+  (start-process "" nil "/home/nobel/Scripts/cycle_display.sh"))
+
+(defun cycle-outputs()
+  (interactive)
+  (start-process "" nil "/home/nobel/Scripts/cycle_outputs.sh"))
+
+(defun flameshot()
+  (interactive)
+  (start-process "" nil "flameshot" "gui"))
+
+(defun toggle-trackpad()
+  (interactive)
+  (start-process "" nil "/home/nobel/Scripts/toggle_trackpad.sh"))
+
+(defun toggle-audio()
+  (interactive)
+  (start-process "" nil "playerctl" "play-pause"))
+
+(defun switch-to-last-buffer ()
+  (interactive)
+  (switch-to-buffer nil))
+
+(defun switch-to-firefox ()
+  (interactive)
+  (switch-to-buffer "google-chrome"))
+
+(defun split-and-focus-left ()
+  (interactive)
+  (split-window-right)
+  (redisplay)
+  (windmove-right)
+  (+ivy/switch-buffer))
+
+;; EXWM configs
+;; Disable menu-bar, tool-bar and scroll-bar to increase the usable space.
+(evil-set-initial-state 'exwm-mode 'emacs)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; Also shrink fringes to 1 pixel.
+(fringe-mode 1)
+
+(require 'exwm)
+(require 'exwm-randr)
+
+(exwm-randr-enable)
+
+(start-process "" nil "/home/nobel/.screenlayout/dual.sh")
+(start-process "" nil "polybar" "panel" "-r")
+
+(setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
+(setq mouse-autoselect-window t
+      focus-follows-mouse t)
+
+;; Set the initial number of workspaces (they can also be created later).
+(setq exwm-workspace-number 10)
+
+;; Allow all buffers in any workspace
+(setq exwm-layout-show-all-buffers t)
+(setq exwm-workspace-show-all-buffers t)
+
+(add-hook 'exwm-update-class-hook
+          (lambda ()
+            (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                        (string= "gimp" exwm-instance-name))
+              (exwm-workspace-rename-buffer exwm-instance-name))))
+(add-hook 'exwm-update-title-hook
+          (lambda ()
+            (when (or (not exwm-instance-name)
+                      (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                      (string= "gimp" exwm-instance-name))
+              (exwm-workspace-rename-buffer exwm-title))))
+
+;; These keys should always pass through to Emacs
+(setq exwm-input-prefix-keys
+      '(?\M-x))
+
+;; Global keybindings can be defined with `exwm-input-global-keys'.
+;; Here are a few examples:
+(setq exwm-input-global-keys
+      `(
+        ([?\s-r] . exwm-reset)
+        ([?\s-h] . windmove-left)
+        ([?\s-l] . windmove-right)
+        ([?\s-k] . windmove-up)
+        ([?\s-j] . windmove-down)
+        ([?\s-v] . split-and-focus-left)
+        ([?\s-s] . split-window-below)
+        ([?\s-b] . +ivy/switch-buffer)
+        ([?\s-w] . mutemic)
+        ([?\s-z] . cycle-display)
+        ([?\s-x] . cycle-outputs)
+        ([?\s-q] . delete-window)
+        ([?\s-d] . kill-current-buffer)
+        ([?\s-f] . delete-other-windows)
+        ([?\s-u] . winner-undo)
+        ([?\s-p] . previous-buffer)
+        ([?\s-n] . next-buffer)
+        ([?\s-a] . flameshot)
+        ([?\s-s] . toggle-audio)
+        ([?\s-o] . switch-to-last-buffer)
+        ([?\s-e] . toggle-trackpad)
+        ([?\s-g] . switch-to-firefox)
+        ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
+        ,@(mapcar (lambda (i)
+                    `(,(kbd (format "s-%d" i)) .
+                      (lambda ()
+                        (interactive)
+                        (exwm-workspace-switch-create ,i))))
+                  (number-sequence 0 9))
+        ;; Bind "s-&" to launch applications ('M-&' also works if the output
+        ;; buffer does not bother you).
+        ([?\s-i] . (lambda (command)
+		     (interactive (list (read-shell-command "$ ")))
+		     (start-process-shell-command command nil command)))))
+
+;; To add a key binding only available in line-mode, simply define it in
+;; `exwm-mode-map'.  The following example shortens 'C-c q' to 'C-q'.
+(define-key exwm-mode-map [?\C-q] #'exwm-input-send-next-key)
+
+(defun efs/send-polybar-hook (module-name hook-index)
+  (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" module-name hook-index)))
+
+(defun efs/send-polybar-exwm-workspace ()
+  (efs/send-polybar-hook "exwm-workspace" 1))
+
+;; Update panel indicator when workspace changes
+(add-hook 'exwm-workspace-switch-hook #'efs/send-polybar-exwm-workspace)
+
+;; Do not forget to enable EXWM. It will start by itself when things are
+;; ready.  You can put it _anywhere_ in your configuration.
+(exwm-enable)

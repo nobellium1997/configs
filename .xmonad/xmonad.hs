@@ -487,9 +487,9 @@ myKeys conf = let
 
     subKeys "Windows"
     (
-    [ ("M-<Backspace>"          , addName "Kill"                            kill1)
+    [ ("M-d"          , addName "Kill"                            kill1)
     , ("M-S-<Backspace>"        , addName "Kill all"                        $ confirmPrompt hotPromptTheme "kill all" $ killAll)
-    , ("M-d"                    , addName "Duplicate w to all ws"           $ toggleCopyToAll)
+    -- , ("M-d"                    , addName "Duplicate w to all ws"           $ toggleCopyToAll)
     , ("M-b"                    , addName "Promote"                         $ promote)
     , ("M-z u"                  , addName "Focus urgent"                    focusUrgent)
     , ("M-z m"                  , addName "Focus master"                    $ windows W.focusMaster)
