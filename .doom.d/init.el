@@ -172,7 +172,7 @@
        ;;(wanderlust +gmail)
 
        :app
-       everywhere
+       ;;everywhere
        ;;calendar
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader

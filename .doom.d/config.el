@@ -3,6 +3,9 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 (package-initialize)
+(load "exwm-edit")
+
+;; (add-hook 'exwm-edit-compose-hook '+word-wrap-mode)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -180,6 +183,9 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+
+;; Set char mode by default
+(setq exwm-manage-configurations '((t char-mode t)))
 
 ;; Also shrink fringes to 1 pixel.
 (fringe-mode 1)

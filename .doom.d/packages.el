@@ -61,6 +61,6 @@
 (package! tree-sitter-langs)
 (package! org-roam)
 
-(package! this-package
-  :recipe (:host github :repo "agzam/exwm-edit"
-           :files ("exwm-edit.el")))
+;; (package! this-package
+;;   :recipe (:host github :repo "agzam/exwm-edit"
+;;            :files ("exwm-edit.el")))
