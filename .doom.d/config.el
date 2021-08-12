@@ -108,7 +108,8 @@
   (back-to-indentation))
 
 ;; Hotkeys
-(map! "C-\\" 'er/expand-region)
+(map! "C-;" 'er/expand-region)
+(map! "C-'" 'er/contract-region)
 (map! :map evil-snipe-local-mode-map :vnm "s" nil :vnm "S" nil)
 (map! :nv "s" 'avy-goto-char-timer)
 (map! :leader :nv "[" 'backward-up-list)
@@ -173,10 +174,13 @@
 
 (defun split-and-focus-left ()
   (interactive)
-  (split-window-right)
-  (redisplay)
-  (windmove-right)
-  (+ivy/switch-buffer))
+  (let ((cur-major-mode major-mode))
+    (split-window-right)
+    (redisplay)
+    (windmove-right)
+    (if (equal cur-major-mode 'exwm-mode)
+        (+ivy/switch-buffer)
+      (+ivy/projectile-find-file))))
 
 ;; EXWM configs
 ;; Disable menu-bar, tool-bar and scroll-bar to increase the usable space.
