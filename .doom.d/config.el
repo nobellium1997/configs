@@ -33,10 +33,6 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -130,6 +126,7 @@
 
 ;; Disable smart-parens
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+(remove-hook 'doom-first-input-hook #'which-key-mode)
 
 ;; Add xml-mode to csproj files
 (add-to-list 'auto-mode-alist '("\\.csproj\\'" . xml-mode))
@@ -244,10 +241,10 @@
         ([?\s-d] . kill-current-buffer)
         ([?\s-f] . delete-other-windows)
         ([?\s-u] . winner-undo)
-        ([?\s-p] . previous-buffer)
-        ([?\s-n] . next-buffer)
+        ;; ([?\s-p] . previous-buffer)
+        ;; ([?\s-n] . next-buffer)
         ([?\s-a] . flameshot)
-        ([?\s-s] . toggle-audio)
+        ([?\s-p] . toggle-audio)
         ([?\s-o] . switch-to-last-buffer)
         ([?\s-e] . toggle-trackpad)
         ([?\s-g] . switch-to-firefox)
