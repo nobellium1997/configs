@@ -59,7 +59,6 @@
 (package! dap-mode)
 (package! tree-sitter)
 (package! tree-sitter-langs)
-(package! org-roam)
 
 ;; (package! this-package
 ;;   :recipe (:host github :repo "agzam/exwm-edit"

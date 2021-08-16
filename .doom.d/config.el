@@ -170,7 +170,7 @@
 
 (defun switch-to-firefox ()
   (interactive)
-  (switch-to-buffer "google-chrome"))
+  (switch-to-buffer "nyxt"))
 
 (defun split-and-focus-left ()
   (interactive)
@@ -204,7 +204,7 @@
 (start-process "" nil "polybar" "panel" "-r")
 (start-process "" nil "clipmenud")
 
-(setq exwm-randr-workspace-monitor-plist '(3 "DP-1" 6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
+(setq exwm-randr-workspace-monitor-plist '(6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
 (setq mouse-autoselect-window t
       focus-follows-mouse t)
 
