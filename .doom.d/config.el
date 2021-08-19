@@ -31,7 +31,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/org")
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -118,6 +118,7 @@
 (map! :nv "]]" 'jump-to-same-indent)
 (map! :nvi "C--" 'er/contract-region)
 (map! :nv "C-r" 'undo-fu-only-redo)
+(map! :i "C-<backspace>" 'evil-delete-backward-word)
 
 ;; EOL config
 (setq evil-move-beyond-eol nil)
@@ -162,7 +163,7 @@
 
 (defun clipmenu()
   (interactive)
-  (start-process "" nil "clipmenu"))
+  (start-process "" nil "clipmenu" "-i"))
 
 (defun switch-to-last-buffer ()
   (interactive)
@@ -170,7 +171,9 @@
 
 (defun switch-to-firefox ()
   (interactive)
-  (switch-to-buffer "nyxt"))
+  (if (not (get-buffer "nyxt"))
+      (start-process "" nil "nyxt")
+    (switch-to-buffer "nyxt")))
 
 (defun split-and-focus-left ()
   (interactive)
@@ -202,6 +205,7 @@
 
 (start-process "" nil "/home/nobel/.screenlayout/dual.sh")
 (start-process "" nil "polybar" "panel" "-r")
+(start-process "" nil "blueman-applet")
 (start-process "" nil "clipmenud")
 
 (setq exwm-randr-workspace-monitor-plist '(6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
