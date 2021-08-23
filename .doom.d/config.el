@@ -5,7 +5,7 @@
 (package-initialize)
 (load "exwm-edit")
 
-;; (add-hook 'exwm-edit-compose-hook '+word-wrap-mode)
+; (add-hook 'exwm-edit-compose-hook '+word-wrap-mode)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -27,7 +27,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'gruvbox)
+(setq doom-theme 'doom-acario-light)
+(after! ivy
+  (set-face-attribute 'ivy-current-match nil :underline t))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -61,9 +63,10 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; Custom company mappings
-(setq company-idle-delay nil)
-(setq company-tooltip-limit 5)
-(setq company-minimum-prefix-length 3)
+(after! company
+  (setq +lsp-company-backends '(company-tabnine :separate company-capf company-yasnippet))
+  (setq company-show-quick-access t)
+  (setq company-tooltip-limit 5))
 
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
@@ -171,9 +174,9 @@
 
 (defun switch-to-firefox ()
   (interactive)
-  (if (not (get-buffer "nyxt"))
-      (start-process "" nil "nyxt")
-    (switch-to-buffer "nyxt")))
+  (if (not (get-buffer "google-chrome"))
+      (start-process "" nil "google-chrome")
+    (switch-to-buffer "google-chrome")))
 
 (defun split-and-focus-left ()
   (interactive)
@@ -207,6 +210,7 @@
 (start-process "" nil "polybar" "panel" "-r")
 (start-process "" nil "blueman-applet")
 (start-process "" nil "clipmenud")
+(start-process "" nil "redshift-gtk")
 
 (setq exwm-randr-workspace-monitor-plist '(6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
 (setq mouse-autoselect-window t
@@ -249,7 +253,7 @@
         ([?\s-b] . +ivy/switch-buffer)
         ([?\s-w] . mutemic)
         ([?\s-z] . cycle-display)
-        ([?\s-x] . cycle-outputs)
+        ([?\s-x] . counsel-M-x)
         ([?\s-q] . delete-window)
         ([?\s-d] . kill-current-buffer)
         ([?\s-f] . delete-other-windows)
