@@ -1,9 +1,0 @@
-[user]
-	email = nbarakat6@gatech.edu
-	name = Nobel
-[credential]
-    helper = store --file ~/.git-credentials
-[alias]
-	root = rev-parse --show-toplevel
-[color]
-	ui = auto
