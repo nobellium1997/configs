@@ -21,9 +21,9 @@ echo "Deleting $FULL_PATH..."
 ssh nobel.barakat@10.0.0.53 Remove-Item "$FULL_PATH" -Recurse -Force -Confirm:\$false
 echo "Deleted"
 
-echo "Creating $FULL_PATH..."
+echo "Creating $FULL_PATH/application_csharp..."
 ssh nobel.barakat@10.0.0.53 mkdir "$FULL_PATH"
 echo "Created"
 
-scp -r "$1" "nobel.barakat@10.0.0.53:$FULL_PATH"
-watcher "$1"
+scp -r "$1/application_csharp" "nobel.barakat@10.0.0.53:$FULL_PATH/application_csharp"
+watcher "$1/application_csharp"

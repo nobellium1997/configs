@@ -203,17 +203,17 @@
 (fringe-mode 1)
 
 (require 'exwm)
-(require 'exwm-randr)
+;; (require 'exwm-randr)
 
-(exwm-randr-enable)
+;; (exwm-randr-enable)
 
-(start-process "" nil "/home/nobel/.screenlayout/dual.sh")
+(start-process "" nil "/home/nobel/.screenlayout/ultrawide.sh")
 (start-process "" nil "polybar" "panel" "-r")
 (start-process "" nil "blueman-applet")
 (start-process "" nil "clipmenud")
 (start-process "" nil "redshift-gtk")
 
-(setq exwm-randr-workspace-monitor-plist '(6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
+;; (setq exwm-randr-workspace-monitor-plist '(6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
 (setq mouse-autoselect-window t
       focus-follows-mouse t)
 
