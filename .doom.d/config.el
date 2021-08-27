@@ -178,6 +178,11 @@
       (start-process "" nil "google-chrome")
     (switch-to-buffer "google-chrome")))
 
+(defun toggle-notifs ()
+  (interactive)
+  (start-process "" nil "notify-send" "Disabling Notifications")
+  (start-process "" nil "notify-send" "DUNST_COMMAND_TOGGLE"))
+
 (defun split-and-focus-left ()
   (interactive)
   (let ((cur-major-mode major-mode))
@@ -203,9 +208,6 @@
 (fringe-mode 1)
 
 (require 'exwm)
-;; (require 'exwm-randr)
-
-;; (exwm-randr-enable)
 
 (start-process "" nil "/home/nobel/.screenlayout/ultrawide.sh")
 (start-process "" nil "polybar" "panel" "-r")
@@ -213,7 +215,6 @@
 (start-process "" nil "clipmenud")
 (start-process "" nil "redshift-gtk")
 
-;; (setq exwm-randr-workspace-monitor-plist '(6 "DP-1" 7 "DP-1" 8 "DP-1" 9 "DP-1" 0 "DP-1"))
 (setq mouse-autoselect-window t
       focus-follows-mouse t)
 
@@ -238,7 +239,8 @@
 
 ;; These keys should always pass through to Emacs
 (setq exwm-input-prefix-keys
-      '(?\M-x))
+      '(?\M-x
+        ?\M-\ ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
 ;; Here are a few examples:
@@ -259,12 +261,13 @@
         ([?\s-d] . kill-current-buffer)
         ([?\s-f] . delete-other-windows)
         ([?\s-u] . winner-undo)
-        ;; ([?\s-p] . previous-buffer)
-        ;; ([?\s-n] . next-buffer)
+        ([?\s-y] . toggle-notifs)
         ([?\s-a] . flameshot)
         ([?\s-p] . toggle-audio)
         ([?\s-o] . switch-to-last-buffer)
-        ([?\s-e] . toggle-trackpad)
+        ([?\s-E] . toggle-trackpad)
+        ([?\s-e] . exwm-workspace-switch-to-previous)
+        ([?\s-t] . +eshell/toggle)
         ([?\s-g] . switch-to-firefox)
         ;; Bind "s-0" to "s-9" to switch to a workspace by its index.
         ,@(mapcar (lambda (i)
