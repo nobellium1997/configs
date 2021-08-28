@@ -174,13 +174,13 @@
 
 (defun switch-to-firefox ()
   (interactive)
-  (if (not (get-buffer "google-chrome"))
-      (start-process "" nil "google-chrome")
-    (switch-to-buffer "google-chrome")))
+  (if (not (get-buffer "vieb"))
+      (start-process "" nil "vieb")
+    (switch-to-buffer "vieb")))
 
 (defun toggle-notifs ()
   (interactive)
-  (start-process "" nil "notify-send" "Disabling Notifications")
+  (start-process "" nil "notify-send" "Enabling Notifs")
   (start-process "" nil "notify-send" "DUNST_COMMAND_TOGGLE"))
 
 (defun split-and-focus-left ()
@@ -201,7 +201,7 @@
 (scroll-bar-mode -1)
 
 ;; Set char mode by default
-(setq exwm-manage-configurations '((t char-mode t)))
+;; (setq exwm-manage-configurations '((t char-mode t)))
 (setq exwm-edit-paste-delay 0.3)
 
 ;; Also shrink fringes to 1 pixel.
@@ -214,6 +214,7 @@
 (start-process "" nil "blueman-applet")
 (start-process "" nil "clipmenud")
 (start-process "" nil "redshift-gtk")
+(start-process "" nil "/opt/cadmus/cadmus")
 
 (setq mouse-autoselect-window t
       focus-follows-mouse t)
