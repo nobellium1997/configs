@@ -142,6 +142,7 @@
 ;; EXWM processes
 (defun mutemic()
   (interactive)
+  (start-process "" nil "playerctl" "pause")
   (start-process "" nil "/home/nobel/Scripts/mutemic.sh"))
 
 (defun cycle-display()
@@ -214,7 +215,8 @@
 (start-process "" nil "blueman-applet")
 (start-process "" nil "clipmenud")
 (start-process "" nil "redshift-gtk")
-(start-process "" nil "/opt/cadmus/cadmus")
+(start-process "" nil "kdeconnect-indicator")
+;; (start-process "" nil "/opt/cadmus/cadmus")
 
 (setq mouse-autoselect-window t
       focus-follows-mouse t)
