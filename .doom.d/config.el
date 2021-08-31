@@ -71,6 +71,11 @@
 ;; Set org-agenda-files
 (setq org-agenda-files '("/home/nobel/Notes"))
 
+;; doom leader config
+(unbind-key "C-l")
+(setq doom-leader-key "C-l")
+(setq doom-leader-alt-key "C-l")
+
 ;; No line numbers for extra cool buffers
 (setq display-line-numbers-type nil)
 
@@ -243,7 +248,7 @@
 ;; These keys should always pass through to Emacs
 (setq exwm-input-prefix-keys
       '(?\M-x
-        ?\M-\ ))
+        ?\C-l ))
 
 ;; Global keybindings can be defined with `exwm-input-global-keys'.
 ;; Here are a few examples:
