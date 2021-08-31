@@ -220,7 +220,7 @@
 (start-process "" nil "blueman-applet")
 (start-process "" nil "clipmenud")
 (start-process "" nil "redshift-gtk")
-(start-process "" nil "kdeconnect-indicator")
+;; (start-process "" nil "kdeconnect-indicator")
 ;; (start-process "" nil "/opt/cadmus/cadmus")
 
 (setq mouse-autoselect-window t
