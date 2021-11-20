@@ -8,7 +8,7 @@ function watcher {
             else
                 local sub_path=$(echo $path | sed "s:/home/nobel/Work/Services/::g")
                 echo "copying $sub_path$file"
-                scp "$path$file" nobel.barakat@10.0.0.53:C:/Users/nobel.barakat/Work/Services/"$sub_path$file"
+                scp "$path$file" user@10.0.0.53:C:/Users/nobel.barakat/Work/Services/"$sub_path$file"
             fi
 
         done
